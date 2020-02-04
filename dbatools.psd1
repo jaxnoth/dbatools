@@ -14,19 +14,19 @@
     ModuleVersion          = '1.0.83'
 
     # ID used to uniquely identify this module
-    GUID                   = '9d139310-ce45-41ce-8e8b-d76335aa1789'
+    GUID                   = '41a4f8e5-303c-44f1-8fd9-1be4e14d0ffc'
 
     # Author of this module
-    Author                 = 'the dbatools team'
+    Author                 = 'DataOps Team'
 
     # Company or vendor of this module
-    CompanyName            = 'dbatools.io'
+    CompanyName            = 'Indiana Wesleyan University'
 
     # Copyright statement for this module
-    Copyright              = 'Copyright (c) 2019 by dbatools, licensed under MIT'
+    Copyright              = 'Copyright (c) 2019 by Indiana Wesleyan University, licensed under MIT'
 
     # Description of the functionality provided by this module
-    Description            = "The community module that enables SQL Server Pros to automate database development and server administration"
+    Description            = "An IWU fork of the dbatools module available at https://dbatools.io/"
 
     # Minimum version of the Windows PowerShell engine required by this module
     PowerShellVersion      = '3.0'
@@ -706,19 +706,19 @@
             IconUri      = "https://dbatools.io/logo.png"
 
             # The web address of this module's project or support homepage.
-            ProjectUri   = "https://dbatools.io"
+            ProjectUri   = "https://github.com/jaxnoth/dbatools"
 
             # The web address of this module's license. Points to a page that's embeddable and linkable.
             LicenseUri   = "https://opensource.org/licenses/MIT"
 
             # Release notes for this particular version of the module
-            ReleaseNotes = "https://dbatools.io/changelog"
+            # ReleaseNotes = "https://dbatools.io/changelog"
 
             # If true, the LicenseUrl points to an end-user license (not just a source license) which requires the user agreement before use.
             # RequireLicenseAcceptance = ""
 
             # Indicates this is a pre-release/testing version of the module.
-            IsPrerelease = 'True'
+            IsPrerelease = 'False'
         }
     }
 }
