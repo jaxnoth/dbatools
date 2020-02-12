@@ -5,10 +5,6 @@ function Copy-DbaDbViewData {
 
     .DESCRIPTION
         Copies data from a SQL Server view to a table using SQL Bulk Copy.
-        The same can be achieved also doing
-        $sourcetable = Invoke-DbaQuery -SqlInstance instance1 ... -As DataTable
-        Write-DbaDbTableData -SqlInstance ... -InputObject $sourcetable
-        but it will force buffering the contents on the table in memory (high RAM usage for large tables).
         With this function, a streaming copy will be done in the most speedy and least resource-intensive way.
 
     .PARAMETER SqlInstance
@@ -287,7 +283,7 @@ function Copy-DbaDbViewData {
             } catch {
                 Stop-Function -Message "Unable to determine source view : $View"
                 $ex = $_.Exception
-            Write-Warning $ex.Message
+                Write-Message -Level warning $ex.Message
                 return
             }
         }
@@ -328,15 +324,21 @@ function Copy-DbaDbViewData {
                 $desttable = Get-DbaDbTable -SqlInstance $destServer -Table $DestinationTable -Database $DestinationDatabase -Verbose:$false | Select-Object -First 1
                 if (-not $desttable -and $AutoCreateTable) {
                     try {
-                        $tablescript = $sqlview | Export-DbaScript -Passthru | Out-String
+                        #select view into tempdb to generate script
+                        $tempTableName = "$($sqlview.Name)_table"
+                        $createquery = "SELECT * INTO tempdb..$tempTableName FROM [$($sqlview.Schema)].[$($sqlview.Name)] WHERE 1=2"
+                        Invoke-DbaQuery -SqlInstance $server -Database $Database -Query $createquery
+                        $tempTable = Get-DbaDbTable -SqlInstance $server -Database tempdb -Table $tempTableName
+                        $tablescript = $tempTable | Export-DbaScript -Passthru | Out-String
+                        Invoke-DbaQuery -SqlInstance $server -Database $Database -Query "DROP TABLE tempdb..$tempTableName"
                         #replacing table name
                         if ($newTableParts.Name) {
-                            $rX = "(CREATE TABLE \[$([regex]::Escape($sqlview.Schema))\]\.\[)$([regex]::Escape($sqlview.Name))(\]\()"
+                            $rX = "(CREATE TABLE \[$([regex]::Escape($tempTable.Schema))\]\.\[)$([regex]::Escape($tempTable.Name))(\]\()"
                             $tablescript = $tablescript -replace $rX, "`$1$($newTableParts.Name)`$2"
                         }
                         #replacing table schema
                         if ($newTableParts.Schema) {
-                            $rX = "(CREATE TABLE \[)$([regex]::Escape($sqlview.Schema))(\]\.\[$([regex]::Escape($newTableParts.Name))\]\()"
+                            $rX = "(CREATE TABLE \[)$([regex]::Escape($tempTable.Schema))(\]\.\[$([regex]::Escape($newTableParts.Name))\]\()"
                             $tablescript = $tablescript -replace $rX, "`$1$($newTableParts.Schema)`$2"
                         }
 
@@ -345,7 +347,7 @@ function Copy-DbaDbViewData {
                             Invoke-DbaQuery -SqlInstance $destServer -Database $DestinationDatabase -Query "$tablescript" -EnableException # add some string assurance there
                             #table list was updated, let's grab a fresh one
                             $destServer.Databases[$DestinationDatabase].Tables.Refresh()
-                            $desttable = Get-DbaDbView -SqlInstance $destServer -View $DestinationTable -Database $DestinationDatabase -Verbose:$false
+                            $desttable = Get-DbaDbTable -SqlInstance $destServer -Table $DestinationTable -Database $DestinationDatabase -Verbose:$false
                             Write-Message -Message "New table created: $desttable" -Level Verbose
                         }
                     } catch {
@@ -434,7 +436,7 @@ function Copy-DbaDbViewData {
                             SourceInstance      = $server.Name
                             SourceDatabase      = $Database
                             SourceSchema        = $sqlview.Schema
-                            SourceView         = $sqlview.Name
+                            SourceView          = $sqlview.Name
                             DestinationInstance = $destServer.Name
                             DestinationDatabase = $DestinationDatabase
                             DestinationSchema   = $desttable.Schema
