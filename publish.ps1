@@ -18,7 +18,7 @@ Push-Location $PSScriptRoot
 # Re-compile allcommands.ps1 and en-us/dbatools-help.xml
 if (-not $SkipCompile) {
     Remove-Module $OriginalModuleName -ea Ignore
-    Import-Module ".\$OriginalModuleName.psm1"
+    Import-Module ".\$OriginalModuleName.psd1"
     HelpOut\Install-MAML $OriginalModuleName -Compact -NoVersion -FunctionRoot functions, internal\functions
     Remove-Module $OriginalModuleName
     if ($CompileOnly) {

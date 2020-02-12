@@ -7365,7 +7365,7 @@ function Copy-DbaDbViewData {
             } catch {
                 Stop-Function -Message "Unable to determine source view : $View"
                 $ex = $_.Exception
-            Write-Warning $ex.Message
+                Write-Message -Level warning $ex.Message
                 return
             }
         }
@@ -7406,15 +7406,21 @@ function Copy-DbaDbViewData {
                 $desttable = Get-DbaDbTable -SqlInstance $destServer -Table $DestinationTable -Database $DestinationDatabase -Verbose:$false | Select-Object -First 1
                 if (-not $desttable -and $AutoCreateTable) {
                     try {
-                        $tablescript = $sqlview | Export-DbaScript -Passthru | Out-String
+                        #select view into tempdb to generate script
+                        $tempTableName = "$($sqlview.Name)_table"
+                        $createquery = "SELECT * INTO tempdb..$tempTableName FROM [$($sqlview.Schema)].[$($sqlview.Name)] WHERE 1=2"
+                        Invoke-DbaQuery -SqlInstance $server -Database $Database -Query $createquery
+                        $tempTable = Get-DbaDbTable -SqlInstance $server -Database tempdb -Table $tempTableName
+                        $tablescript = $tempTable | Export-DbaScript -Passthru | Out-String
+                        Invoke-DbaQuery -SqlInstance $server -Database $Database -Query "DROP TABLE tempdb..$tempTableName"
                         #replacing table name
                         if ($newTableParts.Name) {
-                            $rX = "(CREATE TABLE \[$([regex]::Escape($sqlview.Schema))\]\.\[)$([regex]::Escape($sqlview.Name))(\]\()"
+                            $rX = "(CREATE TABLE \[$([regex]::Escape($tempTable.Schema))\]\.\[)$([regex]::Escape($tempTable.Name))(\]\()"
                             $tablescript = $tablescript -replace $rX, "`$1$($newTableParts.Name)`$2"
                         }
                         #replacing table schema
                         if ($newTableParts.Schema) {
-                            $rX = "(CREATE TABLE \[)$([regex]::Escape($sqlview.Schema))(\]\.\[$([regex]::Escape($newTableParts.Name))\]\()"
+                            $rX = "(CREATE TABLE \[)$([regex]::Escape($tempTable.Schema))(\]\.\[$([regex]::Escape($newTableParts.Name))\]\()"
                             $tablescript = $tablescript -replace $rX, "`$1$($newTableParts.Schema)`$2"
                         }
 
@@ -7423,7 +7429,7 @@ function Copy-DbaDbViewData {
                             Invoke-DbaQuery -SqlInstance $destServer -Database $DestinationDatabase -Query "$tablescript" -EnableException # add some string assurance there
                             #table list was updated, let's grab a fresh one
                             $destServer.Databases[$DestinationDatabase].Tables.Refresh()
-                            $desttable = Get-DbaDbView -SqlInstance $destServer -View $DestinationTable -Database $DestinationDatabase -Verbose:$false
+                            $desttable = Get-DbaDbTable -SqlInstance $destServer -Table $DestinationTable -Database $DestinationDatabase -Verbose:$false
                             Write-Message -Message "New table created: $desttable" -Level Verbose
                         }
                     } catch {
@@ -7512,7 +7518,7 @@ function Copy-DbaDbViewData {
                             SourceInstance      = $server.Name
                             SourceDatabase      = $Database
                             SourceSchema        = $sqlview.Schema
-                            SourceView         = $sqlview.Name
+                            SourceView          = $sqlview.Name
                             DestinationInstance = $destServer.Name
                             DestinationDatabase = $DestinationDatabase
                             DestinationSchema   = $desttable.Schema
@@ -14763,6 +14769,7 @@ function Export-DbaUser {
         $null = Test-ExportDirectory -Path $Path
 
         $outsql = $script:pathcollection = @()
+        $GenerateFilePerUser = $false
 
         $versions = @{
             'SQLServer2000'        = 'Version80'
@@ -14791,8 +14798,10 @@ function Export-DbaUser {
             $InputObject += Get-DbaDatabase -SqlInstance $instance -SqlCredential $SqlCredential -Database $Database -ExcludeDatabase $ExcludeDatabase
         }
 
+        # To keep the filenames generated and re-use (appedn) if needed
+        $usersProcessed = @{ }
+
         foreach ($db in $InputObject) {
-            $FilePath = Get-ExportFilePath -Path $PSBoundParameters.Path -FilePath $PSBoundParameters.FilePath -Type sql -ServerName $db.Parent.Name -Unique
 
             if ([string]::IsNullOrEmpty($destinationVersion)) {
                 #Get compatibility level for scripting the objects
@@ -14821,15 +14830,37 @@ function Export-DbaUser {
                 $users = $db.Users
             }
 
+            # Generate the file path
+            if (Test-Bound -ParameterName FilePath -Not) {
+                $GenerateFilePerUser = $true
+            } else {
+                # Generate a new file name with passed/default path
+                $FilePath = Get-ExportFilePath -Path $PSBoundParameters.Path -FilePath $PSBoundParameters.FilePath -Type sql -ServerName $db.Parent.Name -Unique
+                # Force append to have everything on same file
+                $Append = $true
+            }
+
             # Store roles between users so if we hit the same one we don't create it again
             $roles = @()
             $stepCounter = 0
             foreach ($dbuser in $users) {
-                Write-ProgressHelper -TotalSteps $users.Count -Activity "Exporting from $($db.Name)" -StepNumber ($stepCounter++) -Message "Generating script for user $dbuser"
+
+                if ($GenerateFilePerUser) {
+                    if ($null -eq $usersProcessed[$dbuser.Name]) {
+                        # If user and not specific output file, create file name without database name.
+                        $FilePath = Get-ExportFilePath -Path $PSBoundParameters.Path -FilePath $PSBoundParameters.FilePath -Type sql -ServerName $("$($db.Parent.Name)-$($dbuser.Name)") -Unique
+                        $usersProcessed[$dbuser.Name] = $FilePath
+                    } else {
+                        $Append = $true
+                        $FilePath = $usersProcessed[$dbuser.Name]
+                    }
+                }
+
+                Write-ProgressHelper -TotalSteps $users.Count -Activity "Exporting from $($db.Name)" -StepNumber ($stepCounter++) -Message "Generating script ($FilePath) for user $dbuser"
 
                 #setting database
                 if (((Test-Bound ScriptingOptionsObject) -and $ScriptingOptionsObject.IncludeDatabaseContext) -or - (Test-Bound ScriptingOptionsObject -Not)) {
-                    $outsql += "USE [" + $db.Name + "]"
+                    $useDatabase = "USE [" + $db.Name + "]"
                 }
 
                 try {
@@ -15025,23 +15056,43 @@ function Export-DbaUser {
                 } catch {
                     Stop-Function -Message "This user may be using functionality from $($versionName[$db.CompatibilityLevel.ToString()]) that does not exist on the destination version ($versionNameDesc)." -Continue -InnerErrorRecord $_ -Target $db
                 }
-            }
 
-            if ($ExcludeGoBatchSeparator) {
-                $sql = $outsql
-            } else {
-                $sql = $outsql -join "`r`nGO`r`n"
-                #add the final GO
-                $sql += "`r`nGO"
-            }
-            if (-not $Passthru) {
-                $sql | Out-File -Encoding UTF8 -FilePath $FilePath -Append:$Append -NoClobber:$NoClobber
-                Get-ChildItem -Path $FilePath
-            } else {
-                $sql
+                if (@($perms.Count) -gt 0) {
+                    if ($ExcludeGoBatchSeparator) {
+                        $sql = "$useDatabase $outsql"
+                    } else {
+                        if ($useDatabase) {
+                            $sql = "$useDatabase`r`nGO`r`n" + ($outsql -join "`r`nGO`r`n")
+                        } else {
+                            $sql = $outsql -join "`r`nGO`r`n"
+                        }
+                        #add the final GO
+                        $sql += "`r`nGO"
+                    }
+                }
+
+                if (-not $Passthru) {
+                    # If generate a file per user, clean the collection to populate with next one
+                    if ($GenerateFilePerUser) {
+                        if (-not [string]::IsNullOrEmpty($sql)) {
+                            $sql | Out-File -Encoding UTF8 -FilePath $FilePath -Append:$Append -NoClobber:$NoClobber
+                            Get-ChildItem -Path $FilePath
+                        }
+                    } else {
+                        $sql | Out-File -Encoding UTF8 -FilePath $FilePath -Append:$Append -NoClobber:$NoClobber
+                    }
+                    # Clear variables for next user
+                    $outsql = @()
+                    $sql = ""
+                } else {
+                    $sql
+                }
             }
         }
-
+        # Just a single file, output path once here
+        if (-Not $GenerateFilePerUser) {
+            Get-ChildItem -Path $FilePath
+        }
     }
 }
 
@@ -26069,6 +26120,7 @@ function Get-DbaDbTable {
             $server = $db.Parent
             Write-Message -Level Verbose -Message "Processing $db"
 
+            $db.Tables.Refresh($true) # This will ensure the list of tables is up-to-date
             if ($fqtns) {
                 $tables = @()
                 foreach ($fqtn in $fqtns) {
@@ -26276,7 +26328,7 @@ function Get-DbaDbView {
             foreach ($v in $View) {
                 $fqtn = Get-ObjectNameParts -ObjectName $v
 
-                if (!$fqtn.Parsed) {
+                if (-not $fqtn.Parsed) {
                     Write-Message -Level Warning -Message "Please check you are using proper three-part names. If your search value contains special characters you must use [ ] to wrap the name. The value $t could not be parsed as a valid name."
                     Continue
                 }
@@ -26288,7 +26340,7 @@ function Get-DbaDbView {
                     InputValue = $fqtn.InputValue
                 }
             }
-            if (!$fqtns) {
+            if (-not $fqtns) {
                 Stop-Function -Message "No Valid View specified"  -ErrorRecord $_ -Target $instance -Continue
             }
         }
@@ -26301,6 +26353,7 @@ function Get-DbaDbView {
 
         foreach ($db in $InputObject) {
 
+            $db.Views.Refresh($true) # This will ensure the list of views is up-to-date
             if ($fqtns) {
                 $views = @()
                 foreach ($fqtn in $fqtns) {
@@ -26312,7 +26365,7 @@ function Get-DbaDbView {
                         }
                     }
 
-                    $vw = $db.views | Where-Object { $_.Name -in $fqtn.View -and $fqtn.Schema -in ($_.Schema, $null) -and $fqtn.Database -in ($_.Parent.Name, $null) }
+                    $vw = $db.Views | Where-Object { $_.Name -in $fqtn.View -and $fqtn.Schema -in ($_.Schema, $null) -and $fqtn.Database -in ($_.Parent.Name, $null) }
 
                     if (-not $vw) {
                         Write-Message -Level Verbose -Message "Could not find view $($fqtn.Name) in $db on $server"
@@ -26320,7 +26373,7 @@ function Get-DbaDbView {
                     $views += $vw
                 }
             } else {
-                $views = $db.views
+                $views = $db.Views
             }
 
             if (-not $db.IsAccessible) {
@@ -26337,14 +26390,14 @@ function Get-DbaDbView {
             }
 
             $defaults = 'ComputerName', 'InstanceName', 'SqlInstance', 'Database', 'Schema', 'CreateDate', 'DateLastModified', 'Name'
-            foreach ($v in $views) {
+            foreach ($sqlview in $views) {
 
-                Add-Member -Force -InputObject $v -MemberType NoteProperty -Name ComputerName -value $v.Parent.ComputerName
-                Add-Member -Force -InputObject $v -MemberType NoteProperty -Name InstanceName -value $v.Parent.InstanceName
-                Add-Member -Force -InputObject $v -MemberType NoteProperty -Name SqlInstance -value $v.Parent.SqlInstance
-                Add-Member -Force -InputObject $v -MemberType NoteProperty -Name Database -value $db.Name
+                Add-Member -Force -InputObject $sqlview -MemberType NoteProperty -Name ComputerName -value $sqlview.Parent.ComputerName
+                Add-Member -Force -InputObject $sqlview -MemberType NoteProperty -Name InstanceName -value $sqlview.Parent.InstanceName
+                Add-Member -Force -InputObject $sqlview -MemberType NoteProperty -Name SqlInstance -value $sqlview.Parent.SqlInstance
+                Add-Member -Force -InputObject $sqlview -MemberType NoteProperty -Name Database -value $db.Name
 
-                Select-DefaultView -InputObject $v -Property $defaults
+                Select-DefaultView -InputObject $sqlview -Property $defaults
             }
         }
     }
