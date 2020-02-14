@@ -6,6 +6,17 @@ param (
     [string]
     $StagingFolder = 'Staging',
 
+    [string[]]
+    $FilesToSign = @(
+        '*.ps*1',
+        'bin\library.ps1',
+        'bin\typealiases.ps1',
+        'internal\configurations\configuration.ps1',
+        'internal\scripts\*.ps1',
+        'optional\*.ps1',
+        'xml\*.ps1xml'
+    ),
+
     [switch] $SkipCompile,
     [switch] $CompileOnly,
     [switch] $SkipCleanup
@@ -17,40 +28,67 @@ Push-Location $PSScriptRoot
 
 # Re-compile allcommands.ps1 and en-us/dbatools-help.xml
 if (-not $SkipCompile) {
+    $msg = "Compiling allcommands.ps1 and dbatools-help.xml for release"
+    Write-Progress $msg
     Remove-Module $OriginalModuleName -ea Ignore
-    Import-Module ".\$OriginalModuleName.psm1"
+    Import-Module ".\$OriginalModuleName.psd1"
     HelpOut\Install-MAML $OriginalModuleName -Compact -NoVersion -FunctionRoot functions, internal\functions
     Remove-Module $OriginalModuleName
     if ($CompileOnly) {
         Pop-Location
         return
     }
+    Write-Progress $msg -Completed
 }
 
 # Stage files for Publish-Module
 $msg = "Staging files to $StagingFolder"
-Write-Progress $msg
-Remove-Item $StagingFolder -Recurse -Force -ea Ignore
-if (-not (Test-Path $StagingFolder)) {
-    New-Item $StagingFolder\$PublishedModuleName -Type Directory | Out-Null
+$ModulePath = "$StagingFolder\$PublishedModuleName"
+if ([IO.Path]::GetFileName($StagingFolder) -eq $PublishedModuleName) {
+    $ModulePath = $StagingFolder
 }
-Copy-Item "$OriginalModuleName.psd1" "$StagingFolder\$PublishedModuleName\$PublishedModuleName.psd1"
-Copy-Item * $StagingFolder\$PublishedModuleName -Recurse -Exclude $StagingFolder, "$OriginalModuleName.psd1", .git*, .vscode, bin, tests, appveyor.yml, codecov.yml, publish.ps1
-New-Item $StagingFolder\$PublishedModuleName\bin -Type Directory | Out-Null
-Copy-Item bin\* $StagingFolder\$PublishedModuleName\bin -Recurse -Exclude build, projects, StructuredLogger.dll
+Write-Progress $msg
+Remove-Item $ModulePath -Recurse -Force -ea Ignore
+New-Item $ModulePath -Type Directory | Out-Null
+Copy-Item "$OriginalModuleName.psd1" "$ModulePath\$PublishedModuleName.psd1"
+$ExcludeFromRoot = @(
+    $StagingFolder, "$OriginalModuleName.psd1",
+    ".git*", ".vscode", "bin", "tests",
+    "appveyor.yml", "codecov.yml", "publish.ps1"
+)
+Copy-Item * $ModulePath -Recurse -Exclude $ExcludeFromRoot
+New-Item $ModulePath\bin -Type Directory | Out-Null
+$ExcludeFromBin = @(
+    "build", "projects", "StructuredLogger.dll"
+)
+Copy-Item bin\* $ModulePath\bin -Recurse -Exclude $ExcludeFromBin
+Write-Progress $msg -Completed
+
+# Sign Files
+$msg = "Signing files"
+Write-Progress $msg
+$cert = Get-ChildItem Cert:\CurrentUser\My | Where-Object { $_.EnhancedKeyUsageList.FriendlyName -Contains 'Code Signing' -and $_.Subject -match 'sdops@indwes.edu' }
+$i = 0
+foreach ($file in $FilesToSign) {
+    Write-Progress $msg "Signing $file" -PercentComplete (100 * $i++ / $FilesToSign.Count)
+    Set-AuthenticodeSignature $ModulePath\$file $cert -TimestampServer http://timestamp.digicert.com | Out-Null
+}
 Write-Progress $msg -Completed
 
 # Publish Module
 $msg = "Publishing $PublishedModuleName to the ""$Repository"" repository"
 Write-Progress $msg
-Publish-Module -Path $StagingFolder\$PublishedModuleName -Repository $Repository
+Publish-Module -Path $ModulePath -Repository $Repository
 Write-Progress $msg -Completed
 
 # Clean up
 if (-not $SkipCleanup) {
     $msg = "Deleting the staging folder [$StagingFolder]"
     Write-Progress $msg
-    Remove-Item $StagingFolder -Recurse -Force
+    Remove-Item $ModulePath -Recurse -Force
+    if (-not (Get-ChildItem $StagingFolder -ea Ignore)) {
+        Remove-Item $StagingFolder -ea Ignore
+    }
     Write-Progress $msg -Completed
 }
 
