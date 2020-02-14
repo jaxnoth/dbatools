@@ -197,6 +197,7 @@ function Copy-DbaDbTableData {
         [switch]$KeepIdentity,
         [switch]$KeepNulls,
         [switch]$Truncate,
+        [switch]$DeleteExisting,
         [int]$bulkCopyTimeOut = 5000,
         [Parameter(ValueFromPipeline)]
         [Microsoft.SqlServer.Management.Smo.Table[]]$InputObject,
@@ -241,6 +242,10 @@ function Copy-DbaDbTableData {
         } catch {
             Stop-Function -Message 'Could not load a usable version of SqlBulkCopy.' -ErrorRecord $_
             return
+        }
+
+        if ($DeleteExisting) {
+            $AutoCreateTable = $true
         }
 
         $bulkCopyOptions = 0
@@ -335,6 +340,11 @@ function Copy-DbaDbTableData {
                 }
 
                 $desttable = Get-DbaDbTable -SqlInstance $destServer -Table $DestinationTable -Database $DestinationDatabase -Verbose:$false | Select-Object -First 1
+                if ($DeleteExisting -and $desttable) {
+                    $dropscript = "DROP TABLE [$($desttable.Schema)].[$($desttable.Name)]"
+                    Invoke-DbaQuery -SqlInstance $destServer -Database $DestinationDatabase -Query "$dropscript" -EnableException
+                    $desttable = $null
+                }
                 if (-not $desttable -and $AutoCreateTable) {
                     try {
                         $tablescript = $sqltable | Export-DbaScript -Passthru | Out-String
