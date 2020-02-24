@@ -46997,6 +46997,7 @@ function Invoke-DbaQuery {
         [ValidateSet("DataSet", "DataTable", "DataRow", "PSObject", "SingleValue")]
         [string]$As = "DataRow",
         [System.Collections.IDictionary]$SqlParameters,
+        [System.Data.CommandType]$CommandType = 'Text',
         [switch]$AppendServerInstance,
         [switch]$MessagesToOutput,
         [parameter(ValueFromPipeline)]
@@ -47009,7 +47010,8 @@ function Invoke-DbaQuery {
         Write-Message -Level Debug -Message "Bound parameters: $($PSBoundParameters.Keys -join ", ")"
 
         $splatInvokeDbaSqlAsync = @{
-            As = $As
+            As          = $As
+            CommandType = $CommandType
         }
 
         if (Test-Bound -ParameterName "SqlParameters") {
@@ -78421,6 +78423,9 @@ function Invoke-DbaAsync {
         [System.Collections.IDictionary]
         $SqlParameters,
 
+        [System.Data.CommandType]
+        $CommandType = 'Text',
+
         [switch]
         $AppendServerInstance,
 
@@ -78527,17 +78532,18 @@ function Invoke-DbaAsync {
         $Pieces = $Pieces | Where-Object { $_.Trim().Length -gt 0 }
         foreach ($piece in $Pieces) {
             $cmd = New-Object system.Data.SqlClient.SqlCommand($piece, $conn)
+            $cmd.CommandType = $CommandType
             $cmd.CommandTimeout = $QueryTimeout
 
             if ($null -ne $SqlParameters) {
                 $SqlParameters.GetEnumerator() |
-                    ForEach-Object {
-                        if ($null -ne $_.Value) {
-                            $cmd.Parameters.AddWithValue($_.Key, $_.Value)
-                        } else {
-                            $cmd.Parameters.AddWithValue($_.Key, [DBNull]::Value)
-                        }
-                    } > $null
+                ForEach-Object {
+                    if ($null -ne $_.Value) {
+                        $cmd.Parameters.AddWithValue($_.Key, $_.Value)
+                    } else {
+                        $cmd.Parameters.AddWithValue($_.Key, [DBNull]::Value)
+                    }
+                } > $null
             }
 
             $ds = New-Object system.Data.DataSet
