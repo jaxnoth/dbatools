@@ -661,6 +661,7 @@
         'Get-DbaErrorLog',
         'Get-DbaManagementObject',
         'Test-DbaManagementObject',
+        'Copy-DbaDatabaseData',
         'Copy-DbaDbViewData'
     )
 

@@ -563,6 +563,7 @@ $script:xplat = @(
     'Publish-DbaDacPackage',
     'Copy-DbaDbTableData',
     'Copy-DbaDbViewData',
+    'Copy-DbaDatabaseData',
     'Invoke-DbaQuery',
     'Remove-DbaLogin',
     'Get-DbaAgentJobCategory',
