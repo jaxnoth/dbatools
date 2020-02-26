@@ -169,6 +169,7 @@
         'Get-DbaDependency',
         'Find-DbaCommand',
         'Backup-DbaDatabase',
+        'Backup-DbaDDBoostDatabase',
         'New-DbaDirectory',
         'Get-DbaDbQueryStoreOption',
         'Set-DbaDbQueryStoreOption',
