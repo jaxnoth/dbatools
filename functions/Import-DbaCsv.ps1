@@ -588,6 +588,7 @@ function Import-DbaCsv {
                                     }
                                 } catch {
                                     # oh well, we tried
+                                    Write-Message -Level Verbose -Message "ColumnMap unable to be created automatically."
                                     $ColumnMap = $null
                                 }
                             }
