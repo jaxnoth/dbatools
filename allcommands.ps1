@@ -17495,7 +17495,7 @@ function Find-DbaOrphanedFile {
         }
 
         $FileType += "mdf", "ldf", "ndf"
-        $systemfiles = "distmdl.ldf", "distmdl.mdf", "mssqlsystemresource.ldf", "mssqlsystemresource.mdf"
+        $systemfiles = "distmdl.ldf", "distmdl.mdf", "mssqlsystemresource.ldf", "mssqlsystemresource.mdf", "model_msdbdata.mdf", "model_msdblog.ldf", "model_replicatedmaster.mdf", "model_replicatedmaster.ldf"
 
         $FileTypeComparison = $FileType | ForEach-Object { $_.ToLowerInvariant() } | Where-Object { $_ } | Sort-Object | Get-Unique
     }
@@ -21299,7 +21299,7 @@ function Get-DbaComputerSystem {
                         $isAws = Invoke-Command2 -ComputerName $computerResolved -Credential $Credential -ArgumentList $ProxiedFunc -ScriptBlock {
                             Param( $ProxiedFunc )
                             . ([ScriptBlock]::Create($ProxiedFunc))
-                            ((Invoke-TlsRestMethod2 -TimeoutSec 15 -Uri 'http://169.254.169.254').StatusCode) -eq 200
+                            ((Invoke-TlsRestMethod -TimeoutSec 15 -Uri 'http://169.254.169.254').StatusCode) -eq 200
                         } -Raw
                     } catch [System.Net.WebException] {
                         $isAws = $false
@@ -21363,6 +21363,7 @@ function Get-DbaComputerSystem {
         }
     }
 }
+
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaConnection {
@@ -22083,7 +22084,7 @@ function Get-DbaDbBackupHistory {
                             $AgResults += $AgLoopResults | Where-Object { $_.Database -eq $AgDb } | Sort-Object -Property FirstLsn | Select-Object -Last 1
                         }
                     } else {
-                        $AgResults += $AgLoopResult
+                        $AgResults += $AgLoopResults
                     }
                     # Results are already in the correct format so drop to output
                     $agresults
@@ -22592,6 +22593,7 @@ function Get-DbaDbBackupHistory {
         }
     }
 }
+
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbccHelp {
@@ -38641,7 +38643,9 @@ function Import-DbaCsv {
                 try {
                     $server = Connect-SqlInstance -SqlInstance $instance -SqlCredential $sqlcredential -StatementTimeout 0 -MinimumVersion 9
                     $sqlconn = $server.ConnectionContext.SqlConnectionObject
-                    $sqlconn.Open()
+                    if ($sqlconn.State -ne 'Open') {
+                        $sqlconn.Open()
+                    }
                 } catch {
                     Stop-Function -Message "Error occurred while establishing connection to $instance" -Category ConnectionError -ErrorRecord $_ -Target $instance -Continue
                 }
@@ -39719,6 +39723,7 @@ function Install-DbaFirstResponderKit {
     }
 }
 
+
 #.ExternalHelp dbatools-Help.xml
 function Install-DbaInstance {
     
@@ -40342,36 +40347,36 @@ function Install-DbaMaintenanceSolution {
 
                 # Backup location
                 if ($BackupLocation) {
-                    $findBKP = 'SET @BackupDirectory     = NULL'
-                    $replaceBKP = 'SET @BackupDirectory     = N''' + $BackupLocation + ''''
+                    $findBKP = 'DECLARE @BackupDirectory nvarchar(max)     = NULL'
+                    $replaceBKP = 'DECLARE @BackupDirectory nvarchar(max)     = N''' + $BackupLocation + ''''
                     $fileContents[$file] = $fileContents[$file].Replace($findBKP, $replaceBKP)
                 }
 
                 # CleanupTime
                 if ($CleanupTime -ne 0) {
-                    $findCleanupTime = 'SET @CleanupTime         = NULL'
-                    $replaceCleanupTime = 'SET @CleanupTime         = ' + $CleanupTime
+                    $findCleanupTime = 'DECLARE @CleanupTime int                   = NULL'
+                    $replaceCleanupTime = 'DECLARE @CleanupTime int                   = ' + $CleanupTime
                     $fileContents[$file] = $fileContents[$file].Replace($findCleanupTime, $replaceCleanupTime)
                 }
 
                 # OutputFileDirectory
                 if ($OutputFileDirectory) {
-                    $findOutputFileDirectory = 'SET @OutputFileDirectory = NULL'
-                    $replaceOutputFileDirectory = 'SET @OutputFileDirectory = N''' + $OutputFileDirectory + ''''
+                    $findOutputFileDirectory = 'DECLARE @OutputFileDirectory nvarchar(max) = NULL'
+                    $replaceOutputFileDirectory = 'DECLARE @OutputFileDirectory nvarchar(max) = N''' + $OutputFileDirectory + ''''
                     $fileContents[$file] = $fileContents[$file].Replace($findOutputFileDirectory, $replaceOutputFileDirectory)
                 }
 
                 # LogToTable
                 if (!$LogToTable) {
-                    $findLogToTable = "SET @LogToTable          = 'Y'"
-                    $replaceLogToTable = "SET @LogToTable          = 'N'"
+                    $findLogToTable = "DECLARE @LogToTable nvarchar(max)          = 'Y'"
+                    $replaceLogToTable = "DECLARE @LogToTable nvarchar(max)          = 'N'"
                     $fileContents[$file] = $fileContents[$file].Replace($findLogToTable, $replaceLogToTable)
                 }
 
                 # Create Jobs
                 if (-not $InstallJobs) {
-                    $findCreateJobs = "SET @CreateJobs          = 'Y'"
-                    $replaceCreateJobs = "SET @CreateJobs          = 'N'"
+                    $findCreateJobs = "DECLARE @CreateJobs nvarchar(max)          = 'Y'"
+                    $replaceCreateJobs = "DECLARE @CreateJobs nvarchar(max)          = 'N'"
                     $fileContents[$file] = $fileContents[$file].Replace($findCreateJobs, $replaceCreateJobs)
                 }
             }
@@ -40514,6 +40519,7 @@ function Install-DbaMaintenanceSolution {
         Write-ProgressHelper -ExcludePercent -Message "Installation complete"
     }
 }
+
 
 #.ExternalHelp dbatools-Help.xml
 function Install-DbaSqlWatch {
@@ -42718,6 +42724,7 @@ function Invoke-DbaDbDataMasking {
         [switch]$ExactLength,
         [int]$ConnectionTimeout = 0,
         [int]$CommandTimeout = 300,
+        [int]$BatchSize = 1000,
         [string[]]$DictionaryFilePath,
         [string]$DictionaryExportPath,
         [switch]$EnableException
@@ -42823,18 +42830,16 @@ function Invoke-DbaDbDataMasking {
                 if ($server.VersionMajor -lt 9) {
                     Stop-Function -Message "SQL Server version must be 2005 or greater" -Continue
                 }
+
                 $db = $server.Databases[$($dbName)]
 
-                $connstring = New-DbaConnectionString -SqlInstance $instance -SqlCredential $SqlCredential -Database $dbName -WhatIf:$false -ConnectTimeout $ConnectionTimeout
-                $sqlconn = New-Object System.Data.SqlClient.SqlConnection $connstring
-                $sqlconn.Open()
-                $transaction = $sqlconn.BeginTransaction()
                 $stepcounter = $nullmod = 0
 
                 foreach ($tableobject in $tables.Tables) {
                     $uniqueValues = @()
                     $uniqueValueColumns = @()
-                    $stringbuilder = [System.Text.StringBuilder]''
+                    $stringBuilder = [System.Text.StringBuilder]''
+
                     if ($tableobject.Name -in $ExcludeTable) {
                         Write-Message -Level Verbose -Message "Skipping $($tableobject.Name) because it is explicitly excluded"
                         continue
@@ -42846,9 +42851,38 @@ function Invoke-DbaDbDataMasking {
 
                     $dbTable = $db.Tables | Where-Object { $_.Schema -eq $tableobject.Schema -and $_.Name -eq $tableobject.Name }
 
+                    $cleanupIdentityColumn = $false
+
+                    if (-not ($dbTable.Columns | Where-Object Identity -eq $true)) {
+                        Write-Message -Level Verbose -Message "Adding identity column to table [$($dbTable.Schema)].[$($dbTable.Name)]"
+                        $query = "ALTER TABLE [$($dbTable.Schema)].[$($dbTable.Name)] ADD MaskingID BIGINT IDENTITY(1, 1) NOT NULL;"
+
+                        Invoke-DbaQuery -SqlInstance $server -SqlCredential $SqlCredential -Database $db.Name -Query $query
+
+                        $cleanupIdentityColumn = $true
+
+                        $identityColumn = "MaskingID"
+
+                        $dbTable.Columns.Refresh()
+                    } else {
+                        $identityColumn = $dbTable.Columns | Where-Object Identity | Select-Object -ExpandProperty Name
+                    }
+
+                    try {
+                        Write-Message -Level Verbose -Message "Adding index on identity column [$($identityColumn)] in table [$($dbTable.Schema)].[$($dbTable.Name)]"
+
+                        $query = "CREATE NONCLUSTERED INDEX NIX_$($dbTable.Name)_Masking ON [$($dbTable.Schema)].[$($dbTable.Name)]([$($identityColumn)])"
+
+                        Invoke-DbaQuery -SqlInstance $server -SqlCredential $SqlCredential -Database $db.Name -Query $query
+                    } catch {
+                        Stop-Function -Message "Could not add identity index to table [$($dbTable.Schema)].[$($dbTable.Name)]" -Continue
+                    }
+
+
                     try {
                         if (-not (Test-Bound -ParameterName Query)) {
                             $columnString = "[" + (($dbTable.Columns | Where-Object DataType -in $supportedDataTypes | Select-Object Name -ExpandProperty Name) -join "],[") + "]"
+                            $columnString += ",[$($identityColumn)]"
                             $query = "SELECT $($columnString) FROM [$($tableobject.Schema)].[$($tableobject.Name)]"
                         }
                         $data = $db.Query($query)
@@ -42960,15 +42994,23 @@ function Invoke-DbaDbDataMasking {
                     if ($Pscmdlet.ShouldProcess($instance, "Masking $($tablecolumns.Name -join ', ') in $($data.Rows.Count) rows in $($dbName).$($tableobject.Schema).$($tableobject.Name)")) {
                         $elapsed = [System.Diagnostics.Stopwatch]::StartNew()
 
+                        $totalBatches = [System.Math]::Ceiling($data.Count / $BatchSize)
+                        $rowNumber = $stepcounter = $batchRowCounter = $batchCounter = 0
+
                         # Loop through each of the rows and change them
-                        $rowNumber = $stepcounter = 0
-                        $rowItems = $data | Get-Member -MemberType Properties | Select-Object Name -ExpandProperty Name
                         foreach ($row in $data) {
                             if ((($stepcounter++) % 100) -eq 0) {
-                                Write-ProgressHelper -StepNumber $stepcounter -TotalSteps $data.Count -Activity "Masking data" -Message "Preparing update statements for $($data.Count) rows in $($tableobject.Schema).$($tableobject.Name) in $($dbName) on $instance"
+                                $progressParams = @{
+                                    StepNumber = $stepcounter
+                                    TotalSteps = $data.Count
+                                    Activity   = "Masking $($data.Count) rows in $($tableobject.Schema).$($tableobject.Name) in $($dbName) on $instance"
+                                    Message    = "Generating Updates"
+                                }
+
+                                Write-ProgressHelper @progressParams
                             }
 
-                            $updates = $wheres = @()
+                            $updates = @()
                             $newValue = $null
 
                             foreach ($columnobject in $tablecolumns) {
@@ -43116,59 +43158,59 @@ function Invoke-DbaDbDataMasking {
                                 }
                             }
 
-                            foreach ($item in $rowItems) {
-                                $itemColumnType = $dbTable.Columns[$item].DataType.SqlDataType.ToString().ToLowerInvariant()
+                            $null = $stringBuilder.AppendLine("UPDATE [$($tableobject.Schema)].[$($tableobject.Name)] SET $($updates -join ', ') WHERE [$($identityColumn)] = $($row.$($identityColumn)); ")
 
-                                if (($row.$($item)).GetType().Name -match 'DBNull') {
-                                    $wheres += "[$item] IS NULL"
-                                } elseif ($itemColumnType -in 'bit', 'bool') {
-                                    if ($row.$item) {
-                                        $wheres += "[$item] = 1"
-                                    } else {
-                                        $wheres += "[$item] = 0"
-                                    }
-                                } elseif ($itemColumnType -like '*int*' -or $itemColumnType -in 'decimal') {
-                                    $oldValue = $row.$item
-                                    $wheres += "[$item] = $oldValue"
-                                } elseif ($itemColumnType -in 'text', 'ntext') {
-                                    $oldValue = ($row.$item).Tostring().Replace("'", "''")
-                                    $wheres += "CAST([$item] AS VARCHAR(MAX)) = '$oldValue'"
-                                } elseif ($itemColumnType -eq 'datetime') {
-                                    $oldValue = ($row.$item).Tostring("yyyy-MM-dd HH:mm:ss.fff")
-                                    $wheres += "[$item] = '$oldValue'"
-                                } elseif ($itemColumnType -eq 'datetime2') {
-                                    $oldValue = ($row.$item).Tostring("yyyy-MM-dd HH:mm:ss.fffffff")
-                                    $wheres += "[$item] = '$oldValue'"
-                                } elseif ($itemColumnType -like 'date') {
-                                    $oldValue = ($row.$item).Tostring("yyyy-MM-dd")
-                                    $wheres += "[$item] = '$oldValue'"
-                                } elseif ($itemColumnType -like '*date*') {
-                                    $oldValue = ($row.$item).Tostring("yyyy-MM-dd HH:mm:ss")
-                                    $wheres += "[$item] = '$oldValue'"
-                                } else {
-                                    $oldValue = ($row.$item).Tostring().Replace("'", "''")
-                                    $wheres += "[$item] = '$oldValue'"
+                            $batchRowCounter++
+
+                            if ($batchRowCounter -eq $BatchSize) {
+                                $batchCounter++
+
+                                $progressParams = @{
+                                    StepNumber = $stepcounter
+                                    TotalSteps = $data.Count
+                                    Activity   = "Masking $($data.Count) rows in $($tableobject.Schema).$($tableobject.Name) in $($dbName) on $instance"
+                                    Message    = "Executing Batch $batchCounter/$totalBatches"
                                 }
-                            }
 
-                            $null = $stringbuilder.AppendLine("UPDATE [$($tableobject.Schema)].[$($tableobject.Name)] SET $($updates -join ', ') WHERE $($wheres -join ' AND '); ")
+                                Write-ProgressHelper @progressParams
+
+                                Write-Message -Level Verbose -Message "Executing batch $batchCounter/$totalBatches"
+
+                                try {
+                                    Invoke-DbaQuery -SqlInstance $instance -SqlCredential $SqlCredential -Database $db.Name -Query $stringBuilder.ToString()
+                                } catch {
+                                    Stop-Function -Message "Error updating $($tableobject.Schema).$($tableobject.Name): $_" -Target $stringBuilder -Continue -ErrorRecord $_
+                                }
+
+                                $null = $stringBuilder.Clear()
+                                $batchRowCounter = 0
+                            }
 
                             # Increase the row number
                             $rowNumber++
                         }
 
-                        try {
-                            Write-ProgressHelper -ExcludePercent -Activity "Masking data" -Message "Updating $($data.Count) rows in $($tableobject.Schema).$($tableobject.Name) in $($dbName) on $instance"
-                            $sqlcmd = New-Object System.Data.SqlClient.SqlCommand(($stringbuilder.ToString()), $sqlconn, $transaction)
-                            $sqlcmd.CommandTimeout = $CommandTimeout
-                            $null = $sqlcmd.ExecuteNonQuery()
-                        } catch {
-                            Write-Message -Level VeryVerbose -Message "$($stringbuilder.ToString())"
-                            $errormessage = $_.Exception.Message.ToString()
-                            Stop-Function -Message "Error updating $($tableobject.Schema).$($tableobject.Name): $errormessage.`n$updatequery" -Target $updatequery -Continue -ErrorRecord $_
+                        if ($stringBuilder.Length -ge 1) {
+                            $batchCounter++
+
+                            $progressParams = @{
+                                StepNumber = $stepcounter
+                                TotalSteps = $data.Count
+                                Activity   = "Masking $($data.Count) rows in $($tableobject.Schema).$($tableobject.Name) in $($dbName) on $instance"
+                                Message    = "Executing Batch $batchCounter/$totalBatches"
+                            }
+
+                            Write-ProgressHelper @progressParams
+
+                            try {
+                                Invoke-DbaQuery -SqlInstance $instance -SqlCredential $SqlCredential -Database $db.Name -Query $stringBuilder.ToString()
+                            } catch {
+                                Stop-Function -Message "Error updating $($tableobject.Schema).$($tableobject.Name): $_" -Target $stringBuilder -Continue -ErrorRecord $_
+                            }
                         }
 
-                        $stringbuilder = [System.Text.StringBuilder]''
+                        $null = $stringBuilder.Clear()
+
                         $columnsWithComposites = @()
                         $columnsWithComposites += $tableobject.Columns | Where-Object Composite -ne $null
 
@@ -43189,7 +43231,6 @@ function Invoke-DbaDbDataMasking {
                                             } else {
                                                 $newValue = Get-DbaRandomizedValue -RandomizerType $columnComposite.Type -RandomizerSubType $columnComposite.Subtype  -CharacterString $charstring -Min $columnComposite.Min -Max $columnComposite.Max -Locale $Locale
                                             }
-
                                         } catch {
                                             Stop-Function -Message "Failure" -Target $faker -Continue -ErrorRecord $_
                                         }
@@ -43206,7 +43247,6 @@ function Invoke-DbaDbDataMasking {
                                             $newValue = ($newValue).Tostring().Replace("'", "''")
                                             $compositeItems += "'$newValue'"
                                         }
-
                                     } elseif ($columnComposite.Type -eq 'Static') {
                                         $compositeItems += "'$($columnComposite.Value)'"
                                     } else {
@@ -43216,17 +43256,36 @@ function Invoke-DbaDbDataMasking {
 
                                 $compositeItems = $compositeItems | ForEach-Object { $_ = "ISNULL($($_), '')"; $_ }
 
-                                $null = $stringbuilder.AppendLine("UPDATE [$($tableobject.Schema)].[$($tableobject.Name)] SET [$($columnObject.Name)] = $($compositeItems -join ' + ')")
+                                $null = $stringBuilder.AppendLine("UPDATE [$($tableobject.Schema)].[$($tableobject.Name)] SET [$($columnObject.Name)] = $($compositeItems -join ' + ')")
                             }
 
                             try {
-                                $sqlcmd = New-Object System.Data.SqlClient.SqlCommand(($stringbuilder.ToString()), $sqlconn, $transaction)
-                                $sqlcmd.CommandTimeout = $CommandTimeout
-                                $null = $sqlcmd.ExecuteNonQuery()
+                                Invoke-DbaQuery -SqlInstance $instance -SqlCredential $SqlCredential -Database $db.Name -Query $stringBuilder.ToString()
                             } catch {
-                                Write-Message -Level VeryVerbose -Message "$($stringbuilder.ToString())"
-                                $errormessage = $_.Exception.Message.ToString()
-                                Stop-Function -Message "Error updating $($tableobject.Schema).$($tableobject.Name): $errormessage.`n$updatequery" -Target $updatequery -Continue -ErrorRecord $_
+                                Stop-Function -Message "Error updating $($tableobject.Schema).$($tableobject.Name): $_" -Target $stringBuilder -Continue -ErrorRecord $_
+                            }
+                        }
+
+                        try {
+                            Write-Message -Level Verbose -Message "Removing index on identity column [$($identityColumn)] in table [$($dbTable.Schema)].[$($dbTable.Name)]"
+
+                            $query = "DROP INDEX [NIX_$($dbTable.Name)_Masking] ON [$($dbTable.Schema)].[$($dbTable.Name)]"
+
+                            Invoke-DbaQuery -SqlInstance $instance -SqlCredential $SqlCredential -Database $db.Name -Query $query
+                        } catch {
+                            Stop-Function -Message "Could not remove identity index to table [$($dbTable.Schema)].[$($dbTable.Name)]" -Continue
+                        }
+
+                        if ($cleanupIdentityColumn) {
+                            try {
+                                Write-Message -Level Verbose -Message "Removing identity column [$($identityColumn)] from table [$($dbTable.Schema)].[$($dbTable.Name)]"
+
+                                $query = "ALTER TABLE [$($dbTable.Schema)].[$($dbTable.Name)] DROP COLUMN [$($identityColumn)]"
+
+                                Invoke-DbaQuery -SqlInstance $instance -SqlCredential $SqlCredential -Database $db.Name -Query $query
+
+                            } catch {
+                                Stop-Function -Message "Could not remove identity column from table [$($dbTable.Schema)].[$($dbTable.Name)]" -Continue
                             }
                         }
 
@@ -43250,14 +43309,6 @@ function Invoke-DbaDbDataMasking {
 
                     # Empty the unique values array
                     $uniqueValues = $null
-                }
-
-                # Commit the transaction and close it
-                try {
-                    $null = $transaction.Commit()
-                    $sqlconn.Close()
-                } catch {
-                    Stop-Function -Message "Failure" -Continue -ErrorRecord $_
                 }
 
                 # Export the dictionary when needed
@@ -46413,14 +46464,14 @@ function Invoke-DbaDiagnosticQuery {
         }
 
         $scriptversions = @()
-        $scriptfiles = Get-ChildItem -Path "$Path\SQLServerDiagnosticQueries_*_*.sql"
+        $scriptfiles = Get-ChildItem -Path "$Path\SQLServerDiagnosticQueries_*.sql"
 
         if (!$scriptfiles) {
             Write-Message -Level Warning -Message "Diagnostic scripts not found in $Path. Using the ones within the module."
 
             $Path = Join-Path -Path $base -ChildPath "\bin\diagnosticquery"
 
-            $scriptfiles = Get-ChildItem "$base\bin\diagnosticquery\SQLServerDiagnosticQueries_*_*.sql"
+            $scriptfiles = Get-ChildItem "$base\bin\diagnosticquery\SQLServerDiagnosticQueries_*.sql"
             if (!$scriptfiles) {
                 Stop-Function -Message "Unable to download scripts, do you have an internet connection? $_" -ErrorRecord $_
                 return
@@ -47588,6 +47639,7 @@ function Invoke-DbatoolsRenameHelper {
         }
     }
 }
+
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaWhoIsActive {
@@ -50072,7 +50124,7 @@ function New-DbaAvailabilityGroup {
 
         if ($IPAddress) {
             if ($Pscmdlet.ShouldProcess($Primary, "Adding static IP listener for $Name to the Primary replica")) {
-                $null = Add-DbaAgListener -InputObject $ag -IPAddress $IPAddress[0] -SubnetMask $SubnetMask -Port $Port -Dhcp:$Dhcp
+                $null = Add-DbaAgListener -InputObject $ag -IPAddress $IPAddress -SubnetMask $SubnetMask -Port $Port -Dhcp:$Dhcp
             }
         } elseif ($Dhcp) {
             if ($Pscmdlet.ShouldProcess($Primary, "Adding DHCP listener for $Name to all replicas")) {
@@ -50202,6 +50254,7 @@ function New-DbaAvailabilityGroup {
         Get-DbaAvailabilityGroup -SqlInstance $Primary -SqlCredential $PrimarySqlCredential -AvailabilityGroup $Name
     }
 }
+
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaAzAccessToken {
@@ -53590,7 +53643,7 @@ function New-DbaDiagnosticAdsNotebook {
             }
         }
 
-        $diagnosticScriptPath = Get-ChildItem -Path "$($script:PSModuleRoot)\bin\diagnosticquery\" -Filter "SQLServerDiagnosticQueries_$($TargetVersion)_??????.sql" | Select-Object -First 1
+        $diagnosticScriptPath = Get-ChildItem -Path "$($script:PSModuleRoot)\bin\diagnosticquery\" -Filter "SQLServerDiagnosticQueries_$($TargetVersion).sql" | Select-Object -First 1
 
         if (-not $diagnosticScriptPath) {
             Stop-Function -Message "No diagnostic queries available for `$TargetVersion = $TargetVersion"
@@ -60907,9 +60960,9 @@ function Restore-DbaDatabase {
                             Write-Message -Message "Storage Account Identity access means striped backups cannot be restore"
                         } else {
                             if ($f.BackupPath.count -gt 1) {
-                                $null = $f.BackupPath[0] -match 'https://.*/.*/'
+                                $null = $f.BackupPath[0] -match '(http|https)://[^/]*/[^/]*'
                             } else {
-                                $null = $f.BackupPath -match 'https://.*/.*/'
+                                $null = $f.BackupPath -match '(http|https)://[^/]*/[^/]*'
                             }
                             if (Get-DbaCredential -SqlInstance $RestoreInstance -name $matches[0].trim('/') ) {
                                 Write-Message -Message "We have a SAS credential to use with $($f.BackupPath)" -Level Verbose
@@ -61480,41 +61533,29 @@ function Save-DbaDiagnosticQueryScript {
     }
 
     Add-Type -AssemblyName System.Web
-    $glenberryrss = "http://www.sqlskills.com/blogs/glenn/feed/"
-    $glenberrysql = @()
 
-    Write-Message -Level Verbose -Message "Downloading RSS Feed"
-    $rss = [xml](get-webdata -uri $glenberryrss)
-    $Feed = $rss.rss.Channel
-
-    $glenberrysql = @()
-    $RssPostFilter = "SQL Server Diagnostic Information Queries for*"
+    $glennberryResources = "https://glennsqlperformance.com/resources/"
     $DropboxLinkFilter = "*dropbox.com*"
     $LinkTitleFilter = "*Diagnostic Information Queries*"
-    $ExcludeSpreadsheet = "*BlankResutsSpreadsheet*"
+    $ExcludeSpreadsheet = "*Results Spreadsheet*"
 
-    foreach ($post in $Feed.item) {
-        if ($post.title -like $RssPostFilter) {
-            # We found the first post that matches it, lets go visit and scrape.
-            $page = Get-WebData -uri $post.link
-            $glenberrysql += ($page.Links | Where-Object { $_.href -like $DropboxLinkFilter -and $_.outerHTML -like $LinkTitleFilter -and $_.outerHTML -notlike $ExcludeSpreadsheet } | ForEach-Object {
-                    [pscustomobject]@{
-                        URL        = $_.href
-                        SQLVersion = $_.outerHTML -replace "<.+`">", "" -replace "</a>", "" -replace " Diagnostic Information Queries", "" -replace "SQL Server ", "" -replace ' ', ''
-                        FileYear   = ($post.title -split " ")[-1]
-                        FileMonth  = "{0:00}" -f [int]([CultureInfo]::InvariantCulture.DateTimeFormat.MonthNames.IndexOf(($post.title -split " ")[-2]))
-                    }
-                })
-            break
-        }
-    }
+    Write-Message -Level Verbose -Message "Downloading Glenn Berry Resources Page"
+    $page = Get-WebData -uri $glennberryResources
+
+    $glenberrysql += ($page.Links | Where-Object { $_.href -like $DropboxLinkFilter -and $_.outerHTML -like $LinkTitleFilter -and $_.outerHTML -notlike $ExcludeSpreadsheet } | ForEach-Object {
+            [pscustomobject]@{
+                URL        = $_.href
+                SQLVersion = $_.outerHTML -replace "<.+`">", "" -replace "</a>", "" -replace " Diagnostic Information Queries", "" -replace "SQL Server ", "" -replace ' ', ''
+            }
+        })
+
     Write-Message -Level Verbose -Message "Found $($glenberrysql.Count) documents to download"
     foreach ($doc in $glenberrysql) {
         try {
             $link = $doc.URL.ToString().Replace('dl=0', 'dl=1')
             Write-Message -Level Verbose -Message "Downloading $link)"
             Write-ProgressHelper -Activity "Downloading Glenn Berry's most recent DMVs" -ExcludePercent -Message "Downloading $link" -StepNumber 1
-            $filename = Join-Path -Path $Path  -ChildPath "SQLServerDiagnosticQueries_$($doc.SQLVersion)_$("$($doc.FileYear)$($doc.FileMonth)").sql"
+            $filename = Join-Path -Path $Path  -ChildPath "SQLServerDiagnosticQueries_$($doc.SQLVersion).sql"
             Invoke-TlsWebRequest -Uri $link -OutFile $filename -ErrorAction Stop
             Get-ChildItem -Path $filename
         } catch {
@@ -65709,7 +65750,8 @@ function Set-DbaPrivilege {
         [Parameter(Mandatory)]
         [ValidateSet('IFI', 'LPIM', 'BatchLogon', 'SecAudit')]
         [string[]]$Type,
-        [switch]$EnableException
+        [switch]$EnableException,
+        [string]$User
     )
 
     begin {
@@ -65732,17 +65774,22 @@ function Convert-UserNameToSID ([string] `$Acc ) {
                         Invoke-Command2 -Raw -ComputerName $computer -Credential $Credential -ScriptBlock {
                             $temp = ([System.IO.Path]::GetTempPath()).TrimEnd(""); secedit /export /cfg $temp\secpolByDbatools.cfg > $NULL;
                         }
-                        Write-Message -Level Verbose -Message "Getting SQL Service Accounts on $computer"
-                        $SQLServiceAccounts = (Get-DbaService -ComputerName $computer -Type Engine).StartName
+
+                        $SQLServiceAccounts = @();
+                        if (Test-Bound 'User') {
+                            $SQLServiceAccounts += $User;
+                        } else {
+                            Write-Message -Level Verbose -Message "Getting SQL Service Accounts on $computer"
+                            $SQLServiceAccounts += (Get-DbaService -ComputerName $computer -Type Engine).StartName
+                        }
                         if ($SQLServiceAccounts.count -ge 1) {
                             Write-Message -Level Verbose -Message "Setting Privileges on $Computer"
-                            Invoke-Command2 -Raw -ComputerName $computer -Credential $Credential -Verbose -ArgumentList $ResolveAccountToSID, $SQLServiceAccounts, $BatchLogon, $IFI, $LPIM -ScriptBlock {
+                            Invoke-Command2 -Raw -ComputerName $computer -Credential $Credential -Verbose -ArgumentList $ResolveAccountToSID, $SQLServiceAccounts, $Type -ScriptBlock {
                                 [CmdletBinding()]
                                 param ($ResolveAccountToSID,
                                     $SQLServiceAccounts,
-                                    $BatchLogon,
-                                    $IFI,
-                                    $LPIM)
+                                    $Type
+                                )
                                 . ([ScriptBlock]::Create($ResolveAccountToSID))
                                 $temp = ([System.IO.Path]::GetTempPath()).TrimEnd("");
                                 $tempfile = "$temp\secpolByDbatools.cfg"
@@ -65750,7 +65797,13 @@ function Convert-UserNameToSID ([string] `$Acc ) {
                                     $BLline = Get-Content $tempfile | Where-Object { $_ -match "SeBatchLogonRight" }
                                     ForEach ($acc in $SQLServiceAccounts) {
                                         $SID = Convert-UserNameToSID -Acc $acc;
-                                        if ($BLline -notmatch $SID) {
+                                        if (-not $BLline) {
+                                            $BLline = "SeBatchLogonRight = *$SID"
+                                            (Get-Content $tempfile) -replace "\[Privilege Rights\]", "[Privilege Rights]`n$BLline" |
+                                                Set-Content $tempfile
+                                            
+                                            Write-Verbose "Added $acc to Batch Logon Privileges on $env:ComputerName"
+                                        } elseif ($BLline -notmatch $SID) {
                                             (Get-Content $tempfile) -replace "SeBatchLogonRight = ", "SeBatchLogonRight = *$SID," |
                                                 Set-Content $tempfile
                                             
@@ -65765,7 +65818,13 @@ function Convert-UserNameToSID ([string] `$Acc ) {
                                     $IFIline = Get-Content $tempfile | Where-Object { $_ -match "SeManageVolumePrivilege" }
                                     ForEach ($acc in $SQLServiceAccounts) {
                                         $SID = Convert-UserNameToSID -Acc $acc;
-                                        if ($IFIline -notmatch $SID) {
+                                        if (-not $IFIline) {
+                                            $IFIline = "SeManageVolumePrivilege = *$SID"
+                                            (Get-Content $tempfile) -replace "\[Privilege Rights\]", "[Privilege Rights]`n$IFIline" |
+                                                Set-Content $tempfile
+                                            
+                                            Write-Verbose "Added $acc to Instant File Initialization Privileges on $env:ComputerName"
+                                        } elseif ($IFIline -notmatch $SID) {
                                             (Get-Content $tempfile) -replace "SeManageVolumePrivilege = ", "SeManageVolumePrivilege = *$SID," |
                                                 Set-Content $tempfile
                                             
@@ -65780,7 +65839,13 @@ function Convert-UserNameToSID ([string] `$Acc ) {
                                     $LPIMline = Get-Content $tempfile | Where-Object { $_ -match "SeLockMemoryPrivilege" }
                                     ForEach ($acc in $SQLServiceAccounts) {
                                         $SID = Convert-UserNameToSID -Acc $acc;
-                                        if ($LPIMline -notmatch $SID) {
+                                        if (-not $LPIMline) {
+                                            $LPIMline = "SeLockMemoryPrivilege = *$SID"
+                                            (Get-Content $tempfile) -replace "\[Privilege Rights\]", "[Privilege Rights]`n$LPIMline" |
+                                                Set-Content $tempfile
+                                            
+                                            Write-Verbose "Added $acc to Lock Pages in Memory Privileges on $env:ComputerName"
+                                        } elseif ($LPIMline -notmatch $SID) {
                                             (Get-Content $tempfile) -replace "SeLockMemoryPrivilege = ", "SeLockMemoryPrivilege = *$SID," |
                                                 Set-Content $tempfile
                                             
@@ -65795,7 +65860,13 @@ function Convert-UserNameToSID ([string] `$Acc ) {
                                     $Line = Get-Content $tempfile | Where-Object { $_ -match "SeAuditPrivilege" }
                                     ForEach ($acc in $SQLServiceAccounts) {
                                         $SID = Convert-UserNameToSID -Acc $acc;
-                                        if ($Line -notmatch $SID) {
+                                        if (-not $Line) {
+                                            $Line = "SeAuditPrivilege = *$SID"
+                                            (Get-Content $tempfile) -replace "\[Privilege Rights\]", "[Privilege Rights]`n$Line" |
+                                                Set-Content $tempfile
+                                            
+                                            Write-Verbose "Added $acc to Security Log Privileges on $env:ComputerName"
+                                        } elseif ($Line -notmatch $SID) {
                                             (Get-Content $tempfile) -replace "SeAuditPrivilege = ", "SeAuditPrivilege = *$SID," |
                                                 Set-Content $tempfile
                                             
@@ -65823,7 +65894,6 @@ function Convert-UserNameToSID ([string] `$Acc ) {
         }
     }
 }
-
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaSpConfigure {
