@@ -2,7 +2,7 @@
 
 #.ExternalHelp dbatools-Help.xml
 function Add-DbaAgDatabase {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -181,7 +181,7 @@ function Add-DbaAgDatabase {
 }
 
 function Add-DbaAgListener {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -298,7 +298,7 @@ function Add-DbaAgListener {
 
 #.ExternalHelp dbatools-Help.xml
 function Add-DbaAgReplica {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -439,7 +439,7 @@ function Add-DbaAgReplica {
 
 #.ExternalHelp dbatools-Help.xml
 function Add-DbaComputerCertificate {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [DbaInstance[]]$ComputerName = $env:COMPUTERNAME,
@@ -532,7 +532,7 @@ function Add-DbaComputerCertificate {
 
 #.ExternalHelp dbatools-Help.xml
 function Add-DbaDbMirrorMonitor {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -567,7 +567,7 @@ function Add-DbaDbMirrorMonitor {
 
 #.ExternalHelp dbatools-Help.xml
 function Add-DbaDbRoleMember {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [parameter(ValueFromPipeline)]
@@ -648,7 +648,7 @@ function Add-DbaDbRoleMember {
 
 #.ExternalHelp dbatools-Help.xml
 function Add-DbaPfDataCollectorCounter {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [DbaInstance[]]$ComputerName = $env:COMPUTERNAME,
@@ -731,7 +731,7 @@ function Add-DbaPfDataCollectorCounter {
 
 #.ExternalHelp dbatools-Help.xml
 function Add-DbaRegServer {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -870,7 +870,7 @@ function Add-DbaRegServer {
 
 #.ExternalHelp dbatools-Help.xml
 function Add-DbaRegServerGroup {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -944,7 +944,7 @@ function Add-DbaRegServerGroup {
 
 #.ExternalHelp dbatools-Help.xml
 function Add-DbaServerRoleMember {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [parameter(ValueFromPipeline)]
@@ -1055,7 +1055,7 @@ function Add-DbaServerRoleMember {
 
 #.ExternalHelp dbatools-Help.xml
 function Backup-DbaComputerCertificate {
-    
+
     [CmdletBinding()]
     param (
         [Alias("Password")]
@@ -1082,7 +1082,7 @@ function Backup-DbaComputerCertificate {
 
 #.ExternalHelp dbatools-Help.xml
 function Backup-DbaDatabase {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess)]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", "")] #For AzureCredential
     param (
@@ -1609,7 +1609,7 @@ function Backup-DbaDatabase {
 
 #.ExternalHelp dbatools-Help.xml
 function Backup-DbaDbCertificate {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [parameter(Mandatory, ParameterSetName = "instance")]
@@ -1746,7 +1746,7 @@ function Backup-DbaDbCertificate {
 
 #.ExternalHelp dbatools-Help.xml
 function Backup-DbaDbMasterKey {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -1838,7 +1838,7 @@ function Backup-DbaDbMasterKey {
 
 #.ExternalHelp dbatools-Help.xml
 function Backup-DbaServiceMasterKey {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -1916,7 +1916,7 @@ function Backup-DbaServiceMasterKey {
 
 #.ExternalHelp dbatools-Help.xml
 function Clear-DbaConnectionPool {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -1955,7 +1955,7 @@ function Clear-DbaConnectionPool {
 
 #.ExternalHelp dbatools-Help.xml
 function Clear-DbaLatchStatistics {
-    
+
     [CmdletBinding(ConfirmImpact = 'High', SupportsShouldProcess)]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "", Justification = "Singular Noun doesn't make sense")]
     param (
@@ -1995,7 +1995,7 @@ function Clear-DbaLatchStatistics {
 
 #.ExternalHelp dbatools-Help.xml
 function Clear-DbaPlanCache {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -2046,7 +2046,7 @@ function Clear-DbaPlanCache {
 
 #.ExternalHelp dbatools-Help.xml
 function Clear-DbaWaitStatistics {
-    
+
     [CmdletBinding(ConfirmImpact = 'High', SupportsShouldProcess)]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "", Justification = "Singular Noun doesn't make sense")]
     param (
@@ -2085,7 +2085,7 @@ function Clear-DbaWaitStatistics {
 
 #.ExternalHelp dbatools-Help.xml
 function Connect-DbaInstance {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -2184,7 +2184,7 @@ function Connect-DbaInstance {
         #endregion Utility functions
 
         #region Ensure Credential integrity
-        
+
         if ($SqlCredential) {
             if ($SqlCredential.GetType() -ne [System.Management.Automation.PSCredential]) {
                 Stop-Function -Message "The credential parameter was of a non-supported type. Only specify PSCredentials such as generated from Get-Credential. Input was of type $($SqlCredential.GetType().FullName)"
@@ -2342,7 +2342,7 @@ function Connect-DbaInstance {
                     Add-Member -InputObject $server -NotePropertyName NetPort -NotePropertyValue $instance.Port -Force
                     Add-Member -InputObject $server -NotePropertyName ConnectedAs -NotePropertyValue $server.ConnectionContext.TrueLogin -Force
                     # Azure has a really hard time with $server.Databases, which we rely on heavily. Fix that.
-                    
+
                     $server
                     continue
                 } catch {
@@ -2350,7 +2350,7 @@ function Connect-DbaInstance {
                 }
             }
             #region Safely convert input into instance parameters
-            
+
             if ($instance.GetType() -eq [Sqlcollaborative.Dbatools.Parameter.DbaInstanceParameter]) {
                 [DbaInstanceParameter]$instance = $instance
                 if ($instance.Type -like "SqlConnection") {
@@ -2678,7 +2678,7 @@ function Connect-DbaInstance {
 
 #.ExternalHelp dbatools-Help.xml
 function ConvertTo-DbaDataTable {
-    
+
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseOutputTypeCorrectly", "", Justification = "PSSA Rule Ignored by BOH")]
     [OutputType([System.Object[]])]
@@ -2790,7 +2790,7 @@ function ConvertTo-DbaDataTable {
         }
 
         function Convert-SpecialType {
-            
+
             [CmdletBinding()]
             param (
                 $Value,
@@ -2816,7 +2816,7 @@ function ConvertTo-DbaDataTable {
         }
 
         function Add-Column {
-            
+
             [CmdletBinding()]
             param (
                 [System.Management.Automation.PSPropertyInfo]$Property,
@@ -2971,7 +2971,7 @@ function ConvertTo-DbaDataTable {
 
 #.ExternalHelp dbatools-Help.xml
 function ConvertTo-DbaTimeline {
-    
+
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseOutputTypeCorrectly", "", Justification = "PSSA Rule Ignored by BOH")]
     param (
@@ -3050,7 +3050,7 @@ function ConvertTo-DbaTimeline {
         if ($InputObject[0].SqlInstance -notin $servers) {
             $servers += $InputObject[0].SqlInstance
         }
-        
+
         if ($InputObject[0].TypeName -eq 'AgentJobHistory') {
             $CallerName = "Get-DbaAgentJobHistory"
             $data = $InputObject | Select-Object @{ Name = "SqlInstance"; Expression = { $_.SqlInstance } }, @{ Name = "InstanceName"; Expression = { $_.InstanceName } }, @{ Name = "vLabel"; Expression = { "[" + $($_.SqlInstance -replace "\\", "\\\") + "] " + $_.Job -replace "\'", '' } }, @{ Name = "hLabel"; Expression = { $_.Status } }, @{ Name = "Style"; Expression = { $(Convert-DbaTimelineStatusColor($_.Status)) } }, @{ Name = "StartDate"; Expression = { $(ConvertTo-JsDate($_.StartDate)) } }, @{ Name = "EndDate"; Expression = { $(ConvertTo-JsDate($_.EndDate)) } }
@@ -3134,7 +3134,7 @@ function ConvertTo-DbaTimeline {
 
 #.ExternalHelp dbatools-Help.xml
 function ConvertTo-DbaXESession {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -3205,7 +3205,7 @@ function ConvertTo-DbaXESession {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaAgentAlert {
-    
+
     [cmdletbinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -3393,7 +3393,7 @@ function Copy-DbaAgentAlert {
                     }
                     if ($PSCmdlet.ShouldProcess($destinstance, "Adding $alertName to $jobName")) {
                         try {
-                            
+
                             Write-Message -Message "Adding $alertName to $jobName" -Level Verbose
                             $newJob = $destServer.JobServer.Jobs[$jobName]
                             $newJobId = ($newJob.JobId) -replace " ", ""
@@ -3460,7 +3460,7 @@ function Copy-DbaAgentAlert {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaAgentJob {
-    
+
     [cmdletbinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [DbaInstanceParameter]$Source,
@@ -3671,7 +3671,7 @@ function Copy-DbaAgentJob {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaAgentJobCategory {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -3692,7 +3692,7 @@ function Copy-DbaAgentJobCategory {
 
     begin {
         function Copy-JobCategory {
-            
+
             param (
                 [string[]]$jobCategories
             )
@@ -3760,7 +3760,7 @@ function Copy-DbaAgentJobCategory {
         }
 
         function Copy-OperatorCategory {
-            
+
             [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess)]
             param (
                 [string[]]$operatorCategories
@@ -3831,7 +3831,7 @@ function Copy-DbaAgentJobCategory {
         }
 
         function Copy-AlertCategory {
-            
+
             [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess)]
             param (
                 [string[]]$AlertCategories
@@ -3966,7 +3966,7 @@ function Copy-DbaAgentJobCategory {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaAgentOperator {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -4073,7 +4073,7 @@ function Copy-DbaAgentOperator {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaAgentProxy {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -4215,7 +4215,7 @@ function Copy-DbaAgentProxy {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaAgentSchedule {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [DbaInstanceParameter]$Source,
@@ -4331,7 +4331,7 @@ function Copy-DbaAgentSchedule {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaAgentServer {
-    
+
     [cmdletbinding(SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -4399,9 +4399,9 @@ function Copy-DbaAgentServer {
             Copy-DbaAgentJob -Source $sourceServer -Destination $destinstance -DestinationSqlCredentia $DestinationSqlCredential -Force:$force -DisableOnDestination:$DisableJobsOnDestination -DisableOnSource:$DisableJobsOnSource
 
             # To do
-            
 
-            
+
+
             $copyAgentPropStatus = [pscustomobject]@{
                 SourceServer      = $sourceServer.Name
                 DestinationServer = $destServer.Name
@@ -4446,7 +4446,7 @@ function Copy-DbaAgentServer {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaBackupDevice {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -4603,7 +4603,7 @@ function Copy-DbaBackupDevice {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaCredential {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -4635,7 +4635,7 @@ function Copy-DbaCredential {
         if ($Force) { $ConfirmPreference = 'none' }
 
         function Copy-Credential {
-            
+
             [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", "", Justification = "For Credentials")]
             param (
                 [string[]]$Credentials,
@@ -4741,7 +4741,7 @@ function Copy-DbaCredential {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaCustomError {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -4845,7 +4845,7 @@ function Copy-DbaCustomError {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaDatabase {
-    
+
     [CmdletBinding(DefaultParameterSetName = "DbBackup", SupportsShouldProcess, ConfirmImpact = "Medium")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseOutputTypeCorrectly", "", Justification = "PSSA Rule Ignored by BOH")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", "AzureCredential", Justification = "Unfortunate variable name that doesn't hold a password")]
@@ -4930,7 +4930,7 @@ function Copy-DbaDatabase {
         if ($Force) { $ConfirmPreference = 'none' }
 
         function Join-Path {
-            
+
             [CmdletBinding()]
             param (
                 [string]$Path,
@@ -4946,7 +4946,7 @@ function Copy-DbaDatabase {
         }
 
         function Join-AdminUnc {
-            
+
             [CmdletBinding()]
             param (
                 [Parameter(Mandatory)]
@@ -5223,7 +5223,7 @@ function Copy-DbaDatabase {
         }
 
         function Start-SqlFileTransfer {
-            
+
             [CmdletBinding(SupportsShouldProcess)]
             param (
                 [object]$fileStructure,
@@ -5277,7 +5277,7 @@ function Copy-DbaDatabase {
         }
 
         function Start-SqlDetachAttach {
-            
+
             [CmdletBinding(SupportsShouldProcess)]
             param (
                 [object]$sourceServer,
@@ -6128,7 +6128,7 @@ function Copy-DbaDatabase {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaDataCollector {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -6178,7 +6178,7 @@ function Copy-DbaDataCollector {
                     Write-Message -Level Verbose -Message "Server reconfiguration not yet supported. Only Collection Set migration will be migrated at this time."
                     $NoServerReconfig = $true
 
-                    
+
                     $copyServerConfigStatus = [pscustomobject]@{
                         SourceServer      = $sourceServer.Name
                         DestinationServer = $destServer.Name
@@ -6304,7 +6304,7 @@ function Copy-DbaDataCollector {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaDbAssembly {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -6465,7 +6465,7 @@ function Copy-DbaDbAssembly {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaDbMail {
-    
+
     [cmdletbinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -6786,7 +6786,7 @@ function Copy-DbaDbMail {
             $copyMailServerStatus
             $enableDBMailStatus
 
-            
+
 
             if (($sourceDbMailEnabled -eq 1) -and ($destDbMailEnabled -eq 0)) {
                 if ($pscmdlet.ShouldProcess($destinstance, "Enabling Database Mail")) {
@@ -6822,7 +6822,7 @@ function Copy-DbaDbMail {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaDbQueryStoreOption {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -6979,7 +6979,7 @@ function Copy-DbaDbQueryStoreOption {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaDbTableData {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess)]
     param (
         [DbaInstanceParameter]$SqlInstance,
@@ -7261,7 +7261,7 @@ function Copy-DbaDbTableData {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaDbViewData {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess)]
     param (
         [DbaInstanceParameter]$SqlInstance,
@@ -7551,7 +7551,7 @@ function Copy-DbaDbViewData {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaEndpoint {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -7650,7 +7650,7 @@ function Copy-DbaEndpoint {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaInstanceAudit {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -7795,7 +7795,7 @@ function Copy-DbaInstanceAudit {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaInstanceAuditSpecification {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -7921,7 +7921,7 @@ function Copy-DbaInstanceAuditSpecification {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaInstanceTrigger {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -8033,7 +8033,7 @@ function Copy-DbaInstanceTrigger {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaLinkedServer {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "", Justification = "Internal functions are ignored")]
     param (
@@ -8248,7 +8248,7 @@ function Copy-DbaLinkedServer {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaLogin {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(ParameterSetName = "File", Mandatory)]
@@ -8686,7 +8686,7 @@ function Copy-DbaLogin {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaPolicyManagement {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -8754,7 +8754,7 @@ function Copy-DbaPolicyManagement {
                 $storePolicies = $null
             }
 
-            
+
 
             Write-Message -Level Verbose -Message "Migrating categories"
             $uniquePolicyCategories = $storePolicies | Select-Object -ExpandProperty PolicyCategory -Unique
@@ -8801,7 +8801,7 @@ function Copy-DbaPolicyManagement {
                 }
             }
 
-            
+
 
             Write-Message -Level Verbose -Message "Migrating conditions"
             foreach ($condition in $storeConditions) {
@@ -8866,7 +8866,7 @@ function Copy-DbaPolicyManagement {
                 }
             }
 
-            
+
 
             Write-Message -Level Verbose -Message "Migrating policies"
             foreach ($policy in $storePolicies) {
@@ -8935,7 +8935,7 @@ function Copy-DbaPolicyManagement {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaRegServer {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -9183,7 +9183,7 @@ function Copy-DbaRegServer {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaResourceGovernor {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -9481,7 +9481,7 @@ function Copy-DbaResourceGovernor {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaSpConfigure {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess)]
     param (
         [parameter(Mandatory)]
@@ -9579,7 +9579,7 @@ function Copy-DbaSpConfigure {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaSsisCatalog {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -9596,7 +9596,7 @@ function Copy-DbaSsisCatalog {
         [Switch]$Force,
         [switch]$EnableException
     )
-    
+
     begin {
         $ISNamespace = "Microsoft.SqlServer.Management.IntegrationServices"
 
@@ -10037,7 +10037,7 @@ function Copy-DbaSsisCatalog {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaStartupProcedure {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -10151,7 +10151,7 @@ function Copy-DbaStartupProcedure {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaSysDbUserObject {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [Parameter(Mandatory)]
@@ -10488,7 +10488,7 @@ function Copy-DbaSysDbUserObject {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaXESession {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory)]
@@ -10608,7 +10608,7 @@ function Copy-DbaXESession {
 
 #.ExternalHelp dbatools-Help.xml
 function Copy-DbaXESessionTemplate {
-    
+
     [CmdletBinding()]
     param (
         [string[]]$Path = "$script:PSModuleRoot\bin\xetemplates",
@@ -10640,7 +10640,7 @@ function Copy-DbaXESessionTemplate {
 
 #.ExternalHelp dbatools-Help.xml
 function Disable-DbaAgHadr {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "High")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -10661,7 +10661,7 @@ function Disable-DbaAgHadr {
             }
             $noChange = $false
 
-            
+
 
             try {
                 Write-Message -Level Verbose -Message "Checking current Hadr setting for $computer"
@@ -10674,7 +10674,7 @@ function Disable-DbaAgHadr {
             Write-Message -Level InternalComment -Message "$instance Hadr current value: $isHadrEnabled"
 
             # hadr results from sql wmi can be iffy, skip the check
-            
+
 
             $scriptblock = {
                 $instance = $args[0]
@@ -10719,7 +10719,7 @@ function Disable-DbaAgHadr {
 
 #.ExternalHelp dbatools-Help.xml
 function Disable-DbaFilestream {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "High")]
     param (
         [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
@@ -10788,7 +10788,7 @@ function Disable-DbaFilestream {
 }
 
 function Disable-DbaForceNetworkEncryption {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [Parameter(ValueFromPipeline)]
@@ -10881,7 +10881,7 @@ function Disable-DbaForceNetworkEncryption {
 
 #.ExternalHelp dbatools-Help.xml
 function Disable-DbaHideInstance {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low", DefaultParameterSetName = 'Default')]
     param (
         [Parameter(ValueFromPipeline)]
@@ -10968,7 +10968,7 @@ function Disable-DbaHideInstance {
 
 #.ExternalHelp dbatools-Help.xml
 function Disable-DbaStartupProcedure {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -11063,7 +11063,7 @@ function Disable-DbaStartupProcedure {
 
 #.ExternalHelp dbatools-Help.xml
 function Disable-DbaTraceFlag {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -11121,7 +11121,7 @@ function Disable-DbaTraceFlag {
 
 #.ExternalHelp dbatools-Help.xml
 function Dismount-DbaDatabase {
-    
+
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = "Default", ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory, ParameterSetName = 'SqlInstance')]
@@ -11264,7 +11264,7 @@ function Dismount-DbaDatabase {
 
 #.ExternalHelp dbatools-Help.xml
 function Enable-DbaAgHadr {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "High")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -11285,7 +11285,7 @@ function Enable-DbaAgHadr {
             }
             $noChange = $false
 
-            
+
 
             try {
                 Write-Message -Level Verbose -Message "Checking current Hadr setting for $computer"
@@ -11297,7 +11297,7 @@ function Enable-DbaAgHadr {
             Write-Message -Level InternalComment -Message "$instance Hadr current value: $isHadrEnabled"
 
             # hadr results from sql wmi can be iffy, skip the check
-            
+
 
             $scriptblock = {
                 $instance = $args[0]
@@ -11343,7 +11343,7 @@ function Enable-DbaAgHadr {
 
 #.ExternalHelp dbatools-Help.xml
 function Enable-DbaFilestream {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
@@ -11436,7 +11436,7 @@ function Enable-DbaFilestream {
 
 #.ExternalHelp dbatools-Help.xml
 function Enable-DbaForceNetworkEncryption {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low", DefaultParameterSetName = 'Default')]
     param (
         [Parameter(ValueFromPipeline)]
@@ -11530,7 +11530,7 @@ function Enable-DbaForceNetworkEncryption {
 
 #.ExternalHelp dbatools-Help.xml
 function Enable-DbaHideInstance {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low", DefaultParameterSetName = 'Default')]
     param (
         [Parameter(ValueFromPipeline)]
@@ -11617,7 +11617,7 @@ function Enable-DbaHideInstance {
 
 #.ExternalHelp dbatools-Help.xml
 function Enable-DbaStartupProcedure {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -11696,7 +11696,7 @@ function Enable-DbaStartupProcedure {
 
 #.ExternalHelp dbatools-Help.xml
 function Enable-DbaTraceFlag {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -11755,7 +11755,7 @@ function Enable-DbaTraceFlag {
 
 #.ExternalHelp dbatools-Help.xml
 function Expand-DbaDbLogFile {
-    
+
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'Default')]
     param (
         [parameter(Position = 1, Mandatory)]
@@ -12123,7 +12123,7 @@ function Expand-DbaDbLogFile {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaCredential {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -12268,7 +12268,7 @@ function Export-DbaCredential {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaDacPackage {
-    
+
     [CmdletBinding(DefaultParameterSetName = 'SMO')]
     param
     (
@@ -12475,7 +12475,7 @@ function Export-DbaDacPackage {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaDbRole {
-    
+
     [CmdletBinding()]
     param (
         [parameter()]
@@ -12736,7 +12736,7 @@ function Export-DbaDbRole {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaDbTableData {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -12770,7 +12770,7 @@ function Export-DbaDbTableData {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaDiagnosticQuery {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -12902,7 +12902,7 @@ function Export-DbaDiagnosticQuery {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaExecutionPlan {
-    
+
     [cmdletbinding(SupportsShouldProcess, DefaultParameterSetName = "Default")]
     param (
         [parameter(ParameterSetName = 'NotPiped', Mandatory)]
@@ -13079,7 +13079,7 @@ function Export-DbaExecutionPlan {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaInstance {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -13399,7 +13399,7 @@ function Export-DbaInstance {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaLinkedServer {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -13497,7 +13497,7 @@ function Export-DbaLinkedServer {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaLogin {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter()]
@@ -13899,7 +13899,7 @@ function Export-DbaLogin {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaPfDataCollectorSetTemplate {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstance[]]$ComputerName = $env:COMPUTERNAME,
@@ -13949,7 +13949,7 @@ function Export-DbaPfDataCollectorSetTemplate {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaRegServer {
-    
+
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", "", Justification = "For Parameter CredentialPersistenceType")]
     param (
@@ -14009,7 +14009,7 @@ function Export-DbaRegServer {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaRepServerSetting {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -14073,7 +14073,7 @@ function Export-DbaRepServerSetting {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaScript {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -14268,7 +14268,7 @@ function Export-DbaScript {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaServerRole {
-    
+
     [CmdletBinding()]
     param (
         [parameter()]
@@ -14503,7 +14503,7 @@ function Export-DbaServerRole {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaSpConfigure {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -14567,7 +14567,7 @@ function Export-DbaSpConfigure {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaSysDbUserObject {
-    
+
 
     [CmdletBinding()]
     param (
@@ -14666,7 +14666,7 @@ function Export-DbaSysDbUserObject {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbatoolsConfig {
-    
+
     [CmdletBinding(DefaultParameterSetName = 'FullName')]
     Param (
         [Parameter(ParameterSetName = "FullName", Mandatory = $true)]
@@ -14753,7 +14753,7 @@ function Export-DbatoolsConfig {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaUser {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     [OutputType([String])]
     param (
@@ -15112,7 +15112,7 @@ function Export-DbaUser {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaXECsv {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -15213,7 +15213,7 @@ function Export-DbaXECsv {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaXESession {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -15313,7 +15313,7 @@ function Export-DbaXESession {
 
 #.ExternalHelp dbatools-Help.xml
 function Export-DbaXESessionTemplate {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -15359,7 +15359,7 @@ function Export-DbaXESessionTemplate {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-DbaAgentJob {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -15492,7 +15492,7 @@ function Find-DbaAgentJob {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-DbaBackup {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, HelpMessage = "Full path to the root level backup folder (ex. 'C:\SQL\Backups'")]
@@ -15514,7 +15514,7 @@ function Find-DbaBackup {
                 [string]$UserFriendlyRetention
             )
 
-            
+
 
             [int]$Length = ($UserFriendlyRetention).Length
             $Value = ($UserFriendlyRetention).Substring(0, $Length - 1)
@@ -15589,7 +15589,7 @@ function Find-DbaBackup {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-DbaCommand {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [String]$Pattern,
@@ -15744,7 +15744,7 @@ function Find-DbaCommand {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-DbaDatabase {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -15811,7 +15811,7 @@ function Find-DbaDatabase {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-DbaDbDisabledIndex {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -15892,7 +15892,7 @@ function Find-DbaDbDisabledIndex {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-DbaDbDuplicateIndex {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -16302,7 +16302,7 @@ function Find-DbaDbDuplicateIndex {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-DbaDbGrowthEvent {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -16325,24 +16325,24 @@ function Find-DbaDbGrowthEvent {
         if (Test-Bound 'EventType', 'FileType') {
             switch ($FileType) {
                 'Data' {
-                    
+
                     $eventClass.Remove(93)
                     $eventClass.Remove(95)
                 }
                 'Log' {
-                    
+
                     $eventClass.Remove(92)
                     $eventClass.Remove(94)
                 }
             }
             switch ($EventType) {
                 'Growth' {
-                    
+
                     $eventClass.Remove(94)
                     $eventClass.Remove(95)
                 }
                 'Shrink' {
-                    
+
                     $eventClass.Remove(92)
                     $eventClass.Remove(93)
                 }
@@ -16475,7 +16475,7 @@ function Find-DbaDbGrowthEvent {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-DbaDbUnusedIndex {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -16561,7 +16561,7 @@ function Find-DbaDbUnusedIndex {
                 }
             }
 
-            
+
 
             if (($server.VersionMajor -eq 11 -and $server.BuildNumber -lt 6537) -or ($server.VersionMajor -eq 12 -and $server.BuildNumber -lt 5000)) {
                 Stop-Function -Message "This SQL version has a known issue. Rebuilding an index clears any existing row entry from sys.dm_db_index_usage_stats for that index.`r`nPlease refer to connect item: https://support.microsoft.com/en-us/help/3160407/fix-sys-dm-db-index-usage-stats-missing-information-after-index-rebuil" -Continue
@@ -16582,7 +16582,7 @@ function Find-DbaDbUnusedIndex {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-DbaInstance {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseApprovedVerbs", "", Justification = "Internal functions are ignored")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseOutputTypeCorrectly", "", Justification = "PSSA Rule Ignored by BOH")]
@@ -16607,7 +16607,7 @@ function Find-DbaInstance {
 
         #region Utility Functions
         function Test-SqlInstance {
-            
+
             [CmdletBinding()]
             param (
                 [Parameter(ValueFromPipeline)][DbaInstance[]]$Target,
@@ -16903,7 +16903,7 @@ function Find-DbaInstance {
         }
 
         function Get-DomainSPN {
-            
+
             [CmdletBinding()]
             param (
                 [string]$DomainController,
@@ -16951,7 +16951,7 @@ function Find-DbaInstance {
         }
 
         function Get-DomainServer {
-            
+
             [CmdletBinding()]
             param (
                 [string]$DomainController,
@@ -16986,7 +16986,7 @@ function Find-DbaInstance {
         }
 
         function Get-SQLInstanceBrowserUDP {
-            
+
             [CmdletBinding()]
             param (
                 [Parameter(Mandatory, ValueFromPipeline)][DbaInstance[]]$ComputerName,
@@ -17044,7 +17044,7 @@ function Find-DbaInstance {
         }
 
         function Test-TcpPort {
-            
+
             [CmdletBinding()]
             param (
                 [DbaInstance]$ComputerName,
@@ -17072,7 +17072,7 @@ function Find-DbaInstance {
         }
 
         function Get-IPrange {
-            
+
 
             param
             (
@@ -17119,7 +17119,7 @@ function Find-DbaInstance {
         }
 
         function Resolve-IPRange {
-            
+
             [CmdletBinding()]
             param (
                 [AllowEmptyString()][string]$IpAddress
@@ -17305,7 +17305,7 @@ function Find-DbaInstance {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-DbaLoginInGroup {
-    
+
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "", Justification = "Internal functions are ignored")]
     param (
@@ -17409,7 +17409,7 @@ function Find-DbaLoginInGroup {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-DbaOrphanedFile {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -17601,7 +17601,7 @@ function Find-DbaOrphanedFile {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-DbaSimilarTable {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -17798,7 +17798,7 @@ function Find-DbaSimilarTable {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-DbaStoredProcedure {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -17903,7 +17903,7 @@ function Find-DbaStoredProcedure {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-DbaTrigger {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -18158,7 +18158,7 @@ function Find-DbaTrigger {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-DbaUserObject {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -18431,7 +18431,7 @@ function Find-DbaUserObject {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-DbaView {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -18565,7 +18565,7 @@ function Find-DbaView {
 
 #.ExternalHelp dbatools-Help.xml
 function Format-DbaBackupInformation {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -18698,7 +18698,7 @@ function Format-DbaBackupInformation {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAgDatabase {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -18739,7 +18739,7 @@ function Get-DbaAgDatabase {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAgentAlert {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -18785,7 +18785,7 @@ function Get-DbaAgentAlert {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAgentAlertCategory {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -18831,7 +18831,7 @@ function Get-DbaAgentAlertCategory {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAgentJob {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -18887,7 +18887,7 @@ function Get-DbaAgentJob {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAgentJobCategory {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -18938,7 +18938,7 @@ function Get-DbaAgentJobCategory {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAgentJobHistory {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     param (
         [parameter(Mandatory, ValueFromPipeline, ParameterSetName = "Server")]
@@ -19142,7 +19142,7 @@ function Get-DbaAgentJobHistory {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAgentJobOutputFile {
-    
+
     [CmdletBinding()]
     param
     (
@@ -19203,7 +19203,7 @@ function Get-DbaAgentJobOutputFile {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAgentJobStep {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -19251,7 +19251,7 @@ function Get-DbaAgentJobStep {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAgentLog {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -19308,7 +19308,7 @@ function Get-DbaAgentLog {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAgentOperator {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -19375,7 +19375,7 @@ function Get-DbaAgentOperator {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAgentProxy {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -19419,7 +19419,7 @@ function Get-DbaAgentProxy {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAgentSchedule {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -19639,7 +19639,7 @@ function Get-DbaAgentSchedule {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAgentServer {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -19673,7 +19673,7 @@ function Get-DbaAgentServer {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAgHadr {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -19700,7 +19700,7 @@ function Get-DbaAgHadr {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAgListener {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -19740,7 +19740,7 @@ function Get-DbaAgListener {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAgReplica {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -19782,7 +19782,7 @@ function Get-DbaAgReplica {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAvailabilityGroup {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -19830,7 +19830,7 @@ function Get-DbaAvailabilityGroup {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaAvailableCollation {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -19902,7 +19902,7 @@ function Get-DbaAvailableCollation {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaBackupDevice {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -19932,7 +19932,7 @@ function Get-DbaBackupDevice {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaBackupInformation {
-    
+
     [CmdletBinding( DefaultParameterSetName = "Create")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", "", Justification = "For Parameter AzureCredential")]
     param (
@@ -20161,7 +20161,7 @@ function Get-DbaBackupInformation {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaBuildReference {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
     [CmdletBinding(DefaultParameterSetName = 'Build')]
     param (
@@ -20552,7 +20552,7 @@ function Get-DbaBuildReference {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaClientAlias {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -20576,7 +20576,7 @@ function Get-DbaClientAlias {
 
             foreach ($basekey in $basekeys) {
 
-                
+
                 if ((Test-Path $basekey) -eq $false) {
                     continue
                 }
@@ -20630,7 +20630,7 @@ function Get-DbaClientAlias {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaClientProtocol {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -20674,7 +20674,7 @@ function Get-DbaClientProtocol {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaCmConnection {
-    
+
     [CmdletBinding()]
     param
     (
@@ -20701,7 +20701,7 @@ function Get-DbaCmConnection {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaCmObject {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Class")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingWMICmdlet", "", Justification = "Using Get-WmiObject is used as a fallback for gathering information")]
     param (
@@ -21093,7 +21093,7 @@ function Get-DbaCmObject {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaComputerCertificate {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -21180,7 +21180,7 @@ function Get-DbaComputerCertificate {
 
             if ($Thumbprint) {
                 try {
-                    
+
                     Write-Verbose "Searching Cert:\$Store\$Folder"
                     Get-CoreCertificate -Store $Store -Folder $Folder -Thumbprint $Thumbprint
                 } catch {
@@ -21190,7 +21190,7 @@ function Get-DbaComputerCertificate {
                 }
             } else {
                 try {
-                    
+
                     Write-Verbose "Searching Cert:\$Store\$Folder"
                     if ($Type -eq "Service") {
                         Get-CoreCertificate -Store $Store -Folder $Folder | Where-Object EnhancedKeyUsageList -match '1\.3\.6\.1\.5\.5\.7\.3\.1'
@@ -21238,7 +21238,7 @@ function Get-DbaComputerCertificate {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaComputerSystem {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -21293,7 +21293,7 @@ function Get-DbaComputerSystem {
 
                 if ($IncludeAws) {
                     try {
-                        $ProxiedFunc = 
+                        $ProxiedFunc =
 #.ExternalHelp dbatools-Help.xml
 "function Invoke-TlsRestMethod {`n" + $(Get-Item function:\Invoke-TlsRestMethod).ScriptBlock + "`n}"
                         $isAws = Invoke-Command2 -ComputerName $computerResolved -Credential $Credential -ArgumentList $ProxiedFunc -ScriptBlock {
@@ -21307,7 +21307,7 @@ function Get-DbaComputerSystem {
                     }
 
                     if ($isAws) {
-                        $ProxiedFunc = 
+                        $ProxiedFunc =
 #.ExternalHelp dbatools-Help.xml
 "function Invoke-TlsRestMethod {`n" + $(Get-Item function:\Invoke-TlsRestMethod).ScriptBlock + "`n}"
                         $scriptBlock = {
@@ -21366,7 +21366,7 @@ function Get-DbaComputerSystem {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaConnection {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -21411,7 +21411,7 @@ function Get-DbaConnection {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaCpuRingBuffer {
-    
+
     [CmdletBinding()]
     Param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -21486,7 +21486,7 @@ function Get-DbaCpuRingBuffer {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaCpuUsage {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -21580,7 +21580,7 @@ function Get-DbaCpuUsage {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaCredential {
-    
+
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", "")]
     param (
@@ -21635,7 +21635,7 @@ function Get-DbaCredential {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaCustomError {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -21665,7 +21665,7 @@ function Get-DbaCustomError {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDatabase {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "", Justification = "Internal functions are ignored")]
     param (
@@ -21881,7 +21881,7 @@ function Get-DbaDatabase {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbAssembly {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -21929,7 +21929,7 @@ function Get-DbaDbAssembly {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbAsymmetricKey {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -21977,7 +21977,7 @@ function Get-DbaDbAsymmetricKey {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbBackupHistory {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -22595,7 +22595,7 @@ function Get-DbaDbBackupHistory {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbccHelp {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -22650,7 +22650,7 @@ function Get-DbaDbccHelp {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbccMemoryStatus {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -22709,7 +22709,7 @@ function Get-DbaDbccMemoryStatus {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbccProcCache {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -22757,7 +22757,7 @@ function Get-DbaDbccProcCache {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbccSessionBuffer {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -22895,7 +22895,7 @@ function Get-DbaDbccSessionBuffer {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbccStatistic {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -23085,7 +23085,7 @@ function Get-DbaDbccStatistic {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbccUserOption {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -23133,7 +23133,7 @@ function Get-DbaDbccUserOption {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbCertificate {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -23186,7 +23186,7 @@ function Get-DbaDbCertificate {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbCheckConstraint {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -23249,7 +23249,7 @@ function Get-DbaDbCheckConstraint {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbCompatibility {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -23287,7 +23287,7 @@ function Get-DbaDbCompatibility {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbCompression {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -23375,7 +23375,7 @@ function Get-DbaDbCompression {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbDbccOpenTran {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -23453,7 +23453,7 @@ function Get-DbaDbDbccOpenTran {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbDetachedFileInfo {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory)]
@@ -23548,7 +23548,7 @@ function Get-DbaDbDetachedFileInfo {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbEncryption {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline, Mandatory)]
@@ -23670,7 +23670,7 @@ function Get-DbaDbEncryption {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbExtentDiff {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -23788,7 +23788,7 @@ function Get-DbaDbExtentDiff {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbFeatureUsage {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -23829,7 +23829,7 @@ function Get-DbaDbFeatureUsage {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbFile {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -24033,7 +24033,7 @@ ON fd.Drive = LEFT(df.physical_name, 1);
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbFileGroup {
-    
+
     [CmdletBinding()]
     param ([parameter(ValueFromPipeline)]
         [DbaInstanceParameter[]]$SqlInstance,
@@ -24087,7 +24087,7 @@ function Get-DbaDbFileGroup {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbForeignKey {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -24151,7 +24151,7 @@ function Get-DbaDbForeignKey {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbIdentity {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -24232,7 +24232,7 @@ function Get-DbaDbIdentity {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbLogShipError {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -24374,7 +24374,7 @@ DROP TABLE #DatabaseID;"
 
 #.ExternalHelp dbatools-Help.xml
 Function Get-DbaDbLogSpace {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline, Mandatory)]
@@ -24449,7 +24449,7 @@ Function Get-DbaDbLogSpace {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbMail {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline, Mandatory)]
@@ -24481,7 +24481,7 @@ function Get-DbaDbMail {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbMailAccount {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -24527,7 +24527,7 @@ function Get-DbaDbMailAccount {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbMailConfig {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -24569,7 +24569,7 @@ function Get-DbaDbMailConfig {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbMailHistory {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -24660,7 +24660,7 @@ function Get-DbaDbMailHistory {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbMailLog {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -24733,7 +24733,7 @@ function Get-DbaDbMailLog {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbMailProfile {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -24781,7 +24781,7 @@ function Get-DbaDbMailProfile {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbMailServer {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -24828,7 +24828,7 @@ function Get-DbaDbMailServer {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbMasterKey {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -24870,7 +24870,7 @@ function Get-DbaDbMasterKey {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbMemoryUsage {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -24950,7 +24950,7 @@ function Get-DbaDbMemoryUsage {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbMirror {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -24993,7 +24993,7 @@ function Get-DbaDbMirror {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbMirrorMonitor {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -25067,7 +25067,7 @@ function Get-DbaDbMirrorMonitor {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbObjectTrigger {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -25116,7 +25116,7 @@ function Get-DbaDbObjectTrigger {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbOrphanUser {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -25178,7 +25178,7 @@ function Get-DbaDbOrphanUser {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbPageInfo {
-    
+
     [CmdLetBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -25258,7 +25258,7 @@ function Get-DbaDbPageInfo {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbPartitionFunction {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -25315,7 +25315,7 @@ function Get-DbaDbPartitionFunction {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbPartitionScheme {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -25375,7 +25375,7 @@ function Get-DbaDbPartitionScheme {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbQueryStoreOption {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -25436,7 +25436,7 @@ function Get-DbaDbQueryStoreOption {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbRecoveryModel {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -25472,7 +25472,7 @@ function Get-DbaDbRecoveryModel {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbRestoreHistory {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -25599,7 +25599,7 @@ function Get-DbaDbRestoreHistory {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbRole {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -25660,7 +25660,7 @@ function Get-DbaDbRole {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbRoleMember {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -25743,7 +25743,7 @@ function Get-DbaDbRoleMember {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbSharePoint {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -25773,7 +25773,7 @@ function Get-DbaDbSharePoint {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbSnapshot {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -25826,7 +25826,7 @@ function Get-DbaDbSnapshot {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbSpace {
-    
+
     [CmdletBinding()]
     param ([parameter(ValueFromPipeline)]
         [DbaInstanceParameter[]]$SqlInstance,
@@ -25969,7 +25969,7 @@ function Get-DbaDbSpace {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbState {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseLiteralInitializerForHashtable", "")]
     [CmdletBinding()]
     param (
@@ -26037,7 +26037,7 @@ FROM sys.databases
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbStoredProcedure {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -26087,7 +26087,7 @@ function Get-DbaDbStoredProcedure {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbTable {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -26173,7 +26173,7 @@ function Get-DbaDbTable {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbTrigger {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -26207,7 +26207,7 @@ function Get-DbaDbTrigger {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbUdf {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -26264,7 +26264,7 @@ function Get-DbaDbUdf {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbUser {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -26321,7 +26321,7 @@ function Get-DbaDbUser {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbView {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -26420,7 +26420,7 @@ function Get-DbaDbView {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbVirtualLogFile {
-    
+
     [CmdletBinding()]
     [OutputType([System.Collections.ArrayList])]
     param ([parameter(ValueFromPipeline, Mandatory)]
@@ -26483,7 +26483,7 @@ function Get-DbaDbVirtualLogFile {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDefaultPath {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -26546,7 +26546,7 @@ function Get-DbaDefaultPath {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDependency {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]$InputObject,
@@ -26736,7 +26736,7 @@ function Get-DbaDependency {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDeprecatedFeature {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -26775,7 +26775,7 @@ function Get-DbaDeprecatedFeature {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDiskSpace {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -26845,7 +26845,7 @@ function Get-DbaDiskSpace {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDump {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -26885,7 +26885,7 @@ function Get-DbaDump {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaEndpoint {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -26957,7 +26957,7 @@ function Get-DbaEndpoint {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaErrorLog {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -27015,7 +27015,7 @@ function Get-DbaErrorLog {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaErrorLogConfig {
-    
+
     [cmdletbinding()]
     param (
         [Parameter(ValueFromPipeline, Mandatory)]
@@ -27053,7 +27053,7 @@ function Get-DbaErrorLogConfig {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaEstimatedCompletionTime {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -27135,7 +27135,7 @@ function Get-DbaEstimatedCompletionTime {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaExecutionPlan {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -27273,7 +27273,7 @@ function Get-DbaExecutionPlan {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaFeature {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -27332,7 +27332,7 @@ function Get-DbaFeature {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaFile {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -27478,7 +27478,7 @@ function Get-DbaFile {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaFilestream {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -27506,7 +27506,7 @@ function Get-DbaFilestream {
             $computer = $instance.ComputerName
             $instanceName = $instance.InstanceName
 
-            
+
             if ($instance.IsLocalHost) {
                 $computerName = $computer
             } else {
@@ -27534,7 +27534,7 @@ function Get-DbaFilestream {
             Stop-Function -Message "Issue collecting service-level information on $computer for $instanceName" -Target $computer -ErrorRecord $_ -Continue
         }
 
-        
+
         try {
             Write-Message -Level Verbose -Message "Connecting to $instance."
             $server = Connect-SqlInstance -SqlInstance $instance -SqlCredential $sqlcredential -MinimumVersion 10
@@ -27577,7 +27577,7 @@ function Get-DbaFilestream {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaForceNetworkEncryption {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -27675,7 +27675,7 @@ function Get-DbaForceNetworkEncryption {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaHelpIndex {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -28662,7 +28662,7 @@ function Get-DbaHelpIndex {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaHideInstance {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -28758,7 +28758,7 @@ function Get-DbaHideInstance {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaInstanceAudit {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -28807,7 +28807,7 @@ function Get-DbaInstanceAudit {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaInstanceAuditSpecification {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -28837,7 +28837,7 @@ function Get-DbaInstanceAuditSpecification {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaInstanceInstallDate {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -28899,7 +28899,7 @@ function Get-DbaInstanceInstallDate {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaInstanceProperty {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -28983,7 +28983,7 @@ function Get-DbaInstanceProperty {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaInstanceProtocol {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -29021,7 +29021,7 @@ function Get-DbaInstanceProtocol {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaInstanceTrigger {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -29054,7 +29054,7 @@ function Get-DbaInstanceTrigger {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaInstanceUserOption {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -29083,7 +29083,7 @@ function Get-DbaInstanceUserOption {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaIoLatency {
-    
+
     [CmdletBinding()]
     Param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -29196,7 +29196,7 @@ function Get-DbaIoLatency {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaKbUpdate {
-    
+
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)]
@@ -29391,7 +29391,7 @@ function Get-DbaKbUpdate {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaLastBackup {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -29492,7 +29492,7 @@ function Get-DbaLastBackup {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaLastGoodCheckDb {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -29601,7 +29601,7 @@ function Get-DbaLastGoodCheckDb {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaLatchStatistic {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -29669,7 +29669,7 @@ function Get-DbaLatchStatistic {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaLinkedServer {
-    
+
     [CmdletBinding(DefaultParameterSetName = 'Default')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -29711,7 +29711,7 @@ function Get-DbaLinkedServer {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaLocaleSetting {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -29761,7 +29761,7 @@ function Get-DbaLocaleSetting {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaLogin {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -29897,7 +29897,7 @@ function Get-DbaLogin {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaMaintenanceSolutionLog {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseApprovedVerbs", "", Justification = "Internal functions are ignored")]
     param (
@@ -30085,7 +30085,7 @@ function Get-DbaMaintenanceSolutionLog {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaManagementObject {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -30102,7 +30102,7 @@ function Get-DbaManagementObject {
         }
         $scriptblock = {
             $VersionNumber = [int]$args[0]
-            
+
             Write-Verbose -Message "Checking currently loaded SMO version"
             $loadedversion = [AppDomain]::CurrentDomain.GetAssemblies() | Where-Object { $_.Fullname -like "Microsoft.SqlServer.SMO,*" }
             if ($loadedversion) {
@@ -30114,13 +30114,13 @@ function Get-DbaManagementObject {
                     }
                 }
             }
-            
+
             Write-Verbose -Message "Looking for included smo library"
             $localversion = [version](Get-ChildItem -Path "$script:PSModuleRoot\bin\smo\Microsoft.SqlServer.Smo.dll").VersionInfo.ProductVersion
 
             foreach ($version in $localversion) {
                 if ($VersionNumber -eq 0) {
-                    
+
                     Write-Verbose -Message "Did not pass a version"
                     [PSCustomObject]@{
                         ComputerName = $env:COMPUTERNAME
@@ -30129,10 +30129,10 @@ function Get-DbaManagementObject {
                         LoadTemplate = "Add-Type -Path $("$script:PSModuleRoot\bin\smo\Microsoft.SqlServer.Smo.dll")"
                     }
                 } else {
-                    
+
                     Write-Verbose -Message "Passed version $VersionNumber, looking for that specific version"
                     if ($localversion.ToString().StartsWith("$VersionNumber.")) {
-                        
+
                         Write-Verbose -Message "Found the Version $VersionNumber"
                         [PSCustomObject]@{
                             ComputerName = $env:COMPUTERNAME
@@ -30143,14 +30143,14 @@ function Get-DbaManagementObject {
                     }
                 }
             }
-            
+
             Write-Verbose -Message "Looking for SMO in the Global Assembly Cache"
             $smolist = (Get-ChildItem -Path "$env:SystemRoot\assembly\GAC_MSIL\Microsoft.SqlServer.Smo" | Sort-Object Name -Descending).Name
 
             foreach ($version in $smolist) {
                 $array = $version.Split("__")
                 if ($VersionNumber -eq 0) {
-                    
+
                     Write-Verbose -Message "Did not pass a version, looking for all versions"
                     $currentversion = $array[0]
                     [PSCustomObject]@{
@@ -30160,10 +30160,10 @@ function Get-DbaManagementObject {
                         LoadTemplate = "Add-Type -AssemblyName `"Microsoft.SqlServer.Smo, Version=$($array[0]), Culture=neutral, PublicKeyToken=89845dcd8080cc91`""
                     }
                 } else {
-                    
+
                     Write-Verbose -Message "Passed version $VersionNumber, looking for that specific version"
                     if ($array[0].StartsWith("$VersionNumber.")) {
-                        
+
                         Write-Verbose -Message "Found the Version $VersionNumber"
                         $currentversion = $array[0]
                         [PSCustomObject]@{
@@ -30192,7 +30192,7 @@ function Get-DbaManagementObject {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaMaxMemory {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -30230,7 +30230,7 @@ function Get-DbaMaxMemory {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaMemoryCondition {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -30323,7 +30323,7 @@ ORDER BY a.[RecordTime] ASC"
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaMemoryUsage {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -30353,7 +30353,7 @@ function Get-DbaMemoryUsage {
                 $BufManpagecounters,
                 $SSAScounters,
                 $SSIScounters)
-            
+
             Write-Verbose -Message "Searching for Memory Manager Counters on $Computer"
             try {
                 $availablecounters = (Get-Counter -ListSet '*sql*:Memory Manager*' -ErrorAction SilentlyContinue).paths
@@ -30370,10 +30370,10 @@ function Get-DbaMemoryUsage {
                     }
                 }
             } catch {
-                
+
                 Write-Verbose -Message "No Memory Manager Counters on $Computer"
             }
-            
+
             Write-Verbose -Message "Searching for Plan Cache Counters on $Computer"
             try {
                 $availablecounters = (Get-Counter -ListSet '*sql*:Plan Cache*' -ErrorAction SilentlyContinue).paths
@@ -30390,10 +30390,10 @@ function Get-DbaMemoryUsage {
                     }
                 }
             } catch {
-                
+
                 Write-Verbose -Message "No Plan Cache Counters on $Computer"
             }
-            
+
             Write-Verbose -Message "Searching for Buffer Manager Counters on $Computer"
             try {
                 $availablecounters = (Get-Counter -ListSet "*Buffer Manager*" -ErrorAction SilentlyContinue).paths
@@ -30410,10 +30410,10 @@ function Get-DbaMemoryUsage {
                     }
                 }
             } catch {
-                
+
                 Write-Verbose -Message "No Buffer Manager Counters on $Computer"
             }
-            
+
             Write-Verbose -Message "Searching for SSAS Counters on $Computer"
             try {
                 $availablecounters = (Get-Counter -ListSet "MSAS*:Memory" -ErrorAction SilentlyContinue).paths
@@ -30430,10 +30430,10 @@ function Get-DbaMemoryUsage {
                     }
                 }
             } catch {
-                
+
                 Write-Verbose -Message "No SSAS Counters on $Computer"
             }
-            
+
             Write-Verbose -Message "Searching for SSIS Counters on $Computer"
             try {
                 $availablecounters = (Get-Counter -ListSet "*SSIS*" -ErrorAction SilentlyContinue).paths
@@ -30450,7 +30450,7 @@ function Get-DbaMemoryUsage {
                     }
                 }
             } catch {
-                
+
                 Write-Verbose -Message "No SSIS Counters on $Computer"
             }
         }
@@ -30484,7 +30484,7 @@ function Get-DbaMemoryUsage {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaModule {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -30586,7 +30586,7 @@ function Get-DbaModule {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaMsdtc {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -30691,7 +30691,7 @@ function Get-DbaMsdtc {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaNetworkActivity {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -30736,7 +30736,7 @@ function Get-DbaNetworkActivity {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaNetworkCertificate {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -30827,7 +30827,7 @@ function Get-DbaNetworkCertificate {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaOpenTransaction {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -30889,7 +30889,7 @@ function Get-DbaOpenTransaction {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaOperatingSystem {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -31023,7 +31023,7 @@ function Get-DbaOperatingSystem {
 }
 
 function Get-DbaPageFileSetting {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline, ValueFromPipelineByPropertyName)]
@@ -31094,7 +31094,7 @@ function Get-DbaPageFileSetting {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaPbmCategory {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -31133,7 +31133,7 @@ function Get-DbaPbmCategory {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaPbmCategorySubscription {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -31162,7 +31162,7 @@ function Get-DbaPbmCategorySubscription {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaPbmCondition {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -31201,7 +31201,7 @@ function Get-DbaPbmCondition {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaPbmObjectSet {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -31240,7 +31240,7 @@ function Get-DbaPbmObjectSet {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaPbmPolicy {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -31285,7 +31285,7 @@ function Get-DbaPbmPolicy {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaPbmStore {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -31317,7 +31317,7 @@ function Get-DbaPbmStore {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaPermission {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -31502,7 +31502,7 @@ function Get-DbaPermission {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaPfAvailableCounter {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstance[]]$ComputerName = $env:ComputerName,
@@ -31549,7 +31549,7 @@ process {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaPfDataCollector {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstance[]]$ComputerName = $env:COMPUTERNAME,
@@ -31631,7 +31631,7 @@ function Get-DbaPfDataCollector {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaPfDataCollectorCounter {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstance[]]$ComputerName = $env:COMPUTERNAME,
@@ -31689,7 +31689,7 @@ function Get-DbaPfDataCollectorCounter {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaPfDataCollectorCounterSample {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstance[]]$ComputerName = $env:COMPUTERNAME,
@@ -31802,7 +31802,7 @@ function Get-DbaPfDataCollectorCounterSample {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaPfDataCollectorSet {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -31912,7 +31912,7 @@ function Get-DbaPfDataCollectorSet {
                         Credential                 = $args[1]
                     }
                 } catch {
-                    
+
                     Write-Warning -Message "Issue with getting Collector Set $setname on $env:Computername : $_."
                     continue
                 }
@@ -31939,7 +31939,7 @@ function Get-DbaPfDataCollectorSet {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaPfDataCollectorSetTemplate {
-    
+
     [CmdletBinding()]
     param (
         [string[]]$Path = "$script:PSModuleRoot\bin\perfmontemplates\collectorsets",
@@ -32003,7 +32003,7 @@ function Get-DbaPfDataCollectorSetTemplate {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaPlanCache {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -32038,7 +32038,7 @@ function Get-DbaPlanCache {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaPowerPlan {
-    
+
     param (
         [parameter(Mandatory, ValueFromPipeline)]
         [DbaInstance[]]$ComputerName,
@@ -32098,7 +32098,7 @@ function Get-DbaPowerPlan {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaPrivilege {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -32246,7 +32246,7 @@ function Get-DbaPrivilege {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaProcess {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -32374,7 +32374,7 @@ function Get-DbaProcess {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaProductKey {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline, Mandatory)]
@@ -32542,7 +32542,7 @@ function Get-DbaProductKey {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaQueryExecutionTime {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -32713,7 +32713,7 @@ function Get-DbaQueryExecutionTime {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaRandomizedDataset {
-    
+
     [CmdLetBinding()]
     param(
         [string[]]$Template,
@@ -32785,7 +32785,7 @@ function Get-DbaRandomizedDataset {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaRandomizedDatasetTemplate {
-    
+
     [CmdLetBinding()]
     param(
         [string[]]$Template,
@@ -32822,7 +32822,7 @@ function Get-DbaRandomizedDatasetTemplate {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaRandomizedType {
-    
+
     [CmdLetBinding()]
 
     param(
@@ -32872,7 +32872,7 @@ function Get-DbaRandomizedType {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaRandomizedValue {
-    
+
     [CmdLetBinding()]
     param(
         [string]$DataType,
@@ -33298,7 +33298,7 @@ function Get-DbaRandomizedValue {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaRegistryRoot {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -33361,7 +33361,7 @@ function Get-DbaRegistryRoot {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaRegServer {
-    
+
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingConvertToSecureStringWithPlainText", "")]
     param (
@@ -33566,7 +33566,7 @@ function Get-DbaRegServer {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaRegServerGroup {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -33678,7 +33678,7 @@ function Get-DbaRegServerGroup {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaRegServerStore {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -33723,7 +33723,7 @@ function Get-DbaRegServerStore {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaRepDistributor {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -33772,7 +33772,7 @@ function Get-DbaRepDistributor {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaRepPublication {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -33837,7 +33837,7 @@ function Get-DbaRepPublication {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaRepServer {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -33869,7 +33869,7 @@ function Get-DbaRepServer {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaResourceGovernor {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -33901,7 +33901,7 @@ function Get-DbaResourceGovernor {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaRgClassifierFunction {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -33941,7 +33941,7 @@ function Get-DbaRgClassifierFunction {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaRgResourcePool {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -33983,7 +33983,7 @@ function Get-DbaRgResourcePool {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaRgWorkloadGroup {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -34013,7 +34013,7 @@ function Get-DbaRgWorkloadGroup {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaRunningJob {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -34034,7 +34034,7 @@ function Get-DbaRunningJob {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaSchemaChangeHistory {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -34121,7 +34121,7 @@ function Get-DbaSchemaChangeHistory {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaServerRole {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -34175,7 +34175,7 @@ function Get-DbaServerRole {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaServerRoleMember {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -34261,7 +34261,7 @@ function Get-DbaServerRoleMember {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaService {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Search")]
     param (
         [parameter(ValueFromPipeline, Position = 1)]
@@ -34447,7 +34447,7 @@ function Get-DbaService {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaSpConfigure {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -34611,7 +34611,7 @@ function Get-DbaSpConfigure {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaSpinLockStatistic {
-    
+
     [CmdletBinding()]
     Param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -34664,7 +34664,7 @@ function Get-DbaSpinLockStatistic {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaSpn {
-    
+
     [cmdletbinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseApprovedVerbs", "", Justification = "Internal functions are ignored")]
     param (
@@ -34782,7 +34782,7 @@ function Get-DbaSpn {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaSsisEnvironmentVariable {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -34853,7 +34853,7 @@ function Get-DbaSsisEnvironmentVariable {
                             $encKey = 'MS_Enckey_Env_' + $e.EnvironmentId
                             $encCert = 'MS_Cert_Env_' + $e.EnvironmentId
 
-                            
+
 
                             $sql = @"
                             OPEN SYMMETRIC KEY $encKey DECRYPTION BY CERTIFICATE $encCert;
@@ -34923,7 +34923,7 @@ function Get-DbaSsisEnvironmentVariable {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaSsisExecutionHistory {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory)]
@@ -35078,7 +35078,7 @@ function Get-DbaSsisExecutionHistory {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaStartupParameter {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline, Mandatory)]
@@ -35221,7 +35221,7 @@ function Get-DbaStartupParameter {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaStartupProcedure {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -35283,7 +35283,7 @@ function Get-DbaStartupProcedure {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaSuspectPage {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -35347,7 +35347,7 @@ function Get-DbaSuspectPage {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaTcpPort {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -35483,7 +35483,7 @@ function Get-DbaTcpPort {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaTempdbUsage {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -35568,7 +35568,7 @@ OPTION (RECOMPILE);"
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbatoolsChangeLog {
-    
+
     [CmdletBinding()]
     param (
         [switch]$Local,
@@ -35595,7 +35595,7 @@ function Get-DbatoolsChangeLog {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbatoolsConfig {
-    
+
     [CmdletBinding(DefaultParameterSetName = "FullName")]
     param (
         [Parameter(ParameterSetName = "FullName", Position = 0)]
@@ -35623,7 +35623,7 @@ function Get-DbatoolsConfig {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbatoolsConfigValue {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSPossibleIncorrectComparisonWithNull", "")]
     [CmdletBinding()]
     param (
@@ -35649,7 +35649,7 @@ function Get-DbatoolsConfigValue {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbatoolsLog {
-    
+
     [CmdletBinding()]
     param (
         [string]$FunctionName = "*",
@@ -35729,7 +35729,7 @@ function Get-DbatoolsLog {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbatoolsPath {
-    
+
     [CmdletBinding()]
     Param (
         [Parameter(Mandatory = $true, Position = 0)]
@@ -35743,7 +35743,7 @@ function Get-DbatoolsPath {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaTopResourceUsage {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -35971,7 +35971,7 @@ function Get-DbaTopResourceUsage {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaTrace {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -36053,7 +36053,7 @@ function Get-DbaTrace {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaTraceFlag {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -36100,7 +36100,7 @@ function Get-DbaTraceFlag {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaUptime {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -36174,7 +36174,7 @@ function Get-DbaUptime {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaUserPermission {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -36413,7 +36413,7 @@ function Get-DbaUserPermission {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaWaitingTask {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -36503,7 +36503,7 @@ function Get-DbaWaitingTask {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaWaitResource {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory)]
@@ -36615,7 +36615,7 @@ function Get-DbaWaitResource {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaWaitStatistic {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -37446,7 +37446,7 @@ function Get-DbaWaitStatistic {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaWindowsLog {
-    
+
     #This exists to ignore the Script Analyzer rule for Start-Runspace
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
     [CmdletBinding()]
@@ -37701,7 +37701,7 @@ function Get-DbaWindowsLog {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaWsfcAvailableDisk {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -37724,7 +37724,7 @@ function Get-DbaWsfcAvailableDisk {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaWsfcCluster {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -37743,7 +37743,7 @@ function Get-DbaWsfcCluster {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaWsfcDisk {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -37783,7 +37783,7 @@ function Get-DbaWsfcDisk {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaWsfcNetwork {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -37806,7 +37806,7 @@ function Get-DbaWsfcNetwork {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaWsfcNetworkInterface {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -37827,7 +37827,7 @@ function Get-DbaWsfcNetworkInterface {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaWsfcNode {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -37848,7 +37848,7 @@ function Get-DbaWsfcNode {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaWsfcResource {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -37872,7 +37872,7 @@ function Get-DbaWsfcResource {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaWsfcResourceType {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -37893,7 +37893,7 @@ function Get-DbaWsfcResourceType {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaWsfcRole {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -37915,7 +37915,7 @@ function Get-DbaWsfcRole {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaWsfcSharedVolume {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -37937,7 +37937,7 @@ function Get-DbaWsfcSharedVolume {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaXEObject {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -38002,7 +38002,7 @@ function Get-DbaXEObject {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaXESession {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -38065,7 +38065,7 @@ function Get-DbaXESession {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaXESessionTarget {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     param (
         [parameter(ValueFromPipeline, ParameterSetName = "instance", Mandatory)]
@@ -38142,7 +38142,7 @@ function Get-DbaXESessionTarget {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaXESessionTargetFile {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     param (
         [parameter(ValueFromPipeline, ParameterSetName = "instance", Mandatory)]
@@ -38183,7 +38183,7 @@ function Get-DbaXESessionTargetFile {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaXESessionTemplate {
-    
+
 
     [CmdletBinding()]
     param (
@@ -38255,7 +38255,7 @@ function Get-DbaXESessionTemplate {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaXESmartTarget {
-    
+
     [CmdletBinding()]
     param (
         [switch]$EnableException
@@ -38271,7 +38271,7 @@ function Get-DbaXESmartTarget {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaXEStore {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -38302,7 +38302,7 @@ function Get-DbaXEStore {
 
 #.ExternalHelp dbatools-Help.xml
 function Grant-DbaAgPermission {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -38432,7 +38432,7 @@ function Grant-DbaAgPermission {
 
 #.ExternalHelp dbatools-Help.xml
 function Import-DbaCsv {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [parameter(ValueFromPipeline)]
@@ -38497,7 +38497,7 @@ function Import-DbaCsv {
         }
 
         function New-SqlTable {
-            
+
             [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
             param (
                 [Parameter(Mandatory)]
@@ -38641,7 +38641,9 @@ function Import-DbaCsv {
                 try {
                     $server = Connect-SqlInstance -SqlInstance $instance -SqlCredential $sqlcredential -StatementTimeout 0 -MinimumVersion 9
                     $sqlconn = $server.ConnectionContext.SqlConnectionObject
-                    $sqlconn.Open()
+                    if ($sqlconn.State -ne 'Open') {
+                        $sqlconn.Open()
+                    }
                 } catch {
                     Stop-Function -Message "Error occurred while establishing connection to $instance" -Category ConnectionError -ErrorRecord $_ -Target $instance -Continue
                 }
@@ -38905,7 +38907,7 @@ function Import-DbaCsv {
 
 #.ExternalHelp dbatools-Help.xml
 function Import-DbaPfDataCollectorSetTemplate {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [parameter(ValueFromPipeline)]
@@ -39088,7 +39090,7 @@ function Import-DbaPfDataCollectorSetTemplate {
 
 #.ExternalHelp dbatools-Help.xml
 function Import-DbaRegServer {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory)]
@@ -39179,7 +39181,7 @@ function Import-DbaRegServer {
 
 #.ExternalHelp dbatools-Help.xml
 function Import-DbaSpConfigure {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [Parameter(ParameterSetName = "ServerCopy")]
@@ -39332,7 +39334,7 @@ function Import-DbaSpConfigure {
 
 #.ExternalHelp dbatools-Help.xml
 function Import-DbatoolsConfig {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingEmptyCatchBlock", "")]
     [CmdletBinding(DefaultParameterSetName = "Path")]
     param (
@@ -39436,7 +39438,7 @@ function Import-DbatoolsConfig {
 
 #.ExternalHelp dbatools-Help.xml
 function Import-DbaXESessionTemplate {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -39573,7 +39575,7 @@ function Import-DbaXESessionTemplate {
 
 #.ExternalHelp dbatools-Help.xml
 function Install-DbaFirstResponderKit {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -39722,7 +39724,7 @@ function Install-DbaFirstResponderKit {
 
 #.ExternalHelp dbatools-Help.xml
 function Install-DbaInstance {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Alias('ComputerName')]
@@ -40223,7 +40225,7 @@ function Install-DbaInstance {
 
 #.ExternalHelp dbatools-Help.xml
 function Install-DbaMaintenanceSolution {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Medium")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "", Justification = "Internal functions are ignored")]
     param (
@@ -40518,7 +40520,7 @@ function Install-DbaMaintenanceSolution {
 
 #.ExternalHelp dbatools-Help.xml
 function Install-DbaSqlWatch {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -40668,7 +40670,7 @@ function Install-DbaSqlWatch {
 
 #.ExternalHelp dbatools-Help.xml
 function Install-DbatoolsWatchUpdate {
-    
+
     [cmdletbinding(SupportsShouldProcess)]
     param(
         [string]$TaskName = 'dbatools version check',
@@ -40734,7 +40736,7 @@ function Install-DbatoolsWatchUpdate {
 
 #.ExternalHelp dbatools-Help.xml
 function Install-DbaWhoIsActive {
-    
+
 
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
@@ -40904,7 +40906,7 @@ function Install-DbaWhoIsActive {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaAdvancedInstall {
-    
+
     [CmdletBinding()]
     Param (
         [string]$ComputerName,
@@ -41143,7 +41145,7 @@ function Invoke-DbaAdvancedInstall {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaAdvancedRestore {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", "AzureCredential", Justification = "For Parameter AzureCredential")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseOutputTypeCorrectly", "", Justification = "PSSA Rule Ignored by BOH")]
@@ -41422,7 +41424,7 @@ function Invoke-DbaAdvancedRestore {
 
 #.ExternalHelp dbatools-Help.xml
 Function Invoke-DbaAdvancedUpdate {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     Param (
         [string]$ComputerName,
@@ -41586,7 +41588,7 @@ Function Invoke-DbaAdvancedUpdate {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaAgFailover {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -41640,7 +41642,7 @@ function Invoke-DbaAgFailover {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaBalanceDataFiles {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "", Justification = "Singular Noun doesn't make sense")]
     param (
@@ -41918,7 +41920,7 @@ function Invoke-DbaBalanceDataFiles {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaCycleErrorLog {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -41995,7 +41997,7 @@ function Invoke-DbaCycleErrorLog {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDbccDropCleanBuffer {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -42046,7 +42048,7 @@ function Invoke-DbaDbccDropCleanBuffer {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDbccFreeCache {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -42144,7 +42146,7 @@ function Invoke-DbaDbccFreeCache {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDbClone {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -42307,7 +42309,7 @@ function Invoke-DbaDbClone {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDbDataGenerator {
-    
+
 
     [CmdLetBinding(SupportsShouldProcess, ConfirmImpact = "High")]
     param (
@@ -42698,7 +42700,7 @@ function Invoke-DbaDbDataGenerator {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDbDataMasking {
-    
+
     [CmdLetBinding(SupportsShouldProcess, ConfirmImpact = "High")]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -43291,7 +43293,7 @@ function Invoke-DbaDbDataMasking {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDbDbccCheckConstraint {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -43413,7 +43415,7 @@ function Invoke-DbaDbDbccCheckConstraint {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDbDbccCleanTable {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -43502,7 +43504,7 @@ function Invoke-DbaDbDbccCleanTable {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDbDbccUpdateUsage {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -43610,7 +43612,7 @@ function Invoke-DbaDbDbccUpdateUsage {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDbDecryptObject {
-    
+
     [CmdletBinding()]
     param(
         [parameter(Mandatory, ValueFromPipeline)]
@@ -43865,7 +43867,7 @@ function Invoke-DbaDbDecryptObject {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDbLogShipping {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
 
     param(
@@ -45164,7 +45166,7 @@ function Invoke-DbaDbLogShipping {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDbLogShipRecovery {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Medium")]
     param
     (
@@ -45404,7 +45406,7 @@ function Invoke-DbaDbLogShipRecovery {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDbMirrorFailover {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter]$SqlInstance,
@@ -45446,7 +45448,7 @@ function Invoke-DbaDbMirrorFailover {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDbMirroring {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter]$Primary,
@@ -45686,7 +45688,7 @@ function Invoke-DbaDbMirroring {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDbPiiScan {
-    
+
     [CmdLetBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -45972,7 +45974,7 @@ function Invoke-DbaDbPiiScan {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDbShrink {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -46179,7 +46181,7 @@ function Invoke-DbaDbShrink {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDbUpgrade {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Position = 0)]
@@ -46368,7 +46370,7 @@ function Invoke-DbaDbUpgrade {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDiagnosticQuery {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     [OutputType([pscustomobject[]])]
     param (
@@ -46697,7 +46699,7 @@ function Invoke-DbaDiagnosticQuery {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaPfRelog {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipelineByPropertyName)]
@@ -46980,7 +46982,7 @@ function Invoke-DbaPfRelog {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaQuery {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Query")]
     param (
         [parameter(ValueFromPipeline)]
@@ -47242,7 +47244,7 @@ function Invoke-DbaQuery {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbatoolsFormatter {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -47306,7 +47308,7 @@ function Invoke-DbatoolsFormatter {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbatoolsRenameHelper {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -47592,7 +47594,7 @@ function Invoke-DbatoolsRenameHelper {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaWhoIsActive {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -47736,7 +47738,7 @@ function Invoke-DbaWhoIsActive {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaXEReplay {
-    
+
     [Cmdletbinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseOutputTypeCorrectly", "", Justification = "PSSA Rule Ignored by BOH")]
     param (
@@ -47820,7 +47822,7 @@ function Invoke-DbaXEReplay {
 
 #.ExternalHelp dbatools-Help.xml
 function Join-DbaAvailabilityGroup {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -47879,7 +47881,7 @@ function Join-DbaAvailabilityGroup {
 
 #.ExternalHelp dbatools-Help.xml
 function Measure-DbaBackupThroughput {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -47969,7 +47971,7 @@ function Measure-DbaBackupThroughput {
 
 #.ExternalHelp dbatools-Help.xml
 function Measure-DbaDbVirtualLogFile {
-    
+
     [CmdletBinding()]
     [OutputType([System.Collections.ArrayList])]
     param ([parameter(ValueFromPipeline, Mandatory)]
@@ -48032,7 +48034,7 @@ function Measure-DbaDbVirtualLogFile {
 
 #.ExternalHelp dbatools-Help.xml
 function Measure-DbaDiskSpaceRequirement {
-    
+
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseOutputTypeCorrectly", "", Justification = "PSSA Rule Ignored by BOH")]
     param(
@@ -48258,13 +48260,13 @@ function Measure-DbaDiskSpaceRequirement {
 
 #.ExternalHelp dbatools-Help.xml
 function Measure-DbatoolsImport {
-    
+
     [Sqlcollaborative.Dbatools.dbaSystem.DebugHost]::ImportTime
 }
 
 #.ExternalHelp dbatools-Help.xml
 function Mount-DbaDatabase {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -48352,7 +48354,7 @@ function Mount-DbaDatabase {
 
 #.ExternalHelp dbatools-Help.xml
 function Move-DbaRegServer {
-    
+
 
     [CmdletBinding(SupportsShouldProcess)]
     param (
@@ -48412,7 +48414,7 @@ function Move-DbaRegServer {
 
 #.ExternalHelp dbatools-Help.xml
 function Move-DbaRegServerGroup {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -48476,7 +48478,7 @@ function Move-DbaRegServerGroup {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaAgentAlertCategory {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -48526,7 +48528,7 @@ function New-DbaAgentAlertCategory {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaAgentJob {
-    
+
 
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
@@ -48811,7 +48813,7 @@ function New-DbaAgentJob {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaAgentJobCategory {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -48869,7 +48871,7 @@ function New-DbaAgentJobCategory {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaAgentJobStep {
-    
+
 
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
@@ -49136,7 +49138,7 @@ function New-DbaAgentJobStep {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaAgentProxy {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", "", Justification = "For Parameter ProxyCredential")]
     param (
@@ -49267,7 +49269,7 @@ function New-DbaAgentProxy {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaAgentSchedule {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseOutputTypeCorrectly", "", Justification = "PSSA Rule Ignored by BOH")]
     param (
@@ -49775,7 +49777,7 @@ function New-DbaAgentSchedule {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaAvailabilityGroup {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [parameter(ValueFromPipeline)]
@@ -50206,7 +50208,7 @@ function New-DbaAvailabilityGroup {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaAzAccessToken {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
     [CmdletBinding()]
     param (
@@ -50388,7 +50390,7 @@ function New-DbaAzAccessToken {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaClientAlias {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [DbaInstanceParameter[]]$ComputerName = $env:COMPUTERNAME,
@@ -50430,8 +50432,8 @@ function New-DbaClientAlias {
                     $null = New-Item -Path $connect -Force
                 }
 
-                
-                
+
+
                 # Write-Verbose "Creating/updating alias for $ComputerName for $architecture"
                 $null = New-ItemProperty -Path $connect -Name $Alias -Value $serverstring -PropertyType String -Force
             }
@@ -50464,7 +50466,7 @@ function New-DbaClientAlias {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaCmConnection {
-    
+
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'Credential')]
     param (
         [Parameter(ValueFromPipeline)]
@@ -50540,7 +50542,7 @@ function New-DbaCmConnection {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaComputerCertificate {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseOutputTypeCorrectly", "", Justification = "PSSA Rule Ignored by BOH")]
     param (
@@ -50823,7 +50825,7 @@ function New-DbaComputerCertificate {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaComputerCertificateSigningRequest {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseOutputTypeCorrectly", "", Justification = "PSSA Rule Ignored by BOH")]
     param (
@@ -50989,7 +50991,7 @@ function New-DbaComputerCertificateSigningRequest {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaConnectionString {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -51142,7 +51144,7 @@ function New-DbaConnectionString {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaConnectionStringBuilder {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", "")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingUserNameAndPassWordParams", "")]
@@ -51202,7 +51204,7 @@ function New-DbaConnectionStringBuilder {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaCredential {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -51282,7 +51284,7 @@ function New-DbaCredential {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaDacOption {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     Param (
         [ValidateSet('Dacpac', 'Bacpac')]
@@ -51342,7 +51344,7 @@ function New-DbaDacOption {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaDacProfile {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(ValueFromPipeline)]
@@ -51451,7 +51453,7 @@ function New-DbaDacProfile {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaDatabase {
-    
+
     [Cmdletbinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param
     (
@@ -51725,7 +51727,7 @@ function New-DbaDatabase {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaDbAsymmetricKey {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -51837,7 +51839,7 @@ function New-DbaDbAsymmetricKey {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaDbCertificate {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -51912,7 +51914,7 @@ function New-DbaDbCertificate {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaDbDataGeneratorConfig {
-    
+
     [CmdLetBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [parameter(Mandatory)]
@@ -52229,7 +52231,7 @@ function New-DbaDbDataGeneratorConfig {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaDbMailAccount {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -52290,7 +52292,7 @@ function New-DbaDbMailAccount {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaDbMailProfile {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -52339,7 +52341,7 @@ function New-DbaDbMailProfile {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaDbMaskingConfig {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -52841,7 +52843,7 @@ function New-DbaDbMaskingConfig {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaDbMasterKey {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "High")]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -52894,7 +52896,7 @@ function New-DbaDbMasterKey {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaDbRole {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -52971,7 +52973,7 @@ function New-DbaDbRole {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaDbSnapshot {
-    
+
 
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
@@ -53210,7 +53212,7 @@ function New-DbaDbSnapshot {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaDbTable {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -53363,7 +53365,7 @@ function New-DbaDbTable {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaDbUser {
-    
+
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = "NoLogin", ConfirmImpact = "Medium")]
     param(
         [parameter(Mandatory, Position = 1)]
@@ -53532,7 +53534,7 @@ function New-DbaDbUser {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaDiagnosticAdsNotebook {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param(
         [DbaInstanceParameter]$SqlInstance,
@@ -53632,7 +53634,7 @@ function New-DbaDiagnosticAdsNotebook {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaDirectory {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [Parameter(Mandatory)]
@@ -53680,7 +53682,7 @@ function New-DbaDirectory {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaEndpoint {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -53783,7 +53785,7 @@ function New-DbaEndpoint {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaLogin {
-    
+
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = "Password", ConfirmImpact = "Low")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", "", Justification = "For Parameters Password and MapToCredential")]
     param (
@@ -54138,7 +54140,7 @@ function New-DbaLogin {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaScriptingOption {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
     param()
     New-Object Microsoft.SqlServer.Management.Smo.ScriptingOptions
@@ -54146,7 +54148,7 @@ function New-DbaScriptingOption {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaServerRole {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -54201,7 +54203,7 @@ function New-DbaServerRole {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaServiceMasterKey {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -54224,7 +54226,7 @@ function New-DbaServiceMasterKey {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaSsisCatalog {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -54314,7 +54316,7 @@ function New-DbaSsisCatalog {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbatoolsSupportPackage {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [string]$Path = "$($env:USERPROFILE)\Desktop",
@@ -54455,7 +54457,7 @@ Ideally start a new console, perform the minimal steps required to reproduce the
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaXESession {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -54486,7 +54488,7 @@ function New-DbaXESession {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaXESmartCsvWriter {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory)]
@@ -54533,7 +54535,7 @@ function New-DbaXESmartCsvWriter {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaXESmartEmail {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory)]
@@ -54602,7 +54604,7 @@ function New-DbaXESmartEmail {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaXESmartQueryExec {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -54660,7 +54662,7 @@ function New-DbaXESmartQueryExec {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaXESmartReplay {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -54720,7 +54722,7 @@ function New-DbaXESmartReplay {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaXESmartTableWriter {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -54782,7 +54784,7 @@ function New-DbaXESmartTableWriter {
 
 #.ExternalHelp dbatools-Help.xml
 function Publish-DbaDacPackage {
-    
+
     [CmdletBinding(DefaultParameterSetName = 'Obj', SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param (
         [DbaInstance[]]$SqlInstance,
@@ -55054,7 +55056,7 @@ function Publish-DbaDacPackage {
 
 #.ExternalHelp dbatools-Help.xml
 function Read-DbaAuditFile {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -55149,7 +55151,7 @@ function Read-DbaAuditFile {
 
 #.ExternalHelp dbatools-Help.xml
 function Read-DbaBackupHeader {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", 'AzureCredential', Justification = "For Parameter AzureCredential")]
     [CmdletBinding()]
     param (
@@ -55221,7 +55223,7 @@ function Read-DbaBackupHeader {
                 }
 
                 $restore.FileNumber = $row.Position
-                
+
                 $row.FileList = $restore.ReadFileList($server) | Select-Object *
             }
             $dataTable
@@ -55345,7 +55347,7 @@ function Read-DbaBackupHeader {
 
 #.ExternalHelp dbatools-Help.xml
 function Read-DbaTraceFile {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipelineByPropertyName)]
@@ -55470,7 +55472,7 @@ function Read-DbaTraceFile {
 
 #.ExternalHelp dbatools-Help.xml
 function Read-DbaTransactionLog {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     param (
         [parameter(Mandatory)]
@@ -55533,7 +55535,7 @@ function Read-DbaTransactionLog {
 
 #.ExternalHelp dbatools-Help.xml
 function Read-DbaXEFile {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -55642,7 +55644,7 @@ function Read-DbaXEFile {
 
 #.ExternalHelp dbatools-Help.xml
 function Register-DbatoolsConfig {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     Param (
         [Parameter(ParameterSetName = "Default", ValueFromPipeline = $true)]
@@ -55824,7 +55826,7 @@ function Register-DbatoolsConfig {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaAgDatabase {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -55883,7 +55885,7 @@ function Remove-DbaAgDatabase {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaAgentAlertCategory {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -55929,7 +55931,7 @@ function Remove-DbaAgentAlertCategory {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaAgentJob {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -56008,7 +56010,7 @@ function Remove-DbaAgentJob {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaAgentJobCategory {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -56054,7 +56056,7 @@ function Remove-DbaAgentJobCategory {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaAgentJobStep {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -56126,7 +56128,7 @@ function Remove-DbaAgentJobStep {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaAgentSchedule {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [parameter(Mandatory, ValueFromPipeline, ParameterSetName = "instance")]
@@ -56243,7 +56245,7 @@ function Remove-DbaAgentSchedule {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaAgListener {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -56294,7 +56296,7 @@ function Remove-DbaAgListener {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaAgReplica {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -56342,7 +56344,7 @@ function Remove-DbaAgReplica {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaAvailabilityGroup {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -56388,7 +56390,7 @@ function Remove-DbaAvailabilityGroup {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaBackup {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory, HelpMessage = "Full path to the root level backup folder (ex. 'C:\SQL\Backups'")]
@@ -56459,7 +56461,7 @@ function Remove-DbaBackup {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaClientAlias {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(ValueFromPipelineByPropertyName)]
@@ -56480,7 +56482,7 @@ function Remove-DbaClientAlias {
             foreach ($basekey in $basekeys) {
                 $fullKey = "$basekey\Client\ConnectTo"
                 if ((Test-Path $fullKey) -eq $false) {
-                    
+
                     Write-Warning "Registry key ($fullKey) does not exist on $env:COMPUTERNAME"
                     continue
                 }
@@ -56527,7 +56529,7 @@ function Remove-DbaClientAlias {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaCmConnection {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [Parameter(ValueFromPipeline, Mandatory)]
@@ -56560,7 +56562,7 @@ function Remove-DbaCmConnection {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaComputerCertificate {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "High")]
     param (
         [DbaInstanceParameter[]]$ComputerName = $env:COMPUTERNAME,
@@ -56580,7 +56582,7 @@ function Remove-DbaComputerCertificate {
                 $Store,
                 $Folder
             )
-            
+
             Write-Verbose "Searching Cert:\$Store\$Folder for thumbprint: $thumbprint"
             function Get-CoreCertStore {
                 [CmdletBinding()]
@@ -56629,7 +56631,7 @@ function Remove-DbaComputerCertificate {
 
             if ($Thumbprint) {
                 try {
-                    
+
                     Write-Verbose "Searching Cert:\$Store\$Folder"
                     $cert = Get-CoreCertificate -Store $Store -Folder $Folder -Thumbprint $Thumbprint
                 } catch {
@@ -56675,7 +56677,7 @@ function Remove-DbaComputerCertificate {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaDatabase {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = "Default")]
     param (
         [parameter(Mandatory, ParameterSetName = "instance")]
@@ -56766,7 +56768,7 @@ function Remove-DbaDatabase {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaDatabaseSafely {
-    
+
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = "Default", ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -57163,7 +57165,7 @@ function Remove-DbaDatabaseSafely {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaDbAsymmetricKey {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "High")]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -57206,7 +57208,7 @@ function Remove-DbaDbAsymmetricKey {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaDbBackupRestoreHistory {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -57268,7 +57270,7 @@ function Remove-DbaDbBackupRestoreHistory {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaDbCertificate {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "High")]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -57311,7 +57313,7 @@ function Remove-DbaDbCertificate {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaDbMasterKey {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "High")]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -57363,7 +57365,7 @@ function Remove-DbaDbMasterKey {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaDbMirror {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -57413,7 +57415,7 @@ function Remove-DbaDbMirror {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaDbMirrorMonitor {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -57447,7 +57449,7 @@ function Remove-DbaDbMirrorMonitor {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaDbOrphanUser {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -57553,7 +57555,7 @@ function Remove-DbaDbOrphanUser {
                                         Write-Message -Level Verbose -Message "User $dbuser owns one or more schemas."
 
                                         foreach ($sch in $Schemas) {
-                                            
+
                                             if ($server.versionMajor -lt 11) {
                                                 $NumberObjects = ($db.EnumObjects(0x1FFFFFFF) | Where-Object { $_.Schema -eq $sch.Name } | Measure-Object).Count
                                             } else {
@@ -57672,7 +57674,7 @@ function Remove-DbaDbOrphanUser {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaDbRole {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [parameter(ValueFromPipeline)]
@@ -57749,7 +57751,7 @@ function Remove-DbaDbRole {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaDbRoleMember {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [parameter(ValueFromPipeline)]
@@ -57827,7 +57829,7 @@ function Remove-DbaDbRoleMember {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaDbSnapshot {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -57904,7 +57906,7 @@ function Remove-DbaDbSnapshot {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaDbUser {
-    
+
     [CmdletBinding(DefaultParameterSetName = 'User', SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Position = 1, Mandatory, ValueFromPipeline, ParameterSetName = 'User')]
@@ -58061,7 +58063,7 @@ function Remove-DbaDbUser {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaEndpoint {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -58103,7 +58105,7 @@ function Remove-DbaEndpoint {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaLogin {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = "Default")]
     param (
         [parameter(Mandatory, ParameterSetName = "instance")]
@@ -58163,7 +58165,7 @@ function Remove-DbaLogin {
 }
 
 function Remove-DbaNetworkCertificate {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low", DefaultParameterSetName = 'Default')]
     param (
         [Parameter(ValueFromPipeline)]
@@ -58254,7 +58256,7 @@ function Remove-DbaNetworkCertificate {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaPfDataCollectorCounter {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "High")]
     param (
         [DbaInstance[]]$ComputerName = $env:COMPUTERNAME,
@@ -58337,7 +58339,7 @@ function Remove-DbaPfDataCollectorCounter {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaPfDataCollectorSet {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "High")]
     param (
         [DbaInstance[]]$ComputerName = $env:COMPUTERNAME,
@@ -58356,7 +58358,7 @@ function Remove-DbaPfDataCollectorSet {
             if ($collectorset.name -eq $setname) {
                 $null = $collectorset.Delete()
             } else {
-                
+
                 Write-Warning "Data Collector Set $setname does not exist on $env:COMPUTERNAME."
             }
         }
@@ -58409,7 +58411,7 @@ function Remove-DbaPfDataCollectorSet {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaRegServer {
-    
+
 
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
@@ -58471,7 +58473,7 @@ function Remove-DbaRegServer {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaRegServerGroup {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -58535,7 +58537,7 @@ function Remove-DbaRegServerGroup {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaServerRole {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "High")]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -58580,7 +58582,7 @@ function Remove-DbaServerRole {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaSpn {
-    
+
     [cmdletbinding(SupportsShouldProcess, DefaultParameterSetName = "Default")]
     param (
         [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
@@ -58692,7 +58694,7 @@ function Remove-DbaSpn {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaTrace {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -58748,7 +58750,7 @@ function Remove-DbaTrace {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaXESession {
-    
+
     [CmdletBinding(DefaultParameterSetName = 'Session', SupportsShouldProcess, ConfirmImpact = 'High')]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "", Justification = "Internal functions are ignored")]
     param (
@@ -58823,7 +58825,7 @@ function Remove-DbaXESession {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaXESmartTarget {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -58846,7 +58848,7 @@ function Remove-DbaXESmartTarget {
 
 #.ExternalHelp dbatools-Help.xml
 function Rename-DbaDatabase {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory, ParameterSetName = "Server")]
@@ -59501,7 +59503,7 @@ function Rename-DbaDatabase {
 
 #.ExternalHelp dbatools-Help.xml
 function Rename-DbaLogin {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess)]
     param (
         [parameter(Mandatory)]
@@ -59599,7 +59601,7 @@ function Rename-DbaLogin {
 
 #.ExternalHelp dbatools-Help.xml
 function Repair-DbaDbMirror {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -59635,7 +59637,7 @@ function Repair-DbaDbMirror {
 
 #.ExternalHelp dbatools-Help.xml
 function Repair-DbaDbOrphanUser {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -59767,7 +59769,7 @@ function Repair-DbaDbOrphanUser {
 
 #.ExternalHelp dbatools-Help.xml
 function Repair-DbaInstanceName {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "High")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -59954,7 +59956,7 @@ function Repair-DbaInstanceName {
 
 #.ExternalHelp dbatools-Help.xml
 function Reset-DbaAdmin {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "High")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingWMICmdlet", "", Justification = "Using Get-WmiObject for client backwards compatibilty")]
     param (
@@ -59970,7 +59972,7 @@ function Reset-DbaAdmin {
     begin {
         #region Utility functions
         function ConvertTo-PlainText {
-            
+
             [CmdletBinding()]
             param (
                 [Parameter(Mandatory)]
@@ -59983,7 +59985,7 @@ function Reset-DbaAdmin {
         }
 
         function Invoke-ResetSqlCmd {
-            
+
             [OutputType([System.Boolean])]
             [CmdletBinding()]
             param (
@@ -60381,7 +60383,7 @@ end {
 
 #.ExternalHelp dbatools-Help.xml
 function Reset-DbatoolsConfig {
-    
+
     [CmdletBinding(DefaultParameterSetName = 'Pipeline', SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [Parameter(ValueFromPipeline = $true, ParameterSetName = 'Pipeline')]
@@ -60440,7 +60442,7 @@ function Reset-DbatoolsConfig {
 
 #.ExternalHelp dbatools-Help.xml
 function Resolve-DbaNetworkName {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -60633,7 +60635,7 @@ function Resolve-DbaNetworkName {
 
 #.ExternalHelp dbatools-Help.xml
 function Restart-DbaService {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Server", SupportsShouldProcess)]
     param (
         [Parameter(ParameterSetName = "Server", Position = 1)]
@@ -60701,7 +60703,7 @@ function Restart-DbaService {
 
 #.ExternalHelp dbatools-Help.xml
 function Restore-DbaDatabase {
-    
+
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = "Restore")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", "AzureCredential", Justification = "For Parameter AzureCredential")]
     param (
@@ -61083,7 +61085,7 @@ function Restore-DbaDatabase {
 
 #.ExternalHelp dbatools-Help.xml
 function Restore-DbaDbCertificate {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "High")]
     param (
         [Parameter(Mandatory)]
@@ -61162,7 +61164,7 @@ function Restore-DbaDbCertificate {
 
 #.ExternalHelp dbatools-Help.xml
 function Restore-DbaDbSnapshot {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [DbaInstance[]]$SqlInstance,
@@ -61280,7 +61282,7 @@ function Restore-DbaDbSnapshot {
 
 #.ExternalHelp dbatools-Help.xml
 function Resume-DbaAgDbDataMovement {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -61323,7 +61325,7 @@ function Resume-DbaAgDbDataMovement {
 
 #.ExternalHelp dbatools-Help.xml
 function Revoke-DbaAgPermission {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -61453,7 +61455,7 @@ function Revoke-DbaAgPermission {
 
 #.ExternalHelp dbatools-Help.xml
 function Save-DbaDiagnosticQueryScript {
-    
+
     [CmdletBinding()]
     param (
         [System.IO.FileInfo]$Path = [Environment]::GetFolderPath("mydocuments"),
@@ -61515,7 +61517,7 @@ function Save-DbaDiagnosticQueryScript {
 
 #.ExternalHelp dbatools-Help.xml
 function Save-DbaKbUpdate {
-    
+
     [CmdletBinding()]
     param(
         [string[]]$Name,
@@ -61589,7 +61591,7 @@ function Save-DbaKbUpdate {
 
 #.ExternalHelp dbatools-Help.xml
 function Select-DbaBackupInformation {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -61757,7 +61759,7 @@ function Select-DbaBackupInformation {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaAgentAlert {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -61848,7 +61850,7 @@ function Set-DbaAgentAlert {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaAgentJob {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -62198,7 +62200,7 @@ function Set-DbaAgentJob {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaAgentJobCategory {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseOutputTypeCorrectly", "", Justification = "PSSA Rule Ignored by BOH")]
     param (
@@ -62274,7 +62276,7 @@ function Set-DbaAgentJobCategory {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaAgentJobOutputFile {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [Parameter(Mandatory, HelpMessage = 'The SQL Server Instance',
@@ -62375,7 +62377,7 @@ function Set-DbaAgentJobOutputFile {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaAgentJobOwner {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(ValueFromPipeline)]
@@ -62467,7 +62469,7 @@ function Set-DbaAgentJobOwner {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaAgentJobStep {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [parameter(Mandatory)]
@@ -62736,7 +62738,7 @@ function Set-DbaAgentJobStep {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaAgentSchedule {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -63051,7 +63053,7 @@ function Set-DbaAgentSchedule {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaAgentServer {
-    
+
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = "Low")]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -63255,7 +63257,7 @@ function Set-DbaAgentServer {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaAgListener {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -63298,7 +63300,7 @@ function Set-DbaAgListener {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaAgReplica {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -63407,7 +63409,7 @@ function Set-DbaAgReplica {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaAvailabilityGroup {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -63464,7 +63466,7 @@ function Set-DbaAvailabilityGroup {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaCmConnection {
-    
+
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'Credential')]
     param (
         [Parameter(ValueFromPipeline)]
@@ -63590,7 +63592,7 @@ function Set-DbaCmConnection {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaDbCompatibility {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -63662,7 +63664,7 @@ function Set-DbaDbCompatibility {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaDbCompression {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess)]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseOutputTypeCorrectly", "", Justification = "PSSA Rule Ignored by BOH")]
     param (
@@ -63883,7 +63885,7 @@ function Set-DbaDbCompression {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaDbIdentity {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -63982,7 +63984,7 @@ function Set-DbaDbIdentity {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaDbMirror {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -64043,7 +64045,7 @@ function Set-DbaDbMirror {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaDbOwner {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(ValueFromPipeline)]
@@ -64134,7 +64136,7 @@ function Set-DbaDbOwner {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaDbQueryStoreOption {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -64323,7 +64325,7 @@ function Set-DbaDbQueryStoreOption {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaDbRecoveryModel {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [parameter(Mandatory, ParameterSetName = "Instance")]
@@ -64390,7 +64392,7 @@ function Set-DbaDbRecoveryModel {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaDbState {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = "Server")]
@@ -64775,7 +64777,7 @@ function Set-DbaDbState {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaEndpoint {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -64824,7 +64826,7 @@ function Set-DbaEndpoint {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaErrorLogConfig {
-    
+
     [cmdletbinding(SupportsShouldProcess)]
     param(
         [Parameter(ValueFromPipelineByPropertyName, Mandatory)]
@@ -64900,7 +64902,7 @@ function Set-DbaErrorLogConfig {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaLogin {
-    
+
 
     [CmdletBinding(SupportsShouldProcess)]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", "", Justification = "For Parameter Password")]
@@ -65136,7 +65138,7 @@ function Set-DbaLogin {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaMaxDop {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param (
         [Parameter(ValueFromPipeline)]
@@ -65312,7 +65314,7 @@ function Set-DbaMaxDop {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaMaxMemory {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -65372,7 +65374,7 @@ function Set-DbaMaxMemory {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaNetworkCertificate {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low", DefaultParameterSetName = 'Default')]
     param (
         [Parameter(ValueFromPipelineByPropertyName)]
@@ -65470,7 +65472,7 @@ function Set-DbaNetworkCertificate {
                 $cert = Get-ChildItem Cert:\LocalMachine -Recurse -ErrorAction Stop | Where-Object { $_.Thumbprint -eq $Thumbprint }
 
                 if ($null -eq $cert) {
-                    
+
                     Write-Warning "Certificate does not exist on $env:COMPUTERNAME"
                     return
                 }
@@ -65490,7 +65492,7 @@ function Set-DbaNetworkCertificate {
                 }
 
                 if (-not (Test-Path $KeyFullPath -Type Leaf)) {
-                    
+
                     Write-Warning "Read-only permissions could not be granted to certificate, unable to determine private key path."
                     return
                 }
@@ -65502,7 +65504,7 @@ function Set-DbaNetworkCertificate {
                 if ($acl) {
                     Set-ItemProperty -Path $regpath -Name Certificate -Value $Thumbprint.ToString().ToLowerInvariant() # to make it compat with SQL config
                 } else {
-                    
+
                     Write-Warning "Read-only permissions could not be granted to certificate"
                     return
                 }
@@ -65538,7 +65540,7 @@ function Set-DbaNetworkCertificate {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaPowerPlan {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseOutputTypeCorrectly", "", Justification = "PSSA Rule Ignored by BOH")]
     param (
@@ -65688,7 +65690,7 @@ function Set-DbaPowerPlan {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaPrivilege {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(ValueFromPipeline)]
@@ -65742,10 +65744,10 @@ function Convert-UserNameToSID ([string] `$Acc ) {
                                         if ($BLline -notmatch $SID) {
                                             (Get-Content $tempfile) -replace "SeBatchLogonRight = ", "SeBatchLogonRight = *$SID," |
                                                 Set-Content $tempfile
-                                            
+
                                             Write-Verbose "Added $acc to Batch Logon Privileges on $env:ComputerName"
                                         } else {
-                                            
+
                                             Write-Warning "$acc already has Batch Logon Privilege on $env:ComputerName"
                                         }
                                     }
@@ -65757,10 +65759,10 @@ function Convert-UserNameToSID ([string] `$Acc ) {
                                         if ($IFIline -notmatch $SID) {
                                             (Get-Content $tempfile) -replace "SeManageVolumePrivilege = ", "SeManageVolumePrivilege = *$SID," |
                                                 Set-Content $tempfile
-                                            
+
                                             Write-Verbose "Added $acc to Instant File Initialization Privileges on $env:ComputerName"
                                         } else {
-                                            
+
                                             Write-Warning "$acc already has Instant File Initialization Privilege on $env:ComputerName"
                                         }
                                     }
@@ -65772,10 +65774,10 @@ function Convert-UserNameToSID ([string] `$Acc ) {
                                         if ($LPIMline -notmatch $SID) {
                                             (Get-Content $tempfile) -replace "SeLockMemoryPrivilege = ", "SeLockMemoryPrivilege = *$SID," |
                                                 Set-Content $tempfile
-                                            
+
                                             Write-Verbose "Added $acc to Lock Pages in Memory Privileges on $env:ComputerName"
                                         } else {
-                                            
+
                                             Write-Warning "$acc already has Lock Pages in Memory Privilege on $env:ComputerName"
                                         }
                                     }
@@ -65787,10 +65789,10 @@ function Convert-UserNameToSID ([string] `$Acc ) {
                                         if ($Line -notmatch $SID) {
                                             (Get-Content $tempfile) -replace "SeAuditPrivilege = ", "SeAuditPrivilege = *$SID," |
                                                 Set-Content $tempfile
-                                            
+
                                             Write-Verbose "Added $acc to Write to Security Log Privileges on $env:ComputerName"
                                         } else {
-                                            
+
                                             Write-Warning "$acc already has Write To Security Audit Privilege on $env:ComputerName"
                                         }
                                     }
@@ -65816,7 +65818,7 @@ function Convert-UserNameToSID ([string] `$Acc ) {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaSpConfigure {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -65881,7 +65883,7 @@ function Set-DbaSpConfigure {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaSpn {
-    
+
     [cmdletbinding(SupportsShouldProcess, DefaultParameterSetName = "Default")]
     param (
         [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
@@ -65976,7 +65978,7 @@ function Set-DbaSpn {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaStartupParameter {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "High")]
     param ([parameter(Mandatory)]
         [DbaInstanceParameter[]]$SqlInstance,
@@ -66230,7 +66232,7 @@ function Set-DbaStartupParameter {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaTcpPort {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "High")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -66325,7 +66327,7 @@ function Set-DbaTcpPort {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbaTempDbConfig {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseOutputTypeCorrectly", "", Justification = "PSSA Rule Ignored by BOH")]
     param (
@@ -66480,7 +66482,7 @@ function Set-DbaTempDbConfig {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-DbatoolsPath {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
     [CmdletBinding(DefaultParameterSetName = 'Default')]
     param (
@@ -66503,7 +66505,7 @@ function Set-DbatoolsPath {
 
 #.ExternalHelp dbatools-Help.xml
 function Show-DbaDbList {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -66664,7 +66666,7 @@ function Show-DbaDbList {
 
 #.ExternalHelp dbatools-Help.xml
 function Show-DbaInstanceFileSystem {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -66836,7 +66838,7 @@ function Show-DbaInstanceFileSystem {
 
 #.ExternalHelp dbatools-Help.xml
 function Start-DbaAgentJob {
-    
+
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = "Default")]
     param (
         [parameter(Mandatory, ParameterSetName = "Instance")]
@@ -66941,7 +66943,7 @@ function Start-DbaAgentJob {
 
 #.ExternalHelp dbatools-Help.xml
 function Start-DbaEndpoint {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Low')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -66976,7 +66978,7 @@ function Start-DbaEndpoint {
 
 #.ExternalHelp dbatools-Help.xml
 function Start-DbaMigration {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [DbaInstanceParameter]$Source,
@@ -67213,7 +67215,7 @@ function Start-DbaMigration {
 
 #.ExternalHelp dbatools-Help.xml
 function Start-DbaPfDataCollectorSet {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [DbaInstance[]]$ComputerName = $env:COMPUTERNAME,
@@ -67278,7 +67280,7 @@ function Start-DbaPfDataCollectorSet {
 
 #.ExternalHelp dbatools-Help.xml
 function Start-DbaService {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Server", SupportsShouldProcess)]
     param (
         [Parameter(ParameterSetName = "Server", Position = 1)]
@@ -67324,7 +67326,7 @@ function Start-DbaService {
 
 #.ExternalHelp dbatools-Help.xml
 function Start-DbaTrace {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -67369,7 +67371,7 @@ function Start-DbaTrace {
 
 #.ExternalHelp dbatools-Help.xml
 function Start-DbaXESession {
-    
+
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'Session')]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "", Justification = "Internal functions are ignored")]
     param (
@@ -67474,7 +67476,7 @@ function Start-DbaXESession {
 
 #.ExternalHelp dbatools-Help.xml
 function Start-DbaXESmartTarget {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -67614,7 +67616,7 @@ function Start-DbaXESmartTarget {
 
 #.ExternalHelp dbatools-Help.xml
 function Stop-DbaAgentJob {
-    
+
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = "Default")]
     param (
         [parameter(Mandatory, ParameterSetName = "Instance")]
@@ -67683,7 +67685,7 @@ function Stop-DbaAgentJob {
 
 #.ExternalHelp dbatools-Help.xml
 function Stop-DbaEndpoint {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -67718,7 +67720,7 @@ function Stop-DbaEndpoint {
 
 #.ExternalHelp dbatools-Help.xml
 function Stop-DbaPfDataCollectorSet {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [DbaInstance[]]$ComputerName = $env:COMPUTERNAME,
@@ -67783,7 +67785,7 @@ function Stop-DbaPfDataCollectorSet {
 
 #.ExternalHelp dbatools-Help.xml
 function Stop-DbaProcess {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default", SupportsShouldProcess)]
     param (
         [parameter(Mandatory, ParameterSetName = "Server")]
@@ -67847,7 +67849,7 @@ function Stop-DbaProcess {
 
 #.ExternalHelp dbatools-Help.xml
 function Stop-DbaService {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Server", SupportsShouldProcess, ConfirmImpact = "Medium")]
     param (
         [Parameter(ParameterSetName = "Server", Position = 1)]
@@ -67908,7 +67910,7 @@ function Stop-DbaService {
 
 #.ExternalHelp dbatools-Help.xml
 function Stop-DbaTrace {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -67982,7 +67984,7 @@ function Stop-DbaTrace {
 
 #.ExternalHelp dbatools-Help.xml
 function Stop-DbaXESession {
-    
+
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'Session')]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "", Justification = "Internal functions are ignored")]
     param (
@@ -68059,7 +68061,7 @@ function Stop-DbaXESession {
 
 #.ExternalHelp dbatools-Help.xml
 function Stop-DbaXESmartTarget {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -68082,7 +68084,7 @@ function Stop-DbaXESmartTarget {
 
 #.ExternalHelp dbatools-Help.xml
 function Suspend-DbaAgDbDataMovement {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -68125,7 +68127,7 @@ function Suspend-DbaAgDbDataMovement {
 
 #.ExternalHelp dbatools-Help.xml
 function Sync-DbaAvailabilityGroup {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param (
         [DbaInstanceParameter]$Primary,
@@ -68353,7 +68355,7 @@ function Sync-DbaAvailabilityGroup {
 
 #.ExternalHelp dbatools-Help.xml
 function Sync-DbaLoginPermission {
-    
+
     param (
         [parameter(Mandatory, ValueFromPipeline)]
         [DbaInstanceParameter]$Source,
@@ -68438,7 +68440,7 @@ function Sync-DbaLoginPermission {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaAgentJobOwner {
-    
+
     [CmdletBinding()]
     [OutputType('System.Object[]')]
     param (
@@ -68532,7 +68534,7 @@ function Test-DbaAgentJobOwner {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaBackupInformation {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseOutputTypeCorrectly", "", Justification = "PSSA Rule Ignored by BOH")]
     param (
@@ -68606,7 +68608,7 @@ function Test-DbaBackupInformation {
                             $VerificationErrors++
                         }
                     } else {
-                        
+
                         $pathSep = Get-DbaPathSep -Server $RestoreInstance
                         $ParentPath = Split-Path $path -Parent
                         $ParentPath = $ParentPath.Replace('\', $pathSep)
@@ -68659,7 +68661,7 @@ function Test-DbaBackupInformation {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaBuild {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
     [CmdletBinding()]
     param (
@@ -68836,7 +68838,7 @@ function Test-DbaBuild {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaCmConnection {
-    
+
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingWMICmdlet", "", Justification = "Using Get-WmiObject is used as a fallback for testing connections")]
     param (
@@ -69093,7 +69095,7 @@ function Test-DbaCmConnection {
 }
 
 function Test-DbaConnection {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -69117,8 +69119,8 @@ function Test-DbaConnection {
             }
 
             try {
-                
-                
+
+
                 $resolved = Resolve-DbaNetworkName -ComputerName $instance.ComputerName -Credential $Credential -EnableException
             } catch {
                 Stop-Function -Message "Unable to resolve server information" -Category ConnectionError -Target $instance -ErrorRecord $_ -Continue
@@ -69213,7 +69215,7 @@ function Test-DbaConnection {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaConnectionAuthScheme {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -69277,7 +69279,7 @@ function Test-DbaConnectionAuthScheme {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaDbCollation {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -69324,7 +69326,7 @@ function Test-DbaDbCollation {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaDbCompatibility {
-    
+
     [CmdletBinding()]
     [OutputType("System.Collections.ArrayList")]
     param (
@@ -69372,7 +69374,7 @@ function Test-DbaDbCompatibility {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaDbCompression {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -69883,7 +69885,7 @@ IF OBJECT_ID('tempdb..##tmpEstimatePage', 'U') IS NOT NULL
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaDbDataGeneratorConfig {
-    
+
 
     [cmdletbinding()]
     param (
@@ -69994,7 +69996,7 @@ function Test-DbaDbDataGeneratorConfig {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaDbDataMaskingConfig {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory)]
@@ -70149,7 +70151,7 @@ function Test-DbaDbDataMaskingConfig {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaDbLogShipStatus {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -70350,7 +70352,7 @@ EXEC master.sys.sp_help_log_shipping_monitor"
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaDbOwner {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Position = 0)]
@@ -70406,7 +70408,7 @@ function Test-DbaDbOwner {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaDbRecoveryModel {
-    
+
     [CmdletBinding()]
     [OutputType("System.Collections.ArrayList")]
     param (
@@ -70498,7 +70500,7 @@ function Test-DbaDbRecoveryModel {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaDeprecatedFeature {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -70548,7 +70550,7 @@ function Test-DbaDeprecatedFeature {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaDiskAlignment {
-    
+
     param (
         [parameter(Mandatory, ValueFromPipeline)]
         [DbaInstanceParameter[]]$ComputerName,
@@ -70783,7 +70785,7 @@ process {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaDiskAllocation {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     [OutputType("System.Collections.ArrayList", "System.Boolean")]
     param (
@@ -70946,7 +70948,7 @@ function Test-DbaDiskAllocation {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaDiskSpeed {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -71017,7 +71019,7 @@ function Test-DbaDiskSpeed {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaEndpoint {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -71079,7 +71081,7 @@ function Test-DbaEndpoint {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaIdentityUsage {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -71225,7 +71227,7 @@ function Test-DbaIdentityUsage {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaInstanceName {
-    
+
     [CmdletBinding()]
     [OutputType([System.Collections.ArrayList])]
     param (
@@ -71339,7 +71341,7 @@ function Test-DbaInstanceName {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaLastBackup {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", "", Justification = "For Parameters DestinationCredential and AzureCredential")]
     param (
@@ -71699,7 +71701,7 @@ function Test-DbaLastBackup {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaLinkedServerConnection {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -71740,7 +71742,7 @@ function Test-DbaLinkedServerConnection {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaLoginPassword {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter[]]$SqlInstance,
@@ -71819,7 +71821,7 @@ function Test-DbaLoginPassword {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaManagementObject {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline)]
@@ -71864,7 +71866,7 @@ function Test-DbaManagementObject {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaMaxDop {
-    
+
     [CmdletBinding()]
     [OutputType([System.Collections.ArrayList])]
     param (
@@ -72017,7 +72019,7 @@ function Test-DbaMaxDop {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaMaxMemory {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -72094,7 +72096,7 @@ function Test-DbaMaxMemory {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaMigrationConstraint {
-    
+
     [CmdletBinding(DefaultParameterSetName = "DbMigration")]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -72109,7 +72111,7 @@ function Test-DbaMigrationConstraint {
     )
 
     begin {
-        
+
 
         $editions = @{
             "Enterprise" = 10;
@@ -72230,7 +72232,7 @@ function Test-DbaMigrationConstraint {
 
                         #If SQL Server 2016 SP1 (13.0.4001.0) or higher
                         if ($destVersionNumber -ge 13040010) {
-                            
+
                             if ($editions.Item($destServer.Edition.ToString().Split(" ")[0]) -eq 1 -and $dbFeatures.Contains("ChangeCapture")) {
                                 [pscustomobject]@{
                                     SourceInstance      = $sourceServer.Name
@@ -72305,7 +72307,7 @@ function Test-DbaMigrationConstraint {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaNetworkLatency {
-    
+
     [CmdletBinding()]
     [OutputType([System.Object[]])]
     param (
@@ -72369,7 +72371,7 @@ function Test-DbaNetworkLatency {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaOptimizeForAdHoc {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -72416,7 +72418,7 @@ function Test-DbaOptimizeForAdHoc {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaPath {
-    
+
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseOutputTypeCorrectly", "", Justification = "PSSA Rule Ignored by BOH")]
     param (
@@ -72475,7 +72477,7 @@ function Test-DbaPath {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaPowerPlan {
-    
+
     param (
         [parameter(ValueFromPipeline)]
         [DbaInstance[]]$ComputerName = $env:COMPUTERNAME,
@@ -72576,7 +72578,7 @@ function Test-DbaPowerPlan {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaRepLatency {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -72738,7 +72740,7 @@ function Test-DbaRepLatency {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaSpn {
-    
+
     [cmdletbinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseOutputTypeCorrectly", "", Justification = "PSSA Rule Ignored by BOH")]
     param (
@@ -72799,7 +72801,7 @@ function Test-DbaSpn {
                 $instanceName = $args[2]
                 $instanceCount = $wmi.ServerInstances.Count
 
-                
+
                 Write-Verbose "Found $instanceCount instances"
 
                 foreach ($instance in $wmi.ServerInstances) {
@@ -72824,7 +72826,7 @@ function Test-DbaSpn {
                     $spn.InstanceName = $instance.Name
                     $instanceName = $spn.InstanceName
 
-                    
+
                     Write-Verbose "Parsing $instanceName"
 
                     $services = $wmi.Services | Where-Object DisplayName -EQ "SQL Server ($instanceName)"
@@ -72833,7 +72835,7 @@ function Test-DbaSpn {
 
                     if ($spn.Cluster) {
                         $hostEntry = ($services.advancedproperties | Where-Object Name -EQ 'VSNAME').Value.ToLowerInvariant()
-                        
+
                         Write-Verbose "Found cluster $hostEntry"
                         $hostEntry = ([System.Net.Dns]::GetHostEntry($hostEntry)).HostName
                         $spn.ComputerName = $hostEntry
@@ -72848,7 +72850,7 @@ function Test-DbaSpn {
 
                     #is tcp enabled on this instance? If not, we don't need an spn, son
                     if ((($instance.ServerProtocols | Where-Object { $_.Displayname -eq "TCP/IP" }).ProtocolProperties | Where-Object { $_.Name -eq "Enabled" }).Value -eq $true) {
-                        
+
                         Write-Verbose "TCP is enabled, gathering SPN requirements"
                         $spn.TcpEnabled = $true
                         #Each instance has a default SPN of MSSQLSvc\<fqdn> or MSSSQLSvc\<fqdn>:Instance
@@ -72975,7 +72977,7 @@ function Test-DbaSpn {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaTempDbConfig {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -73119,7 +73121,7 @@ function Test-DbaTempDbConfig {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaWindowsLogin {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -73341,7 +73343,7 @@ function Test-DbaWindowsLogin {
 
 #.ExternalHelp dbatools-Help.xml
 Function Uninstall-DbaSqlWatch {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -73468,7 +73470,7 @@ Function Uninstall-DbaSqlWatch {
 
 #.ExternalHelp dbatools-Help.xml
 function Uninstall-DbatoolsWatchUpdate {
-    
+
     [Cmdletbinding()]
     param()
     process {
@@ -73477,7 +73479,7 @@ function Uninstall-DbatoolsWatchUpdate {
             return
         }
 
-        
+
         $script = {
             try {
                 $task = Get-ScheduledTask -TaskName "dbatools version check" -ErrorAction SilentlyContinue
@@ -73522,7 +73524,7 @@ function Uninstall-DbatoolsWatchUpdate {
 
 #.ExternalHelp dbatools-Help.xml
 function Unregister-DbatoolsConfig {
-    
+
     [CmdletBinding(DefaultParameterSetName = 'Pipeline')]
     param (
         [Parameter(ValueFromPipeline = $true, ParameterSetName = 'Pipeline')]
@@ -73672,7 +73674,7 @@ function Unregister-DbatoolsConfig {
 
 #.ExternalHelp dbatools-Help.xml
 function Update-DbaInstance {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = 'Version')]
     Param (
         [parameter(ValueFromPipeline, Position = 1)]
@@ -73949,7 +73951,7 @@ function Update-DbaInstance {
 
 #.ExternalHelp dbatools-Help.xml
 function Update-DbaServiceAccount {
-    
+
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = "ServiceName" )]
     param (
         [parameter(ParameterSetName = "ServiceName")]
@@ -74112,7 +74114,7 @@ function Update-DbaServiceAccount {
 
 #.ExternalHelp dbatools-Help.xml
 function Update-Dbatools {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "", Justification = "It is the proper noun of the cmdlet")]
     param(
@@ -74137,7 +74139,7 @@ function Update-Dbatools {
 
 #.ExternalHelp dbatools-Help.xml
 function Watch-DbaDbLogin {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     param (
         [parameter(Mandatory)]
@@ -74169,7 +74171,7 @@ function Watch-DbaDbLogin {
         $systemdbs = "master", "msdb", "model", "tempdb"
         $excludedPrograms = "Microsoft SQL Server Management Studio - Query", "SQL Management"
 
-        
+
         if ($SqlCms) {
             try {
                 $servers = Get-DbaRegServer -SqlInstance $SqlCms -SqlCredential $SqlCredential -EnableException
@@ -74187,7 +74189,7 @@ function Watch-DbaDbLogin {
             }
         }
 
-        
+
         foreach ($instance in $servers) {
             try {
                 $server = Connect-SqlInstance -SqlInstance $instance -SqlCredential $SqlCredential -MinimumVersion 9
@@ -74231,7 +74233,7 @@ function Watch-DbaDbLogin {
 
 #.ExternalHelp dbatools-Help.xml
 function Watch-DbatoolsUpdate {
-    
+
     [CmdletBinding()]
     param()
     process {
@@ -74288,7 +74290,7 @@ function Watch-DbatoolsUpdate {
 
 #.ExternalHelp dbatools-Help.xml
 function Watch-DbaXESession {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     param (
         [parameter(ValueFromPipeline, ParameterSetName = "instance", Mandatory)]
@@ -74391,7 +74393,7 @@ function Watch-DbaXESession {
 
 #.ExternalHelp dbatools-Help.xml
 function Write-DbaDbTableData {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [Parameter(Mandatory)]
@@ -74433,7 +74435,7 @@ function Write-DbaDbTableData {
 
         #region Utility Functions
         function Invoke-BulkCopy {
-            
+
             [CmdletBinding()]
             param (
                 $DataTable,
@@ -74461,7 +74463,7 @@ function Write-DbaDbTableData {
         }
 
         function New-Table {
-            
+
             [CmdletBinding(SupportsShouldProcess)]
             param (
                 $DataTable,
@@ -74496,7 +74498,7 @@ function Write-DbaDbTableData {
                     $columnValue = $DataTable.$sqlColumnName
                 }
 
-                
+
                 if ($PStoSQLTypes.Keys -contains $column.DataType) {
                     $sqlDataType = $PStoSQLTypes[$($column.DataType.toString())]
                     if ($UseDynamicStringLength -and $column.MaxLength -gt 0 -and ($column.DataType -in ("String", "System.String"))) {
@@ -74595,7 +74597,7 @@ function Write-DbaDbTableData {
         $quotedFQTN = New-Object System.Text.StringBuilder
 
         if ($server.ServerType -ne 'SqlAzureDatabase') {
-            
+
             [void]$quotedFQTN.Append( '[' )
             if ($databaseName.Contains(']')) {
                 [void]$quotedFQTN.Append( $databaseName.Replace(']', ']]') )
@@ -74634,7 +74636,7 @@ function Write-DbaDbTableData {
         }
 
         if ($server.ServerType -eq 'SqlAzureDatabase') {
-            
+
             try {
                 $null = $server.Databases
             } catch {
@@ -74864,7 +74866,7 @@ function Write-DbaDbTableData {
 
 #.ExternalHelp dbatools-Help.xml
 function Connect-AsServer {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -74904,7 +74906,7 @@ function Connect-AsServer {
 
 #.ExternalHelp dbatools-Help.xml
 function Connect-ConnstringInstance {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -74966,7 +74968,7 @@ function Connect-ReplicationDB {
 
 #.ExternalHelp dbatools-Help.xml
 function Connect-SqlInstance {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -74990,7 +74992,7 @@ function Connect-SqlInstance {
 
 #.ExternalHelp dbatools-Help.xml
 function Convert-ByteToHexString {
-    
+
     param ([byte[]]$InputObject)
     $outString = "0x"
     $InputObject | ForEach-Object { $outString += ("{0:X}" -f $_).PadLeft(2, "0") }
@@ -74999,7 +75001,7 @@ function Convert-ByteToHexString {
 
 #.ExternalHelp dbatools-Help.xml
 function Convert-DbaLSN {
-    
+
     [CmdletBinding()]
     param(
         [string]$LSN,
@@ -75035,7 +75037,7 @@ function Convert-DbaLSN {
 
 #.ExternalHelp dbatools-Help.xml
 function Convert-DbaTimelineStatusColor {
-    
+
 
     [CmdletBinding()]
     param (
@@ -75056,7 +75058,7 @@ function Convert-DbaTimelineStatusColor {
 
 #.ExternalHelp dbatools-Help.xml
 function Convert-DbVersionToSqlVersion {
-    
+
     param (
         [string]$dbversion
     )
@@ -75085,7 +75087,7 @@ function Convert-DbVersionToSqlVersion {
 
 #.ExternalHelp dbatools-Help.xml
 function Convert-HexStringToByte {
-    
+
     param (
         [string]$InputObject
     )
@@ -75097,7 +75099,7 @@ function Convert-HexStringToByte {
 
 #.ExternalHelp dbatools-Help.xml
 function ConvertTo-JsDate {
-    
+
 
     [CmdletBinding()]
     param (
@@ -75121,7 +75123,7 @@ function Disconnect-Regserver ($Server) {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-SqlInstanceSetup {
-    
+
     [CmdletBinding()]
     Param
     (
@@ -75185,7 +75187,7 @@ function Find-SqlInstanceSetup {
 
 #.ExternalHelp dbatools-Help.xml
 function Find-SqlInstanceUpdate {
-    
+
     [OutputType('System.IO.FileInfo')]
     [CmdletBinding()]
     Param
@@ -75454,7 +75456,7 @@ namespace CredEnum {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-BackupAncientHistory {
-    
+
     [CmdletBinding(DefaultParameterSetName = "Default")]
     param (
         [parameter(Mandatory)]
@@ -75614,7 +75616,7 @@ function Get-BackupAncientHistory {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-CodePage {
-    
+
     [CmdletBinding()]
     param (
         [int]$id
@@ -75628,7 +75630,7 @@ function Get-CodePage {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaADObject {
-    
+
     [CmdletBinding()]
     param (
         [string[]]$ADObject,
@@ -75741,7 +75743,7 @@ function Get-DbaADObject {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaDbPhysicalFile {
-    
+
     [CmdletBinding()]
     param(
         [parameter(Mandatory)]
@@ -75770,7 +75772,7 @@ function Get-DbaDbPhysicalFile {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaFileStreamFolder {
-    
+
     param (
         [DbaInstanceParameter]$SqlInstance,
         [PSCredential]$SqlCredential,
@@ -75814,7 +75816,7 @@ function Get-DbaFileStreamFolder {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaPathSep {
-    
+
     [CmdletBinding()]
     param (
         [object]$Server
@@ -75829,7 +75831,7 @@ function Get-DbaPathSep {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaReportingService {
-    
+
     [CmdletBinding()]
     param (
         [parameter(ValueFromPipeline, Position = 1)]
@@ -75931,7 +75933,7 @@ function Get-DbaReportingService {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaServiceErrorMessage {
-    
+
     param(
         [parameter(ValueFromPipeline, Position = 1)]
         [int]$ErrorNumber
@@ -75971,7 +75973,7 @@ function Get-DbaServiceErrorMessage {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DecryptedObject {
-    
+
     param (
         [Parameter(Mandatory)]
         [Microsoft.SqlServer.Management.Smo.Server]$SqlInstance,
@@ -76044,7 +76046,7 @@ function Get-DecryptedObject {
         $ivlen = 16
     }
 
-    
+
 
     Write-Message -Level Verbose -Message "Query link server password information from the Db."
 
@@ -76068,7 +76070,7 @@ function Get-DecryptedObject {
         Stop-Function -Message "Failure enabling DAC on $sourcename" -Target $source -ErrorRecord $_
     }
 
-    
+
 
     $sql = switch ($Type) {
         "LinkedServer" {
@@ -76164,7 +76166,7 @@ function Get-DecryptedObject {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DirectoryRestoreFile {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -76261,7 +76263,7 @@ function Get-ExportFilePath ($Path, $FilePath, $Type, $ServerName, [switch]$Uniq
 
 #.ExternalHelp dbatools-Help.xml
 function Get-InternalService {
-    
+
     [CmdletBinding()]
     param (
         [string[]]
@@ -76330,7 +76332,7 @@ function Get-InternalService {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-JobList {
-    
+
     [cmdletbinding()]
     param(
         [Parameter(ValueFromPipeline)]
@@ -76414,7 +76416,7 @@ function Get-JobList {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-Language {
-    
+
     [CmdletBinding()]
     param (
         [int]$id
@@ -76431,7 +76433,7 @@ function Get-Language {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-ObjectNameParts {
-    
+
     param (
         [string]$ObjectName
     )
@@ -76512,7 +76514,7 @@ function Get-ObjectNameParts {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-OfflineSqlFileStructure {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory, Position = 0)]
@@ -76576,7 +76578,7 @@ function Get-OfflineSqlFileStructure {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-PasswordHash {
-    
+
     param (
         [object]$Password,
         $SqlMajorVersion,
@@ -76712,7 +76714,7 @@ function Get-ResourceState ($state) {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-RestoreContinuableDatabase {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -76744,7 +76746,7 @@ function Get-RestoreContinuableDatabase {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-SaLoginName {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -76785,7 +76787,7 @@ function Get-SmoServerForDynamicParams {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-SqlCmdVars {
-    
+
     [CmdletBinding()]
     param
     (
@@ -76811,7 +76813,7 @@ function Get-SqlCmdVars {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-SqlDefaultPaths {
-    
+
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "")]
     param (
@@ -76865,7 +76867,7 @@ function Get-SqlDefaultPaths {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-SqlDefaultSpConfigure {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -77410,7 +77412,7 @@ function Get-SqlDefaultSpConfigure {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-SqlFileStructure {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory, Position = 0)]
@@ -77532,7 +77534,7 @@ function Get-SqlFileStructure {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-SQLInstanceComponent {
-    
+
 
     [CmdletBinding()]
     param
@@ -77571,7 +77573,7 @@ function Get-SQLInstanceComponent {
             );
 
             function Get-SQLInstanceDetail {
-                
+
                 param
                 (
                     [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
@@ -77789,7 +77791,7 @@ function Get-SQLInstanceComponent {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-SqlInstanceUpdate {
-    
+
     [CmdletBinding(DefaultParameterSetName = 'Latest')]
     param
     (
@@ -77962,7 +77964,7 @@ function Get-SqlInstanceUpdate {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-SqlSaLogin {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -78012,7 +78014,7 @@ function Get-WmiHadr {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-XpDirTreeRestoreFile {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -78069,7 +78071,7 @@ function Get-XpDirTreeRestoreFile {
 
 #.ExternalHelp dbatools-Help.xml
 function Import-DbaCmdlet {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -78158,7 +78160,7 @@ function Import-DbaCmdlet {
 
 #.ExternalHelp dbatools-Help.xml
 function Initialize-CredSSP {
-    
+
 
     Param (
         [Parameter(Mandatory, Position = 1)]
@@ -78208,7 +78210,7 @@ function Initialize-CredSSP {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-Alter {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [object]$Object
@@ -78224,7 +78226,7 @@ function Invoke-Alter {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-Command2 {
-    
+
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUsePSCredentialType", "")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingPlainTextForPassword", "")]
@@ -78242,7 +78244,7 @@ function Invoke-Command2 {
         [switch]$Raw,
         [version]$RequiredPSVersion
     )
-    
+
 
     $InvokeCommandSplat = @{ }
     if ($ArgumentList) {
@@ -78324,7 +78326,7 @@ function Invoke-Command2 {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-CommandWithFallback {
-    
+
     param (
         [DbaInstanceParameter]$ComputerName = $env:COMPUTERNAME,
         [object]$Credential,
@@ -78373,7 +78375,7 @@ function Invoke-CommandWithFallback {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-Create {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [object]$Object
@@ -78394,7 +78396,7 @@ function Invoke-Create {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaAsync {
-    
+
 
     param (
         [Alias('Connection', 'Conn')]
@@ -78657,7 +78659,7 @@ function Invoke-DbaAsync {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbaDbCorruption {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -78863,7 +78865,7 @@ function Invoke-DbaDiagnosticQueryScriptParser {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-DbMirrorValidation {
-    
+
     [CmdletBinding()]
     param (
         [DbaInstanceParameter]$Primary,
@@ -79017,7 +79019,7 @@ function Invoke-DbMirrorValidation {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-ManagedComputerCommand {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -79067,7 +79069,7 @@ function Invoke-ManagedComputerCommand {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-Program {
-    
+
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSObject])]
     param
@@ -79194,7 +79196,7 @@ function Invoke-Program {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-SmoCheck {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -79217,7 +79219,7 @@ function Invoke-SmoCheck {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-TagCommand ([string]$Tag, [string]$Keyword) {
-    
+
 
     $tagsRex = ([regex]'(?m)^[\s]{0,15}Tags:(.*)$')
     $modulepath = (Get-Module -Name dbatools).Path
@@ -79277,7 +79279,7 @@ function Invoke-TagCommand ([string]$Tag, [string]$Keyword) {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-TlsRestMethod {
-    
+
     $currentVersionTls = [Net.ServicePointManager]::SecurityProtocol
     $currentSupportableTls = [Math]::Max($currentVersionTls.value__, [Net.SecurityProtocolType]::Tls.value__)
     $availableTls = [enum]::GetValues('Net.SecurityProtocolType') | Where-Object { $_ -gt $currentSupportableTls }
@@ -79293,7 +79295,7 @@ function Invoke-TlsRestMethod {
 #.ExternalHelp dbatools-Help.xml
 function Invoke-TlsWebRequest {
 
-    
+
     $currentVersionTls = [Net.ServicePointManager]::SecurityProtocol
     $currentSupportableTls = [Math]::Max($currentVersionTls.value__, [Net.SecurityProtocolType]::Tls.value__)
     $availableTls = [enum]::GetValues('Net.SecurityProtocolType') | Where-Object { $_ -gt $currentSupportableTls }
@@ -79308,7 +79310,7 @@ function Invoke-TlsWebRequest {
 
 #.ExternalHelp dbatools-Help.xml
 function Join-AdminUnc {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -79333,7 +79335,7 @@ function Join-AdminUnc {
 
 #.ExternalHelp dbatools-Help.xml
 function Join-SomePath {
-    
+
     [CmdletBinding()]
     param (
         [string]$Path,
@@ -79346,7 +79348,7 @@ function Join-SomePath {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaLogShippingPrimaryDatabase {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
 
     param (
@@ -79563,7 +79565,7 @@ function New-DbaLogShippingPrimaryDatabase {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaLogShippingPrimarySecondary {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [parameter(Mandatory)]
@@ -79648,7 +79650,7 @@ function New-DbaLogShippingPrimarySecondary {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaLogShippingSecondaryDatabase {
-    
+
 
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
 
@@ -79846,7 +79848,7 @@ function New-DbaLogShippingSecondaryDatabase {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaLogShippingSecondaryPrimary {
-    
+
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
     param (
         [parameter(Mandatory)]
@@ -79986,7 +79988,7 @@ function New-DbaLogShippingSecondaryPrimary {
 
 #.ExternalHelp dbatools-Help.xml
 function Register-RemoteSessionConfiguration {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingConvertToSecureStringWithPlainText", "")]
     [CmdletBinding(SupportsShouldProcess)]
     Param (
@@ -80090,7 +80092,7 @@ function Resolve-IpAddress {
 
 #.ExternalHelp dbatools-Help.xml
 function Resolve-NetBiosName {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -80118,7 +80120,7 @@ function Resolve-SqlIpAddress {
 
 #.ExternalHelp dbatools-Help.xml
 function Restart-WinRMService {
-    
+
 
     [CmdletBinding(SupportsShouldProcess)]
     Param (
@@ -80167,7 +80169,7 @@ function Restart-WinRMService {
 
 #.ExternalHelp dbatools-Help.xml
 function Select-DefaultView {
-    
+
 
     [CmdletBinding()]
     param (
@@ -80333,7 +80335,7 @@ process {
 
 #.ExternalHelp dbatools-Help.xml
 function Set-ServiceStartMode {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param (
         [string]$Mode,
@@ -80453,7 +80455,7 @@ function Start-DbccCheck {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-ComputerTarget {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline, Mandatory)]
@@ -80470,7 +80472,7 @@ function Test-ComputerTarget {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaLsnChain {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory, ValueFromPipeline)]
@@ -80568,7 +80570,7 @@ function Test-DbaLsnChain {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaRestoreVersion {
-    
+
     [CmdletBinding()]
     param (
         [parameter(Mandatory)]
@@ -80649,7 +80651,7 @@ function Test-HostOSLinux {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-PendingReboot {
-    
+
     [OutputType([bool])]
     [CmdletBinding()]
     param
@@ -80700,7 +80702,7 @@ function Test-PendingReboot {
 #requires -version 3.0
 
 function Test-PSRemoting {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUsePSCredentialType", "")]
     [Cmdletbinding()]
     param(
@@ -80726,7 +80728,7 @@ function Test-PSRemoting {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-SqlAgent {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -80746,7 +80748,7 @@ function Test-SqlAgent {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-SqlLoginAccess {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -80802,7 +80804,7 @@ function Test-SqlQueryComplete {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-SqlSa {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -80824,7 +80826,7 @@ function Test-SqlSa {
 
 #.ExternalHelp dbatools-Help.xml
 function Unregister-RemoteSessionConfiguration {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     Param (
         [parameter(Mandatory)]
@@ -80875,7 +80877,7 @@ function Unregister-RemoteSessionConfiguration {
 
 #.ExternalHelp dbatools-Help.xml
 function Update-ServiceStatus {
-    
+
     [CmdletBinding(SupportsShouldProcess)]
     param(
         [parameter(ValueFromPipeline, Mandatory)]
@@ -81053,7 +81055,7 @@ end {
 
 #.ExternalHelp dbatools-Help.xml
 function Update-SqlDbOwner {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
     [CmdletBinding(SupportsShouldProcess)]
     param (
@@ -81127,7 +81129,7 @@ function Update-SqlDbOwner {
 
 #.ExternalHelp dbatools-Help.xml
 function Update-SqlDbReadOnly {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
     [CmdletBinding(SupportsShouldProcess)]
     param (
@@ -81166,7 +81168,7 @@ function Update-SqlDbReadOnly {
 
 #.ExternalHelp dbatools-Help.xml
 function Update-SqlPermission {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "")]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
     [CmdletBinding(SupportsShouldProcess)]
@@ -81260,7 +81262,7 @@ function Update-SqlPermission {
     }
 
     if ($SourceServer.VersionMajor -ge 9 -and $DestServer.VersionMajor -ge 9) {
-        
+
 
         $null = $sourceServer.ConnectionContext.SqlConnectionObject.Close()
         $null = $destServer.ConnectionContext.SqlConnectionObject.Close()
@@ -81524,7 +81526,7 @@ function Update-SqlPermission {
 
 #.ExternalHelp dbatools-Help.xml
 function global:Where-DbaObject {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline, Mandatory)]
@@ -81687,16 +81689,16 @@ function Read-DbatoolsConfigFile
         [Parameter(Mandatory = $true, ParameterSetName = 'Path')]
         [string]
         $Path,
-        
+
         [Parameter(Mandatory = $true, ParameterSetName = 'Weblink')]
         [string]
         $Weblink,
-        
+
         [Parameter(Mandatory = $true, ParameterSetName = 'RawJson')]
         [string]
         $RawJson
     )
-    
+
     #region Utility Function
     function New-ConfigItem
     {
@@ -81704,21 +81706,21 @@ function Read-DbatoolsConfigFile
         [CmdletBinding()]
         param (
             $FullName,
-            
+
             $Value,
-            
+
             $Type,
-            
+
             [switch]
             $KeepPersisted,
-            
+
             [switch]
             $Enforced,
-            
+
             [switch]
             $Policy
         )
-        
+
         [pscustomobject]@{
             FullName        = $FullName
             Value            = $Value
@@ -81728,7 +81730,7 @@ function Read-DbatoolsConfigFile
             Policy            = $Policy
         }
     }
-    
+
     function Get-WebContent
     {
         [CmdletBinding()]
@@ -81736,13 +81738,13 @@ function Read-DbatoolsConfigFile
             [string]
             $WebLink
         )
-        
+
         $webClient = New-Object System.Net.WebClient
         $webClient.Encoding = [System.Text.Encoding]::UTF8
         $webClient.DownloadString($WebLink)
     }
     #endregion Utility Function
-    
+
     if ($Path)
     {
         if (-not (Test-Path $Path)) { return }
@@ -81756,7 +81758,7 @@ function Read-DbatoolsConfigFile
     {
         $data = $RawJson | ConvertFrom-Json -ErrorAction Stop
     }
-    
+
     foreach ($item in $data)
     {
         #region No Version
@@ -81765,7 +81767,7 @@ function Read-DbatoolsConfigFile
             New-ConfigItem -FullName $item.FullName -Value ([Sqlcollaborative.Dbatools.Configuration.ConfigurationHost]::ConvertFromPersistedValue($item.Value, $item.Type))
         }
         #endregion No Version
-        
+
         #region Version One
         if ($item.Version -eq 1)
         {
@@ -81796,20 +81798,20 @@ function Read-DbatoolsConfigPersisted
     Param (
         [Sqlcollaborative.Dbatools.Configuration.ConfigScope]
         $Scope,
-        
+
         [string]
         $Module,
-        
+
         [int]
         $ModuleVersion = 1,
-        
+
         [System.Collections.Hashtable]
         $Hashtable,
-        
+
         [switch]
         $Default
     )
-    
+
     begin
     {
         #region Helper Functions
@@ -81819,21 +81821,21 @@ function Read-DbatoolsConfigPersisted
             [CmdletBinding()]
             param (
                 $FullName,
-                
+
                 $Value,
-                
+
                 $Type,
-                
+
                 [switch]
                 $KeepPersisted,
-                
+
                 [switch]
                 $Enforced,
-                
+
                 [switch]
                 $Policy
             )
-            
+
             [pscustomobject]@{
                 FullName      = $FullName
                 Value         = $Value
@@ -81843,21 +81845,21 @@ function Read-DbatoolsConfigPersisted
                 Policy        = $Policy
             }
         }
-        
+
         function Read-Registry
         {
             [CmdletBinding()]
             param (
                 $Path,
-                
+
                 [switch]
                 $Enforced
             )
-            
+
             if (-not (Test-Path $Path)) { return }
-            
+
             $common = 'PSPath', 'PSParentPath', 'PSChildName', 'PSDrive', 'PSProvider'
-            
+
             foreach ($item in ((Get-ItemProperty -Path $Path -ErrorAction Ignore).PSObject.Properties | Where-Object Name -NotIn $common))
             {
                 if ($item.Value -like "Object:*")
@@ -81876,10 +81878,10 @@ function Read-DbatoolsConfigPersisted
             }
         }
         #endregion Helper Functions
-        
+
         if (-not $Hashtable) { $results = @{ } }
         else { $results = $Hashtable }
-        
+
         if ($Module) { $filename = "$($Module.ToLowerInvariant())-$($ModuleVersion).json" }
         else { $filename = "psf_config.json" }
     }
@@ -81895,7 +81897,7 @@ function Read-DbatoolsConfigPersisted
             }
         }
         #endregion File - Computer Wide
-        
+
         #region Registry - Computer Wide
         if (($Scope -band 4) -and (-not $script:NoRegistry))
         {
@@ -81906,7 +81908,7 @@ function Read-DbatoolsConfigPersisted
             }
         }
         #endregion Registry - Computer Wide
-        
+
         #region File - User Shared
         if ($Scope -band 32)
         {
@@ -81917,7 +81919,7 @@ function Read-DbatoolsConfigPersisted
             }
         }
         #endregion File - User Shared
-        
+
         #region Registry - User Shared
         if (($Scope -band 1) -and (-not $script:NoRegistry))
         {
@@ -81928,7 +81930,7 @@ function Read-DbatoolsConfigPersisted
             }
         }
         #endregion Registry - User Shared
-        
+
         #region File - User Local
         if ($Scope -band 16)
         {
@@ -81939,7 +81941,7 @@ function Read-DbatoolsConfigPersisted
             }
         }
         #endregion File - User Local
-        
+
         #region Registry - User Enforced
         if (($Scope -band 2) -and (-not $script:NoRegistry))
         {
@@ -81950,7 +81952,7 @@ function Read-DbatoolsConfigPersisted
             }
         }
         #endregion Registry - User Enforced
-        
+
         #region Registry - System Enforced
         if (($Scope -band 8) -and (-not $script:NoRegistry))
         {
@@ -81971,7 +81973,7 @@ function Read-DbatoolsConfigPersisted
 
 #.ExternalHelp dbatools-Help.xml
 function Register-DbatoolsConfigValidation {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -81994,14 +81996,14 @@ function Write-DbatoolsConfigFile
     Param (
         [Sqlcollaborative.Dbatools.Configuration.Config[]]
         $Config,
-        
+
         [string]
         $Path,
-        
+
         [switch]
         $Replace
     )
-    
+
     begin
     {
         $parent = Split-Path -Path $Path
@@ -82009,7 +82011,7 @@ function Write-DbatoolsConfigFile
         {
             $null = New-Item $parent -ItemType Directory -Force
         }
-        
+
         $data = @{ }
         if ((Test-Path $Path) -and (-not $Replace))
         {
@@ -82038,7 +82040,7 @@ function Write-DbatoolsConfigFile
                 $datum["Type"] = $persisted.PersistedType
                 $datum["Style"] = "default"
             }
-            
+
             $data[$item.FullName] = [pscustomobject]$datum
         }
     }
@@ -82051,7 +82053,7 @@ function Write-DbatoolsConfigFile
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-Parallel {
-    
+
     [cmdletbinding(DefaultParameterSetName = 'ScriptBlock')]
     param (
         [Parameter(ParameterSetName = 'ScriptBlock')]
@@ -82468,7 +82470,7 @@ function Invoke-Parallel {
 
 #.ExternalHelp dbatools-Help.xml
 function Invoke-SteppablePipeline {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -82484,7 +82486,7 @@ function Invoke-SteppablePipeline {
 }
 
 function Stop-Function {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
     [CmdletBinding(DefaultParameterSetName = 'Plain')]
     param (
@@ -82636,7 +82638,7 @@ function Stop-Function {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-Bound {
-    
+
     # Do not be tempted to use [CmdletBinding()] here, this will subtly change the way this function's parameters are bound, and break it.
     param (
         [string[]]
@@ -82675,7 +82677,7 @@ function Test-Bound {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-DbaDeprecation {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -82729,7 +82731,7 @@ function Test-DbaDeprecation {
 }
 
 function Test-ElevationRequirement {
-    
+
     [CmdletBinding(DefaultParameterSetName = 'Stop')]
     param (
         [DbaInstanceParameter]$ComputerName,
@@ -82767,7 +82769,7 @@ function Test-ElevationRequirement {
 }
 
 function Test-FunctionInterrupt {
-    
+
     [CmdletBinding()]
     param (
 
@@ -82781,7 +82783,7 @@ function Test-FunctionInterrupt {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-PsVersion {
-    
+
     [CmdletBinding()]
     param (
         [float]$Is,
@@ -82813,7 +82815,7 @@ function Test-PsVersion {
 
 #.ExternalHelp dbatools-Help.xml
 function Test-Windows {
-    
+
     [CmdletBinding()]
     param (
         [switch]$NoWarn
@@ -82831,7 +82833,7 @@ function Test-Windows {
 
 #.ExternalHelp dbatools-Help.xml
 function Convert-DbaMessageException {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -82876,7 +82878,7 @@ function Convert-DbaMessageException {
 
 #.ExternalHelp dbatools-Help.xml
 function Convert-DbaMessageLevel {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -82923,7 +82925,7 @@ function Convert-DbaMessageLevel {
 
 #.ExternalHelp dbatools-Help.xml
 function Convert-DbaMessageTarget {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -82968,7 +82970,7 @@ function Convert-DbaMessageTarget {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaMessageLevelModifier {
-    
+
     [CmdletBinding()]
     param (
         [string]
@@ -82980,7 +82982,7 @@ function Get-DbaMessageLevelModifier {
 
 #.ExternalHelp dbatools-Help.xml
 function New-DbaMessageLevelModifier {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
     [CmdletBinding()]
     param (
@@ -83053,7 +83055,7 @@ function New-DbaMessageLevelModifier {
 
 #.ExternalHelp dbatools-Help.xml
 function Register-DbaMessageEvent {
-    
+
     [CmdletBinding(PositionalBinding = $false)]
     param (
         [Parameter(Mandatory)]
@@ -83123,7 +83125,7 @@ function Register-DbaMessageEvent {
 
 #.ExternalHelp dbatools-Help.xml
 function Register-DbaMessageTransform {
-    
+
     [CmdletBinding(PositionalBinding = $false)]
     param (
         [Parameter(Mandatory, ParameterSetName = "Target")]
@@ -83173,7 +83175,7 @@ function Register-DbaMessageTransform {
 
 #.ExternalHelp dbatools-Help.xml
 function Remove-DbaMessageLevelModifier {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
     [CmdletBinding()]
     param (
@@ -83210,7 +83212,7 @@ function Remove-DbaMessageLevelModifier {
 
 #.ExternalHelp dbatools-Help.xml
 function Write-HostColor {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingWriteHost", "")]
     [CmdletBinding()]
     param (
@@ -83251,7 +83253,7 @@ function Write-HostColor {
 
 #.ExternalHelp dbatools-Help.xml
 function Get-DbaRunspace {
-    
+
     [CmdletBinding()]
     param (
         [string]
@@ -83263,7 +83265,7 @@ function Get-DbaRunspace {
 
 #.ExternalHelp dbatools-Help.xml
 function Register-DbaMaintenanceTask {
-    
+
 
     [CmdletBinding()]
     param (
@@ -83328,7 +83330,7 @@ function Register-DbaMaintenanceTask {
 
 #.ExternalHelp dbatools-Help.xml
 function Register-DbaRunspace {
-    
+
     [CmdletBinding(PositionalBinding = $false)]
     param
     (
@@ -83354,7 +83356,7 @@ function Register-DbaRunspace {
 
 #.ExternalHelp dbatools-Help.xml
 function Start-DbaRunspace {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
@@ -83398,7 +83400,7 @@ function Start-DbaRunspace {
 
 #.ExternalHelp dbatools-Help.xml
 function Stop-DbaRunspace {
-    
+
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
     [CmdletBinding()]
     param (
@@ -83443,7 +83445,7 @@ function Stop-DbaRunspace {
 
 #.ExternalHelp dbatools-Help.xml
 function global:New-DbaTeppCompletionResult {
-    
+
     param (
         [Parameter(ValueFromPipelineByPropertyName, Mandatory, ValueFromPipeline)]
         [ValidateNotNullOrEmpty()]
@@ -83496,7 +83498,7 @@ function global:New-DbaTeppCompletionResult {
 
 #.ExternalHelp dbatools-Help.xml
 function Register-DbaTeppArgumentCompleter {
-    
+
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingEmptyCatchBlock", "")]
     param (
@@ -83555,7 +83557,7 @@ function Register-DbaTeppArgumentCompleter {
 
 #.ExternalHelp dbatools-Help.xml
 function Register-DbaTeppInstanceCacheBuilder {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -83575,7 +83577,7 @@ function Register-DbaTeppInstanceCacheBuilder {
 
 #.ExternalHelp dbatools-Help.xml
 function Register-DbaTeppScriptblock {
-    
+
     [CmdletBinding()]
     param (
         [System.Management.Automation.ScriptBlock]
@@ -83595,7 +83597,7 @@ function Register-DbaTeppScriptblock {
 
 #.ExternalHelp dbatools-Help.xml
 function Join-DbaPath {
-    
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, Position = 0)]
@@ -83632,17 +83634,17 @@ function Resolve-DbaPath
         [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
         [string[]]
         $Path,
-        
+
         [string]
         $Provider,
-        
+
         [switch]
         $SingleItem,
-        
+
         [switch]
         $NewChild
     )
-    
+
     process
     {
         foreach ($inputPath in $Path)
@@ -83655,24 +83657,24 @@ function Resolve-DbaPath
             {
                 $parent = Split-Path -Path $inputPath
                 $child = Split-Path -Path $inputPath -Leaf
-                
+
                 try
                 {
                     if (-not $parent) { $parentPath = Get-Location -ErrorAction Stop }
                     else { $parentPath = Resolve-Path $parent -ErrorAction Stop }
                 }
                 catch { Stop-Function -Message "Failed to resolve path" -ErrorRecord $_ -EnableException $true }
-                
+
                 if ($SingleItem -and (($parentPath | Measure-Object).Count -gt 1))
                 {
                     Stop-Function -Message "Could not resolve to a single parent path." -EnableException $true
                 }
-                
+
                 if ($Provider -and ($parentPath.Provider.Name -ne $Provider))
                 {
                     Stop-Function -Message "Resolved provider is $($parentPath.Provider.Name) when it should be $($Provider)" -EnableException $true
                 }
-                
+
                 foreach ($parentItem in $parentPath)
                 {
                     Join-Path $parentItem.ProviderPath $child
@@ -83682,17 +83684,17 @@ function Resolve-DbaPath
             {
                 try { $resolvedPaths = Resolve-Path $inputPath -ErrorAction Stop }
                 catch { Stop-Function -Message "Failed to resolve path" -ErrorRecord $_ -EnableException $true }
-                
+
                 if ($SingleItem -and (($resolvedPaths | Measure-Object).Count -gt 1))
                 {
                     Stop-Function -Message "Could not resolve to a single parent path." -EnableException $true
                 }
-                
+
                 if ($Provider -and ($resolvedPaths.Provider.Name -ne $Provider))
                 {
                     Stop-Function -Message "Resolved provider is $($resolvedPaths.Provider.Name) when it should be $($Provider)" -EnableException $true
                 }
-                
+
                 $resolvedPaths.ProviderPath
             }
         }

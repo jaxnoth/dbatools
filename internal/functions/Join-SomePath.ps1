@@ -1,8 +1,19 @@
 function Join-SomePath {
     <#
-    An internal command that does not require the local path to exist
+    .SYNOPSIS
+        Combines two path strings into a valid path without requiring path to exist.
 
-    Boo, this does not work, but keeping it for future ref.
+    .DESCRIPTION
+        Combines two path strings into a valid path without requiring path to exist.
+
+        Handles all slash variants between the two strings.
+
+    .PARAMETER Path
+        First part of path
+
+    .PARAMETER ChildPath
+        Second part of path
+
     #>
     [CmdletBinding()]
     param (
@@ -10,6 +21,6 @@ function Join-SomePath {
         [string]$ChildPath
     )
     process {
-        [IO.Path]::Combine($Path, $ChildPath)
+        [IO.Path]::Combine([string[]]@($Path, $ChildPath))
     }
 }

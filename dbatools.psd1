@@ -170,6 +170,7 @@
         'Find-DbaCommand',
         'Backup-DbaDatabase',
         'Backup-DbaDDBoostDatabase',
+        'Remove-DbaDDBoostBackup',
         'New-DbaDirectory',
         'Get-DbaDbQueryStoreOption',
         'Set-DbaDbQueryStoreOption',
