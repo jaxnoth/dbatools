@@ -24253,7 +24253,7 @@
                        ],
                        [
                            "Database",
-                           "Specifies the database to instal the First Responder Kit stored procedures into",
+                           "Specifies the database to install the First Responder Kit stored procedures into",
                            "",
                            false,
                            "false",
@@ -26141,6 +26141,14 @@
                            "300"
                        ],
                        [
+                           "BatchSize",
+                           "Size of the batch to use to write the masked data back to the database",
+                           "",
+                           false,
+                           "false",
+                           "1000"
+                       ],
+                       [
                            "DictionaryFilePath",
                            "Import the dictionary to be used in in the database masking",
                            "",
@@ -26181,7 +26189,7 @@
                            ""
                        ]
                    ],
-        "Syntax":  "Invoke-DbaDbDataMasking [[-SqlInstance] \u003cDbaInstanceParameter[]\u003e] [[-SqlCredential] \u003cPSCredential\u003e] [[-Database] \u003cString[]\u003e] [-FilePath] \u003cObject\u003e [[-Locale] \u003cString\u003e] [[-CharacterString] \u003cString\u003e] [[-Table] \u003cString[]\u003e] [[-Column] \u003cString[]\u003e] [[-ExcludeTable] \u003cString[]\u003e] [[-ExcludeColumn] \u003cString[]\u003e] [[-Query] \u003cString\u003e] [[-MaxValue] \u003cInt32\u003e] [[-ModulusFactor] \u003cInt32\u003e] [-ExactLength] [[-ConnectionTimeout] \u003cInt32\u003e] [[-CommandTimeout] \u003cInt32\u003e] [[-DictionaryFilePath] \u003cString[]\u003e] [[-DictionaryExportPath] \u003cString\u003e] [-EnableException] [-WhatIf] [-Confirm] [\u003cCommonParameters\u003e]"
+        "Syntax":  "Invoke-DbaDbDataMasking [[-SqlInstance] \u003cDbaInstanceParameter[]\u003e] [[-SqlCredential] \u003cPSCredential\u003e] [[-Database] \u003cString[]\u003e] [-FilePath] \u003cObject\u003e [[-Locale] \u003cString\u003e] [[-CharacterString] \u003cString\u003e] [[-Table] \u003cString[]\u003e] [[-Column] \u003cString[]\u003e] [[-ExcludeTable] \u003cString[]\u003e] [[-ExcludeColumn] \u003cString[]\u003e] [[-Query] \u003cString\u003e] [[-MaxValue] \u003cInt32\u003e] [[-ModulusFactor] \u003cInt32\u003e] [-ExactLength] [[-ConnectionTimeout] \u003cInt32\u003e] [[-CommandTimeout] \u003cInt32\u003e] [[-BatchSize] \u003cInt32\u003e] [[-DictionaryFilePath] \u003cString[]\u003e] [[-DictionaryExportPath] \u003cString\u003e] [-EnableException] [-WhatIf] [-Confirm] [\u003cCommonParameters\u003e]"
     },
     {
         "Name":  "Invoke-DbaDbDbccCheckConstraint",
@@ -27940,7 +27948,7 @@
                  ],
         "Synopsis":  "Invoke-DbaDiagnosticQuery runs the scripts provided by Glenn Berry\u0027s DMV scripts on specified servers",
         "Alias":  "",
-        "Author":  "Andre Kamman (@AndreKamman), http://clouddba.io",
+        "Author":  "Andre Kamman (@AndreKamman), http://andrekamman.com",
         "CommandName":  "Invoke-DbaDiagnosticQuery",
         "Availability":  "Windows, Linux, macOS",
         "Links":  "https://dbatools.io/Invoke-DbaDiagnosticQuery",
@@ -28262,7 +28270,7 @@
         "CommandName":  "Invoke-DbaQuery",
         "Availability":  "Windows, Linux, macOS",
         "Links":  "https://dbatools.io/Invoke-DbaQuery",
-        "Examples":  "-------------------------- EXAMPLE 1 --------------------------\nPS C:\\\u003eInvoke-DbaQuery -SqlInstance server\\instance -Query \u0027SELECT foo FROM bar\u0027\nRuns the sql query \u0027SELECT foo FROM bar\u0027 against the instance \u0027server\\instance\u0027\n-------------------------- EXAMPLE 2 --------------------------\nPS C:\\\u003eGet-DbaRegServer -SqlInstance [SERVERNAME] -Group [GROUPNAME] | Invoke-DbaQuery -Query \u0027SELECT foo FROM bar\u0027\nRuns the sql query \u0027SELECT foo FROM bar\u0027 against all instances in the group [GROUPNAME] on the CMS [SERVERNAME]\n-------------------------- EXAMPLE 3 --------------------------\nPS C:\\\u003e\"server1\", \"server1\\nordwind\", \"server2\" | Invoke-DbaQuery -File \"C:\\scripts\\sql\\rebuild.sql\"\nRuns the sql commands stored in rebuild.sql against the instances \"server1\", \"server1\\nordwind\" and \"server2\"\n-------------------------- EXAMPLE 4 --------------------------\nPS C:\\\u003eGet-DbaDatabase -SqlInstance \"server1\", \"server1\\nordwind\", \"server2\" | Invoke-DbaQuery -File \"C:\\scripts\\sql\\rebuild.sql\"\nRuns the sql commands stored in rebuild.sql against all accessible databases of the instances \"server1\", \"server1\\nordwind\" and \"server2\"\n-------------------------- EXAMPLE 5 --------------------------\nPS C:\\\u003eInvoke-DbaQuery -SqlInstance . -Query \u0027SELECT * FROM users WHERE Givenname = @name\u0027 -SqlParameters @{ Name = \"Maria\" }\nExecutes a simple query against the users table using SQL Parameters.\r\nThis avoids accidental SQL Injection and is the safest way to execute queries with dynamic content.\r\nKeep in mind the limitations inherent in parameters - it is quite impossible to use them for content references.\r\nWhile it is possible to parameterize a where condition, it is impossible to use this to select which columns to select.\r\nThe inserted text will always be treated as string content, and not as a reference to any SQL entity (such as columns, tables or databases).\n-------------------------- EXAMPLE 6 --------------------------\nPS C:\\\u003eInvoke-DbaQuery -SqlInstance aglistener1 -ReadOnly -Query \"select something from readonlydb.dbo.atable\"\nExecutes a query with ReadOnly application intent on aglistener1.",
+        "Examples":  "-------------------------- EXAMPLE 1 --------------------------\nPS C:\\\u003eInvoke-DbaQuery -SqlInstance server\\instance -Query \u0027SELECT foo FROM bar\u0027\nRuns the sql query \u0027SELECT foo FROM bar\u0027 against the instance \u0027server\\instance\u0027\n-------------------------- EXAMPLE 2 --------------------------\nPS C:\\\u003eGet-DbaRegServer -SqlInstance [SERVERNAME] -Group [GROUPNAME] | Invoke-DbaQuery -Query \u0027SELECT foo FROM bar\u0027\nRuns the sql query \u0027SELECT foo FROM bar\u0027 against all instances in the group [GROUPNAME] on the CMS [SERVERNAME]\n-------------------------- EXAMPLE 3 --------------------------\nPS C:\\\u003e\"server1\", \"server1\\nordwind\", \"server2\" | Invoke-DbaQuery -File \"C:\\scripts\\sql\\rebuild.sql\"\nRuns the sql commands stored in rebuild.sql against the instances \"server1\", \"server1\\nordwind\" and \"server2\"\n-------------------------- EXAMPLE 4 --------------------------\nPS C:\\\u003eGet-DbaDatabase -SqlInstance \"server1\", \"server1\\nordwind\", \"server2\" | Invoke-DbaQuery -File \"C:\\scripts\\sql\\rebuild.sql\"\nRuns the sql commands stored in rebuild.sql against all accessible databases of the instances \"server1\", \"server1\\nordwind\" and \"server2\"\n-------------------------- EXAMPLE 5 --------------------------\nPS C:\\\u003eInvoke-DbaQuery -SqlInstance . -Query \u0027SELECT * FROM users WHERE Givenname = @name\u0027 -SqlParameters @{ Name = \"Maria\" }\nExecutes a simple query against the users table using SQL Parameters.\r\nThis avoids accidental SQL Injection and is the safest way to execute queries with dynamic content.\r\nKeep in mind the limitations inherent in parameters - it is quite impossible to use them for content references.\r\nWhile it is possible to parameterize a where condition, it is impossible to use this to select which columns to select.\r\nThe inserted text will always be treated as string content, and not as a reference to any SQL entity (such as columns, tables or databases).\n-------------------------- EXAMPLE 6 --------------------------\nPS C:\\\u003eInvoke-DbaQuery -SqlInstance aglistener1 -ReadOnly -Query \"select something from readonlydb.dbo.atable\"\nExecutes a query with ReadOnly application intent on aglistener1.\n-------------------------- EXAMPLE 7 --------------------------\nPS C:\\\u003eInvoke-DbaQuery -SqlInstance \"server1\" -Database tempdb -Query \"Example_SP\" -SqlParameters @{ Name = \"Maria\" } -CommandType StoredProcedure\nExecutes a stored procedure Example_SP using SQL Parameters",
         "Params":  [
                        [
                            "SqlInstance",
@@ -28337,6 +28345,14 @@
                            ""
                        ],
                        [
+                           "CommandType",
+                           "Specifies the type of command represented by the query string.  Default is Text",
+                           "",
+                           false,
+                           "false",
+                           "Text"
+                       ],
+                       [
                            "AppendServerInstance",
                            "If this switch is enabled, the SQL Server instance will be appended to PSObject and DataRow output.",
                            "",
@@ -28377,7 +28393,7 @@
                            "False"
                        ]
                    ],
-        "Syntax":  "Invoke-DbaQuery [-SqlInstance \u003cDbaInstanceParameter[]\u003e] [-SqlCredential \u003cPSCredential\u003e] [-Database \u003cString\u003e] -Query \u003cString\u003e [-QueryTimeout \u003cInt32\u003e] [-As \u003cString\u003e] [-SqlParameters \u003cIDictionary\u003e] [-AppendServerInstance] [-MessagesToOutput] [-InputObject \u003cDatabase[]\u003e] [-ReadOnly] [-EnableException] [\u003cCommonParameters\u003e]\nInvoke-DbaQuery [-SqlInstance \u003cDbaInstanceParameter[]\u003e] [-SqlCredential \u003cPSCredential\u003e] [-Database \u003cString\u003e] [-QueryTimeout \u003cInt32\u003e] -File \u003cObject[]\u003e [-As \u003cString\u003e] [-SqlParameters \u003cIDictionary\u003e] [-AppendServerInstance] [-MessagesToOutput] [-InputObject \u003cDatabase[]\u003e] [-ReadOnly] [-EnableException] [\u003cCommonParameters\u003e]\nInvoke-DbaQuery [-SqlInstance \u003cDbaInstanceParameter[]\u003e] [-SqlCredential \u003cPSCredential\u003e] [-Database \u003cString\u003e] [-QueryTimeout \u003cInt32\u003e] -SqlObject \u003cSqlSmoObject[]\u003e [-As \u003cString\u003e] [-SqlParameters \u003cIDictionary\u003e] [-AppendServerInstance] [-MessagesToOutput] [-InputObject \u003cDatabase[]\u003e] [-ReadOnly] [-EnableException] [\u003cCommonParameters\u003e]"
+        "Syntax":  "Invoke-DbaQuery [-SqlInstance \u003cDbaInstanceParameter[]\u003e] [-SqlCredential \u003cPSCredential\u003e] [-Database \u003cString\u003e] -Query \u003cString\u003e [-QueryTimeout \u003cInt32\u003e] [-As \u003cString\u003e] [-SqlParameters \u003cIDictionary\u003e] [-CommandType {Text | StoredProcedure | TableDirect}] [-AppendServerInstance] [-MessagesToOutput] [-InputObject \u003cDatabase[]\u003e] [-ReadOnly] [-EnableException] [\u003cCommonParameters\u003e]\nInvoke-DbaQuery [-SqlInstance \u003cDbaInstanceParameter[]\u003e] [-SqlCredential \u003cPSCredential\u003e] [-Database \u003cString\u003e] [-QueryTimeout \u003cInt32\u003e] -File \u003cObject[]\u003e [-As \u003cString\u003e] [-SqlParameters \u003cIDictionary\u003e] [-CommandType {Text | StoredProcedure | TableDirect}] [-AppendServerInstance] [-MessagesToOutput] [-InputObject \u003cDatabase[]\u003e] [-ReadOnly] [-EnableException] [\u003cCommonParameters\u003e]\nInvoke-DbaQuery [-SqlInstance \u003cDbaInstanceParameter[]\u003e] [-SqlCredential \u003cPSCredential\u003e] [-Database \u003cString\u003e] [-QueryTimeout \u003cInt32\u003e] -SqlObject \u003cSqlSmoObject[]\u003e [-As \u003cString\u003e] [-SqlParameters \u003cIDictionary\u003e] [-CommandType {Text | StoredProcedure | TableDirect}] [-AppendServerInstance] [-MessagesToOutput] [-InputObject \u003cDatabase[]\u003e] [-ReadOnly] [-EnableException] [\u003cCommonParameters\u003e]"
     },
     {
         "Name":  "Invoke-DbatoolsFormatter",
@@ -40186,7 +40202,7 @@
                  ],
         "Synopsis":  "Save-DbaDiagnosticQueryScript downloads the most recent version of all Glenn Berry DMV scripts",
         "Alias":  "",
-        "Author":  "Andre Kamman (@AndreKamman), http://clouddba.io",
+        "Author":  "Andre Kamman (@AndreKamman), https://andrekamman.com",
         "CommandName":  "Save-DbaDiagnosticQueryScript",
         "Availability":  "Windows, Linux, macOS",
         "Links":  "https://dbatools.io/Save-DbaDiagnosticQueryScript",
@@ -43838,7 +43854,7 @@
         "CommandName":  "Set-DbaPowerPlan",
         "Availability":  "Windows only",
         "Links":  "https://dbatools.io/Set-DbaPowerPlan",
-        "Examples":  "-------------------------- EXAMPLE 1 --------------------------\nPS C:\\\u003eSet-DbaPowerPlan -ComputerName sql2017\nSets the Power Plan to High Performance. Skips it if its already set.\n-------------------------- EXAMPLE 2 --------------------------\nPS C:\\\u003e\u0027Server1\u0027, \u0027Server2\u0027 | Set-DbaPowerPlan -PowerPlan Balanced\nSets the Power Plan to Balanced for Server1 and Server2. Skips it if its already set.\n-------------------------- EXAMPLE 3 --------------------------\nPS C:\\\u003e$cred = Get-Credential \u0027Domain\\User\u0027\nPS C:\\\u003e Set-DbaPowerPlan -ComputerName sql2017 -Credential $cred\nConnects using alternative Windows credential and sets the Power Plan to High Performance. Skips it if its already set.\n-------------------------- EXAMPLE 4 --------------------------\nPS C:\\\u003eSet-DbaPowerPlan -ComputerName sqlcluster -CustomPowerPlan \u0027Maximum Performance\u0027\nSets the Power Plan to the custom power plan called \"Maximum Performance\". Skips it if its already set.",
+        "Examples":  "-------------------------- EXAMPLE 1 --------------------------\nPS C:\\\u003eSet-DbaPowerPlan -ComputerName sql2017\nSets the Power Plan to High Performance. Skips it if its already set.\n-------------------------- EXAMPLE 2 --------------------------\nPS C:\\\u003eSet-DbaPowerPlan -ComputerName sql2017 -PowerPlan HÃ¶chstleistung\nSets the PowerPlan on a German system to HÃ¶chstleistung.\nWe use the English phrase \"High Performance\" by default. To specify Power Plans in another language, use the -PowerPlan parameter.\n-------------------------- EXAMPLE 3 --------------------------\nPS C:\\\u003e\u0027Server1\u0027, \u0027Server2\u0027 | Set-DbaPowerPlan -PowerPlan Balanced\nSets the Power Plan to Balanced for Server1 and Server2. Skips it if its already set.\n-------------------------- EXAMPLE 4 --------------------------\nPS C:\\\u003e$cred = Get-Credential \u0027Domain\\User\u0027\nPS C:\\\u003e Set-DbaPowerPlan -ComputerName sql2017 -Credential $cred\nConnects using alternative Windows credential and sets the Power Plan to High Performance. Skips it if its already set.\n-------------------------- EXAMPLE 5 --------------------------\nPS C:\\\u003eSet-DbaPowerPlan -ComputerName sqlcluster -CustomPowerPlan \u0027Maximum Performance\u0027\nSets the Power Plan to the custom power plan called \"Maximum Performance\". Skips it if its already set.",
         "Params":  [
                        [
                            "ComputerName",
@@ -43858,7 +43874,7 @@
                        ],
                        [
                            "PowerPlan",
-                           "Specifies the Power Plan that you wish to use. Valid options for this match the Windows default Power Plans of \"Power Saver\", \"Balanced\", and \"High Performance\".",
+                           "Specifies the Power Plan that you wish to use.\nWe use the English phrase \"High Performance\" by default. To specify Power Plans in another language, use this parameter (-PowerPlan HÃ¶chstleistung).",
                            "",
                            false,
                            "false",
@@ -43952,6 +43968,14 @@
                            "False"
                        ],
                        [
+                           "User",
+                           "If provided, will add requested permissions to this account instead of the the account under which the SQL service is running.",
+                           "",
+                           false,
+                           "false",
+                           ""
+                       ],
+                       [
                            "WhatIf",
                            "If this switch is enabled, no actions are performed but informational messages will be displayed that explain what would happen if the command were to run.",
                            "wi",
@@ -43968,7 +43992,7 @@
                            ""
                        ]
                    ],
-        "Syntax":  "Set-DbaPrivilege [[-ComputerName] \u003cDbaInstanceParameter[]\u003e] [[-Credential] \u003cPSCredential\u003e] [-Type] \u003cString[]\u003e [-EnableException] [-WhatIf] [-Confirm] [\u003cCommonParameters\u003e]"
+        "Syntax":  "Set-DbaPrivilege [[-ComputerName] \u003cDbaInstanceParameter[]\u003e] [[-Credential] \u003cPSCredential\u003e] [-Type] \u003cString[]\u003e [-EnableException] [[-User] \u003cString\u003e] [-WhatIf] [-Confirm] [\u003cCommonParameters\u003e]"
     },
     {
         "Name":  "Set-DbaSpConfigure",
