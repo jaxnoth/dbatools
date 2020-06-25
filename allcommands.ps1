@@ -83701,3 +83701,40 @@ function Resolve-DbaPath
     }
 }
 
+function Get-DbaDDBoostAgentLocation {
+
+    [CmdletBinding()]
+    param (
+        [Parameter(ValueFromPipeline)]
+        [Alias('cn', 'host', 'Server')]
+        [DbaInstanceParameter]$ComputerName = $env:COMPUTERNAME,
+        [pscredential]$Credential,
+        [string] $DataDomainAgentPath,
+        [switch]$EnableException
+    )
+
+    begin {
+
+        If ($DataDomainAgentPath) {
+            $agentPath = $DataDomainAgentPath
+        } else {
+            $Node = Invoke-Command2 -ComputerName $ComputerName -Credential $Credential -ScriptBlock {
+                $Node = Get-ItemProperty HKLM:\SOFTWARE\WOW6432Node\EMC\DDBMSS
+                If (-Not $Node) {
+                    $Node = Get-ItemProperty HKLM:\SOFTWARE\EMC\DDBMSS
+                }
+                if (Test-Path $Node.Path -PathType Container) {
+                    return $Node
+                }
+            }
+            If ($Node) {
+                $agentPath = $Node.Path
+            }
+        }
+        if (-Not $agentPath) {
+            Stop-Function -Message "Cannot determine location of DDBoost Agent"
+        }
+        Write-Message -Message "DDBoost Agent Path: $agentPath" -Level Verbose
+        return $agentPath
+    }
+}

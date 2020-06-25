@@ -61,13 +61,15 @@ function Get-DbaDDBoostAgentLocation {
                 If (-Not $Node) {
                     $Node = Get-ItemProperty HKLM:\SOFTWARE\EMC\DDBMSS
                 }
-                return $Node
+                if (Test-Path $Node.Path -PathType Container) {
+                    return $Node
+                }
             }
             If ($Node) {
                 $agentPath = $Node.Path
             }
         }
-        if (-Not ($agentPath -and (Test-Path $agentPath -PathType Container))) {
+        if (-Not $agentPath) {
             Stop-Function -Message "Cannot determine location of DDBoost Agent"
         }
         Write-Message -Message "DDBoost Agent Path: $agentPath" -Level Verbose

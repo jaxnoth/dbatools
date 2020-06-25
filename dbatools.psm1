@@ -767,7 +767,8 @@ $script:xplat = @(
     'Update-Dbatools',
     'Add-DbaServerRoleMember',
     'Get-DbatoolsPath',
-    'Set-DbatoolsPath'
+    'Set-DbatoolsPath',
+    'Get-DbaDDBoostAgentLocation'
 )
 
 $script:noncoresmo = @(
@@ -925,7 +926,8 @@ $script:windowsonly = @(
     # Unknown
     'Get-DbaErrorLog',
     'Get-DbaManagementObject',
-    'Test-DbaManagementObject'
+    'Test-DbaManagementObject',
+    'Get-DbaDDBoostAgentLocation'
 )
 
 # If a developer or appveyor calls the psm1 directly, they want all functions
