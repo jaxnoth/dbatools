@@ -195,7 +195,19 @@ function New-DbaDbMaskingConfig {
             }
         }
 
-        $supportedDataTypes = 'bit', 'bigint', 'bool', 'char', 'date', 'datetime', 'datetime2', 'decimal', 'int', 'money', 'nchar', 'ntext', 'nvarchar', 'smalldatetime', 'smallint', 'text', 'time', 'uniqueidentifier', 'userdefineddatatype', 'varchar'
+        $supportedDataTypes = @(
+            'bit', 'bigint', 'bool',
+            'char', 'date',
+            'datetime', 'datetime2', 'decimal',
+            'float',
+            'int',
+            'money',
+            'nchar', 'ntext', 'nvarchar',
+            'smalldatetime', 'smallint',
+            'text', 'time', 'tinyint',
+            'uniqueidentifier', 'userdefineddatatype',
+            'varchar'
+        )
 
         $maskingconfig = @()
     }
@@ -489,6 +501,7 @@ function New-DbaDbMaskingConfig {
                             Nullable        = $columnobject.Nullable
                             KeepNull        = $true
                             Composite       = $null
+                            Action          = $null
                         }
                     } else {
                         $type = "Random"
@@ -553,6 +566,7 @@ function New-DbaDbMaskingConfig {
                             Nullable        = $columnobject.Nullable
                             KeepNull        = $true
                             Composite       = $null
+                            Action          = $null
                         }
                     }
                 }
