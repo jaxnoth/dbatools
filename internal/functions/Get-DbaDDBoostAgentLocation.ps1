@@ -52,7 +52,7 @@ function Get-DbaDDBoostAgentLocation {
     )
 
     begin {
-
+        Write-Verbose "Testing"
         If ($DataDomainAgentPath) {
             $agentPath = $DataDomainAgentPath
         } else {

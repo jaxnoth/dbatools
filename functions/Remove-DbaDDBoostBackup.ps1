@@ -67,6 +67,13 @@ function Remove-DbaDDBoostBackup {
             "-Y"
         )
 
+        $Args = @(
+            "-k", #Expired Backups
+            "-n mssql",
+            "-z `"$DataDomainBoostLockboxPath`"",
+            "-Y"
+        )
+
     }
     end {
         $fileExe = Get-DbaDDBoostAgentLocation -ComputerName $ComputerName -Credential $Credential -DataDomainAgentPath $DataDomainAgentPath
