@@ -105,3 +105,62 @@ In order to the highest perfection possible in everything discussed above we hav
 As commands expand in functionality and new commands are added the health can change on any given commit. As of right now we use this as reference to reach major release status (e.g. 1.0) for the module. We may continue to expand on the checks for later releases.
 
 There are a few checks which need a core developer to manually sign off the "check", but there are a lot everyone else can fix too, namely ScriptAnalyzer and CodeCoverage.
+
+## Managing Jaxnoth fork
+
+### Miscellaneous commands
+  - `git branch -vv` list local branches with tracking and worktrees
+  - `git branch -D <branch names>` branch cleanup
+  - `git reset origin/development` moves branch pointer
+  - `git remote -v` lists remote names and urls
+### Incorporating upstream changes
+Must have clean development first
+May need to Resolve conflicts after pull or merge
+  1. `git co development`  Retrieves development branch
+  1. `git fetch --all` Pulls all new code from all remotes
+  1. `git pull` Makes sure local development is up to date with origin
+  1. `git merge upstream/master` Starts merge process
+  1. `git push` Updates origin
+  1. `git co master` Retrieves master branch
+  1. `git merge development` Pulls code from development
+      1. Resolve conflicts
+      1. Advance version # to lastest plus .1
+      1. `.\publish.ps1 ` Updating allcommands.ps1
+      1. `git merge --continue` Completes merge process
+  1. `.\publish.ps1 -Repository sdt` Publishes to internal repository
+### Creating feature branches
+#### Local features
+  1. `git co origin/master -b <branch-name>` Creates new branch that tracks origin/master
+  1. Update module version with `-feature.#` at end
+  1. `git commit`
+  1. `git push -u origin <branch-name>` publishes to Jaxnoth fork and adds tracking to that branch
+  1. Make code changes and commit
+  1. `.\publish.ps1` Updates allcommands.ps1
+  1. `install-module iwu.dbatools -repository test`
+  1. Test code
+  1. `git co master`
+  1. `git merge <branch-name> --no-commit`
+      1. fix version
+      1. `.\publish.ps1 ` Updating allcommands.ps1
+      1. `git merge --continue` Completes merge process
+  1. `.\publish.ps1 -Repository sdt` Publishes to internal repository
+  1. `git push origin :<branch-name>` github cleanup
+  1. `git branch -D <branch names>` branch cleanup
+#### Shared features
+  1. `git co upstream/master -b <branch-name>` Creates new branch that tracks origin/master
+  1. `git push -u origin <branch-name>` publishes to Jaxnoth fork and adds tracking to that branch
+  1. Make code changes and commit
+  1. `git co -B <branch-name>-local` creates/checksout a branch that can be rebased
+  1. `git rebase origin/master` rebase branch to include local customizations
+  1. `.\publish.ps1` Updates allcommands.ps1
+  1. `install-module iwu.dbatools -repository test`
+  1. Test code locally
+     *to makes correction `git co <branch-name>` then return to step 3*
+  1. `git branch -D <branch-name>-local` cleanup of local testing branch
+  1. `git co <branch-name>` checks out shareable branch
+  1. run automated tests
+  1. `git push` saves changes to Jaxnoth github
+  1. create pull request on github.com
+  1. after pull request is accepted/merged:
+      1. `git push origin :<branch-name>` github cleanup
+      1. `git branch -D <branch names>` branch cleanup
