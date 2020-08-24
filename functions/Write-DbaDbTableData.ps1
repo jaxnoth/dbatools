@@ -138,7 +138,7 @@ function Write-DbaDbTableData {
         PS C:\> $passwd = ConvertTo-SecureString "P@ssw0rd" -AsPlainText -Force
         PS C:\> $AzureCredential = New-Object System.Management.Automation.PSCredential("AzureAccount"),$passwd)
         PS C:\> $DataTable = Import-Csv C:\temp\customers.csv
-        PS C:\> Write-DbaDbTableData -SqlInstance AzureDB.database.windows.net -InputObject $DataTable -Database mydb -Table customers -KeepNulls -Credential $AzureCredential -BulkCopyTimeOut 300
+        PS C:\> Write-DbaDbTableData -SqlInstance AzureDB.database.windows.net -InputObject $DataTable -Database mydb -Table customers -KeepNulls -SqlCredential $AzureCredential -BulkCopyTimeOut 300
 
         This performs the same operation as the previous example, but against a SQL Azure Database instance using the required credentials.
 
@@ -346,32 +346,6 @@ function Write-DbaDbTableData {
         #region Prepare type for bulk copy
         if (-not $Truncate) { $ConfirmPreference = "None" }
 
-        # Getting the total rows copied is a challenge. Use SqlBulkCopyExtension.
-        # http://stackoverflow.com/questions/1188384/sqlbulkcopy-row-count-when-complete
-
-        $sourcecode = 'namespace System.Data.SqlClient {
-            using Reflection;
-
-            public static class SqlBulkCopyExtension
-            {
-                const String _rowsCopiedFieldName = "_rowsCopied";
-                static FieldInfo _rowsCopiedField = null;
-
-                public static int RowsCopiedCount(this SqlBulkCopy bulkCopy)
-                {
-                    if (_rowsCopiedField == null) _rowsCopiedField = typeof(SqlBulkCopy).GetField(_rowsCopiedFieldName, BindingFlags.NonPublic | BindingFlags.GetField | BindingFlags.Instance);
-                    return (int)_rowsCopiedField.GetValue(bulkCopy);
-                }
-            }
-        }'
-        # Load the basics
-        if (-not $script:core) {
-            try {
-                Add-Type -ReferencedAssemblies System.Data.dll -TypeDefinition $sourcecode -ErrorAction Stop
-            } catch {
-                $null = 1
-            }
-        }
         #endregion Prepare type for bulk copy
 
         #region Resolve Full Qualified Table Name
@@ -482,7 +456,8 @@ function Write-DbaDbTableData {
                 return
             }
 
-            $tableExists = ($tableName -in $databaseObject.Tables.Name) -and ($databaseObject.Tables.Schema -eq $schemaName)
+            $targetTable = $databaseObject.Tables | Where-Object { $_.Name -eq $tableName -and $_.Schema -eq $schemaName }
+            $tableExists = $targetTable.Count -eq 1
         } catch {
             Stop-Function -Message "Failure" -ErrorRecord $_ -Continue
         }

@@ -95,7 +95,7 @@ function Import-DbaCsv {
         This behaviour will be overridden if the -Schema parameter is specified.
 
     .PARAMETER TableLock
-        If this switch is enabled, the SqlBulkCopy option to acquire a table lock will be used. This is automatically used if -Turbo is enabled.
+        If this switch is enabled, the SqlBulkCopy option to acquire a table lock will be used.
 
         Per Microsoft "Obtain a bulk update lock for the duration of the bulk copy operation. When not
         specified, row locks are used."
@@ -373,34 +373,6 @@ function Import-DbaCsv {
         }
 
         Write-Message -Level Verbose -Message "Started at $(Get-Date)"
-
-        # Getting the total rows copied is a challenge. Use SqlBulkCopyExtension.
-        # http://stackoverflow.com/questions/1188384/sqlbulkcopy-row-count-when-complete
-
-        $sourcecode = 'namespace System.Data.SqlClient
-        {
-            using Reflection;
-
-            public static class SqlBulkCopyExtension
-            {
-                const String _rowsCopiedFieldName = "_rowsCopied";
-                static FieldInfo _rowsCopiedField = null;
-
-                public static int RowsCopiedCount(this SqlBulkCopy bulkCopy)
-                {
-                    if (_rowsCopiedField == null) _rowsCopiedField = typeof(SqlBulkCopy).GetField(_rowsCopiedFieldName, BindingFlags.NonPublic | BindingFlags.GetField | BindingFlags.Instance);
-                    return (int)_rowsCopiedField.GetValue(bulkCopy);
-                }
-            }
-        }
-    '
-        if (-not $script:core) {
-            try {
-                Add-Type -ReferencedAssemblies System.Data.dll -TypeDefinition $sourcecode -ErrorAction Stop
-            } catch {
-                $null = 1
-            }
-        }
     }
     process {
         foreach ($filename in $Path) {
@@ -676,13 +648,8 @@ function Import-DbaCsv {
                         if (-not $NoTransaction) {
                             $null = $transaction.Commit()
                         }
-                        if ($script:core) {
-                            $rowscopied = "Unsupported in Core"
-                            $rps = $null
-                        } else {
-                            $rowscopied = [System.Data.SqlClient.SqlBulkCopyExtension]::RowsCopiedCount($bulkcopy)
-                            $rps = [int]($rowscopied / $elapsed.Elapsed.TotalSeconds)
-                        }
+                        $rowscopied = Get-BulkRowsCopiedCount $bulkcopy
+                        $rps = [int]($rowscopied / $elapsed.Elapsed.TotalSeconds)
 
                         Write-Message -Level Verbose -Message "$rowscopied total rows copied"
 
