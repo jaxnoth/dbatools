@@ -8,7 +8,7 @@
 @{
 
     # Script module or binary module file associated with this manifest.
-    RootModule             = 'dbatools.psm1'
+    RootModule             = 'dbatools.psm1-mergeproc.1'
 
     # Version number of this module.
     ModuleVersion          = '1.0.115.1'
