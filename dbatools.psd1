@@ -11,7 +11,7 @@
     RootModule             = 'dbatools.psm1'
 
     # Version number of this module.
-    ModuleVersion          = '1.0.115'
+    ModuleVersion          = '1.0.120'
 
     # ID used to uniquely identify this module
     GUID                   = '41a4f8e5-303c-44f1-8fd9-1be4e14d0ffc'
@@ -135,6 +135,7 @@
         'Get-DbaLastBackup',
         'Connect-DbaInstance',
         'Get-DbaDbBackupHistory',
+        'Get-DbaAgBackupHistory',
         'Read-DbaBackupHeader',
         'Test-DbaLastBackup',
         'Get-DbaMaxMemory',
@@ -528,6 +529,7 @@
         'Get-DbaAgentJobOutputFile',
         'Set-DbaAgentJobOutputFile',
         'Get-DbaBuildReference',
+        'Update-DbaBuildReference',
         'New-DbaDacProfile'
         'Import-DbaXESessionTemplate',
         'Export-DbaXESessionTemplate',

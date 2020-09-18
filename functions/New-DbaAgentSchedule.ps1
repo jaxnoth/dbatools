@@ -280,7 +280,6 @@ function New-DbaAgentSchedule {
 
             # Loop through the array
             foreach ($item in $FrequencyInterval) {
-                $FrequencyInterval
                 switch ($item) {
                     { [int]$_ -ge 1 -and [int]$_ -le 31 } { $interval = [int]$item }
                 }
@@ -533,8 +532,7 @@ function New-DbaAgentSchedule {
 
                             }
 
-                            # Output the job schedule
-                            return $JobSchedule
+                            $JobSchedule
                         }
                     }
                 } # foreach object job
