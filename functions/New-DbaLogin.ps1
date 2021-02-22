@@ -55,6 +55,10 @@ function New-DbaLogin {
     .PARAMETER PasswordPolicyEnforced
         Enforces password complexity policy. Can be $true or $false(default)
 
+    .PARAMETER PasswordMustChange
+        Enforces user must change password at next login.
+        When specified will enforce PasswordExpirationEnabled and PasswordPolicyEnforced as they are required for the must change.
+
     .PARAMETER Disabled
         Create the login in a disabled state
 
@@ -168,6 +172,9 @@ function New-DbaLogin {
         [parameter(ParameterSetName = "Password")]
         [parameter(ParameterSetName = "PasswordHash")]
         [switch]$PasswordPolicyEnforced,
+        [Alias("MustChange")]
+        [parameter(ParameterSetName = "Password")]
+        [switch]$PasswordMustChange,
         [Alias("Disable")]
         [switch]$Disabled,
         [switch]$DenyWindowsLogin,
@@ -205,6 +212,11 @@ function New-DbaLogin {
             Return
         }
 
+        if ($PasswordMustChange -and (-not $SecurePassword)) {
+            Stop-Function -Message "You need to specified -SecurePassword when using -PasswordMustChange parameter." -Category InvalidArgument -EnableException $EnableException
+            Return
+        }
+
         $loginCollection = @()
         if ($InputObject) {
             $loginCollection += $InputObject
@@ -217,12 +229,13 @@ function New-DbaLogin {
         }
         foreach ($instance in $SqlInstance) {
             try {
-                $server = Connect-SqlInstance -SqlInstance $instance -SqlCredential $sqlcredential
+                $server = Connect-SqlInstance -SqlInstance $instance -SqlCredential $SqlCredential
             } catch {
                 Stop-Function -Message "Error occurred while establishing connection to $instance" -Category ConnectionError -ErrorRecord $_ -Target $instance -Continue
             }
 
             foreach ($loginItem in $loginCollection) {
+                $usedTsql = $false
                 #check if $loginItem is an SMO Login object
                 if ($loginItem.GetType().Name -eq 'Login') {
                     #Get all the necessary fields
@@ -233,6 +246,7 @@ function New-DbaLogin {
                     $currentLanguage = $loginItem.Language
                     $currentPasswordExpirationEnabled = $loginItem.PasswordExpirationEnabled
                     $currentPasswordPolicyEnforced = $loginItem.PasswordPolicyEnforced
+                    $currentPasswordMustChange = $loginItem.MustChangePassword
                     $currentDisabled = $loginItem.IsDisabled
                     $currentDenyWindowsLogin = $loginItem.DenyWindowsLogin
                     #Get previous password
@@ -286,7 +300,7 @@ function New-DbaLogin {
                     else { $loginType = 'WindowsUser' }
                 }
 
-                if (($server.LoginMode -ne [Microsoft.SqlServer.Management.Smo.ServerLoginMode]::Mixed) -and ($loginType -eq 'SqlLogin')) {
+                if ((-not $server.IsAzure) -and ($server.LoginMode -ne [Microsoft.SqlServer.Management.Smo.ServerLoginMode]::Mixed) -and ($loginType -eq 'SqlLogin')) {
                     Write-Message -Level Warning -Message "$instance does not have Mixed Mode enabled. [$loginName] is an SQL Login. Enable mixed mode authentication after the migration completes to use this type of login."
                 }
 
@@ -304,6 +318,13 @@ function New-DbaLogin {
                 }
                 if ($PSBoundParameters.Keys -contains 'PasswordPolicyEnforced') {
                     $currentPasswordPolicyEnforced = $PasswordPolicyEnforced
+                }
+                if ($PSBoundParameters.Keys -contains 'PasswordMustChange') {
+                    $currentPasswordMustChange = $PasswordMustChange
+                    # Enforce Expiration and Policy properties as they are needed when we want to use "Must Change" property
+                    Write-Message -Level Verbose -Message "Forcing 'Expiration' and 'Policy' properties to 'ON' because MustChange was specified."
+                    $currentPasswordExpirationEnabled = $true
+                    $currentPasswordPolicyEnforced = $true
                 }
                 if ($PSBoundParameters.Keys -contains 'MapToAsymmetricKey') {
                     $currentAsymmetricKey = $MapToAsymmetricKey
@@ -392,10 +413,9 @@ function New-DbaLogin {
                                 $newLogin.PasswordPolicyEnforced = $false
                             }
 
-                            # leaving it here to test
+                            # DENY CONNECT SQL
                             if ($currentDenyWindowsLogin) {
                                 Write-Message -Level VeryVerbose -Message "Setting $loginName DenyWindowsLogin to $currentDenyWindowsLogin"
-                                $withParams += ", DENY_LOGIN" # gotta check this one
                                 $newLogin.DenyWindowsLogin = $currentDenyWindowsLogin
                             }
 
@@ -452,6 +472,7 @@ function New-DbaLogin {
                                 $null = $server.Query($sql)
                                 $newLogin = $server.logins[$loginName]
                                 Write-Message -Level Verbose -Message "Successfully added $loginName to $instance."
+                                $usedTsql = $true
                             } catch {
                                 Stop-Function -Message "Failed to add $loginName to $instance." -Category InvalidOperation -ErrorRecord $_ -Target $instance -Continue
                             }
@@ -468,30 +489,52 @@ function New-DbaLogin {
                                     $sql = "ALTER LOGIN [$loginName] DISABLE"
                                     $null = $server.Query($sql)
                                     Write-Message -Level Verbose -Message "Login $loginName has been disabled on $instance."
+                                    $usedTsql = $true
                                 } catch {
                                     Stop-Function -Message "Failed to disable $loginName on $instance." -Category InvalidOperation -ErrorRecord $_ -Target $instance -Continue
                                 }
                             }
                         }
                         #Process the DenyWindowsLogin property
-                        if ($currentDenyWindowsLogin) {
+                        if ($currentDenyWindowsLogin -ne $newLogin.DenyWindowsLogin) {
                             try {
-                                $newLogin.DenyWindowsLogin = $true
-                                $newLogin.Apply()
-                                Write-Message -Level Verbose -Message "Login $loginName has been denied on $instance."
+                                $newLogin.DenyWindowsLogin = $currentDenyWindowsLogin
+                                $newLogin.Alter()
+                                Write-Message -Level Verbose -Message "Login $loginName has been denied from logging in on $instance."
                             } catch {
-                                Write-Message -Level Verbose -Message "Failed to set deny windows login priviledge $loginName on $instance using SMO, trying T-SQL."
+                                Write-Message -Level Verbose -Message "Failed to deny from logging in $loginName on $instance using SMO, trying T-SQL."
                                 try {
-                                    $sql = "ALTER LOGIN [$loginName] DENY_WINDOWS" #check this one
+                                    $sql = "DENY CONNECT SQL TO [{0}]" -f $newLogin.Name
                                     $null = $server.Query($sql)
-                                    Write-Message -Level Verbose -Message "Login $loginName is now denied of Windows login privileges on $instance."
+                                    Write-Message -Level Verbose -Message "Login $loginName has been denied from logging in on $instance."
+                                    $usedTsql = $true
                                 } catch {
                                     Stop-Function -Message "Failed to set deny windows login priviledge $loginName on $instance." -Category InvalidOperation -ErrorRecord $_ -Target $instance -Continue
                                 }
                             }
                         }
+
+                        #Process the MustChangePassword property
+                        if ($currentPasswordMustChange -ne $newLogin.MustChangePassword) {
+                            try {
+                                $newLogin.ChangePassword($SecurePassword, $true, $true)
+                                Write-Message -Level Verbose -Message "Login $loginName has been marked as must change password."
+
+                                # We need to refresh login after ChangePassword. Otherwise, MustChangePassword will appear as False
+                                $server.Logins[$loginName].Refresh()
+                            } catch {
+                                Write-Message -Level Verbose -Message "Failed to marked as must change password in $loginName on $instance using SMO."
+                            }
+                        }
+
                         #Display results
+                        # If we ever used T-SQL, the smo is some times not up to date and should be refreshed
+                        if ($usedTsql) {
+                            $server.Logins.Refresh()
+                        }
+
                         Get-DbaLogin -SqlInstance $server -Login $loginName
+
                     } catch {
                         Stop-Function -Message "Failed to create login $loginName on $instance." -Target $credential -InnerErrorRecord $_ -Continue
                     }

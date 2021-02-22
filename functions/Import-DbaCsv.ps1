@@ -125,14 +125,17 @@ function Import-DbaCsv {
 
     .PARAMETER Quote
         Defines the default quote character wrapping every field.
+        Default: double-quotes
 
     .PARAMETER Escape
         Defines the default escape character letting insert quotation characters inside a quoted field.
 
         The escape character can be the same as the quote character.
+        Default: double-quotes
 
     .PARAMETER Comment
-        Defines the default comment character indicating that a line is commented out. Default is #.
+        Defines the default comment character indicating that a line is commented out.
+        Default: hashtag
 
     .PARAMETER TrimmingOption
         Determines which values should be trimmed. Default is "None". Options are All, None, UnquotedOnly and QuotedOnly.
@@ -436,7 +439,14 @@ function Import-DbaCsv {
                 $elapsed = [System.Diagnostics.Stopwatch]::StartNew()
                 # Open Connection to SQL Server
                 try {
-                    $server = Connect-SqlInstance -SqlInstance $instance -SqlCredential $sqlcredential -StatementTimeout 0 -MinimumVersion 9
+                    $server = Connect-SqlInstance -SqlInstance $instance -SqlCredential $SqlCredential -Database $Database -StatementTimeout 0 -MinimumVersion 9
+
+                    # boundary case: ensure the correct db is referenced in the $server object
+                    if ($Database -ne $server.ConnectionContext.DatabaseName) {
+                        Stop-Function -Message "The SqlInstance object for $instance is currently connected to the database `"$($server.ConnectionContext.CurrentDatabase)`" and does not match the parameter `"-Database $Database`". If a pre-connected SqlInstance object is passed in it must be connected to the database specified by the -Database parameter."
+                        return
+                    }
+
                     $sqlconn = $server.ConnectionContext.SqlConnectionObject
                     if ($sqlconn.State -ne 'Open') {
                         $sqlconn.Open()
@@ -452,15 +462,6 @@ function Import-DbaCsv {
                         $transaction = $sqlconn.BeginTransaction()
                     }
                 }
-
-                # Ensure database exists
-                $sql = "select count(*) from master.dbo.sysdatabases where name = '$Database'"
-                $sqlcmd = New-Object System.Data.SqlClient.SqlCommand($sql, $sqlconn, $transaction)
-                if (($sqlcmd.ExecuteScalar()) -eq 0) {
-                    Stop-Function -Continue -Message "Database does not exist on $instance"
-                }
-                Write-Message -Level Verbose -Message "Database exists"
-                $sqlconn.ChangeDatabase($Database)
 
                 # Ensure Schema exists
                 $sql = "select count(*) from [$Database].sys.schemas where name='$schema'"
@@ -557,7 +558,7 @@ function Import-DbaCsv {
                                 try {
                                     $firstline = Get-Content -Path $file -TotalCount 1 -ErrorAction Stop
                                     $ColumnMapping = @{ }
-                                    $firstline -split $Delimiter | ForEach-Object {
+                                    $firstline -split "$Delimiter", 0, "SimpleMatch" | ForEach-Object {
                                         $ColumnMapping.Add($_, $_)
                                     }
                                     $ColumnMap += $ColumnMapping

@@ -352,7 +352,18 @@ function Copy-DbaLogin {
 
                 Write-Message -Level Verbose -Message "Attempting to add $newUserName to $destinstance."
                 try {
-                    $destLogin = New-DbaLogin -SqlInstance $destServer -InputObject $Login -NewSid:$NewSid -LoginRenameHashtable:$LoginRenameHashtable -EnableException:$true
+                    $splatNewLogin = @{
+                        SqlInstance          = $destServer
+                        InputObject          = $Login
+                        NewSid               = $NewSid
+                        LoginRenameHashtable = $LoginRenameHashtable
+                    }
+                    if ($Login.DefaultDatabase -notin $destServer.Databases.Name) {
+                        $copyLoginStatus.Notes = "Database $($Login.DefaultDatabase) does not exist on $destServer, switching DefaultDatabase to 'master' for $($Login.Name)"
+                        Write-Message -Level Warning -Message $copyLoginStatus.Notes
+                        $splatNewLogin.DefaultDatabase = 'master'
+                    }
+                    $destLogin = New-DbaLogin @splatNewLogin -EnableException:$true
                     $copyLoginStatus.Status = "Successful"
                 } catch {
                     $copyLoginStatus.Status = "Failed"
@@ -366,7 +377,11 @@ function Copy-DbaLogin {
 
                 if (-not $ExcludePermissionSync) {
                     if ($Pscmdlet.ShouldProcess($destinstance, "Updating SQL login $newUserName permissions")) {
-                        Update-SqlPermission -SourceServer $sourceServer -SourceLogin $Login -DestServer $destServer -DestLogin $destLogin -ObjectLevel:$ObjectLevel
+                        # In rare cases, when the instance has a case sensitive collation and there are two logins that differ only in case, New-DbaLogin will return them both into $destLogin
+                        # So we loop, just in case...
+                        foreach ($dl in $destLogin) {
+                            Update-SqlPermission -SourceServer $sourceServer -SourceLogin $Login -DestServer $destServer -DestLogin $dl -ObjectLevel:$ObjectLevel
+                        }
                     }
                 }
             }
@@ -380,15 +395,13 @@ function Copy-DbaLogin {
         } else {
             $loginsCollection += Get-DbaLogin -SqlInstance $Source -SqlCredential $SourceSqlCredential -Login $Login -EnableException:$EnableException
         }
-        foreach ($loginObject in $loginsCollection) {
-            $sourceServer = $loginObject[0].Parent
-            $sourceLoginName = $loginObject.Name
-            $sourceVersionMajor = $sourceServer.VersionMajor
 
-            if ($OutFile) {
-                Export-DbaLogin -SqlInstance $sourceServer -FilePath $OutFile -Login $sourceLoginName -ExcludeLogin $ExcludeLogin
-                continue
-            }
+        if ($OutFile) {
+            return (Export-DbaLogin -SqlInstance $Source -SqlCredential $SourceSqlCredential -FilePath $OutFile -Login $loginsCollection -ObjectLevel:$ObjectLevel -ExcludeLogin $ExcludeLogin -EnableException:$EnableException)
+        }
+        foreach ($loginObject in $loginsCollection) {
+            $sourceServer = $loginObject.Parent
+            $sourceVersionMajor = $sourceServer.VersionMajor
 
             foreach ($destinstance in $Destination) {
                 try {

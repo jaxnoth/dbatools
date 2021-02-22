@@ -270,7 +270,7 @@ if (-not ([Sqlcollaborative.Dbatools.Message.LogHost]::LoggingPath)) {
 # Note: Each optional file must include a conditional governing whether it's run at all.
 # Validations were moved into the other files, in order to prevent having to update dbatools.psm1 every time
 # 96ms
-foreach ($file in (Get-ChildItem -Path "$script:PSScriptRoot\optional" -filter *.ps1)) {
+foreach ($file in (Get-ChildItem -Path "$script:PSScriptRoot\optional" -Filter *.ps1)) {
     . $file.FullName
 }
 Write-ImportTime -Text "Loading Optional Commands"
@@ -394,6 +394,7 @@ $script:xplat = @(
     'Get-DbaLastBackup',
     'Connect-DbaInstance',
     'Get-DbaDbBackupHistory',
+    'Get-DbaAgBackupHistory',
     'Read-DbaBackupHeader',
     'Test-DbaLastBackup',
     'Get-DbaMaxMemory',
@@ -407,6 +408,7 @@ $script:xplat = @(
     'Remove-DbaDbAsymmetricKey',
     'Invoke-DbaDbTransfer',
     'New-DbaDbTransfer',
+    'Remove-DbaDbData',
     'Resolve-DbaNetworkName',
     'Export-DbaAvailabilityGroup',
     'Write-DbaDbTableData',
@@ -764,12 +766,19 @@ $script:xplat = @(
     'Export-DbaDbRole',
     'Export-DbaServerRole',
     'Get-DbaBuildReference',
+    'Update-DbaBuildReference',
     'Install-DbaFirstResponderKit',
     'Install-DbaWhoIsActive',
     'Update-Dbatools',
     'Add-DbaServerRoleMember',
     'Get-DbatoolsPath',
-    'Set-DbatoolsPath'
+    'Set-DbatoolsPath',
+    'Export-DbaSysDbUserObject',
+    'Test-DbaDbQueryStore',
+    'Install-DbaMultiTool',
+    'New-DbaAgentOperator',
+    'Remove-DbaAgentOperator',
+    'Remove-DbaDbTableData'
 )
 
 $script:noncoresmo = @(
@@ -791,7 +800,8 @@ $script:noncoresmo = @(
     'Get-DbaRepPublication',
     'Test-DbaRepLatency',
     'Export-DbaRepServerSetting',
-    'Get-DbaRepServer'
+    'Get-DbaRepServer',
+    'Move-DbaDbFile'
 )
 $script:windowsonly = @(
     # solvable filesystem issues or other workarounds

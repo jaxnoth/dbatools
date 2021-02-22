@@ -71,11 +71,12 @@ function Test-DbaDbDataMaskingConfig {
             return
         }
 
-        $supportedDataTypes = @('bigint', 'bit', 'bool', 'char', 'date', 'datetime', 'datetime2', 'decimal', 'int', 'money', 'nchar', 'ntext', 'nvarchar', 'smalldatetime', 'smallint', 'text', 'time', 'uniqueidentifier', 'userdefineddatatype', 'varchar')
+        $supportedDataTypes = @('bigint', 'bit', 'bool', 'char', 'date', 'datetime', 'datetime2', 'decimal', 'float', 'int', 'money', 'nchar', 'ntext', 'nvarchar', 'smalldatetime', 'smallint', 'text', 'time', 'tinyint', 'uniqueidentifier', 'userdefineddatatype', 'varchar')
 
         $randomizerTypes = Get-DbaRandomizedType
 
         $requiredColumnProperties = @('Action', 'CharacterString', 'ColumnType', 'Composite', 'Deterministic', 'Format', 'MaskingType', 'MaxValue', 'MinValue', 'Name', 'Nullable', 'KeepNull', 'SubType')
+        $allowedColumnProperties = @('Action', 'CharacterString', 'ColumnType', 'Composite', 'Deterministic', 'Format', 'MaskingType', 'MaxValue', 'MinValue', 'Name', 'Nullable', 'KeepNull', 'Separator', 'SubType', 'StaticValue')
 
         $allowedActionCategories = @('datetime', 'number', 'column')
         $allowedActionSubCategories = @('year', 'quarter', 'month', 'dayofyear', 'day', 'week', 'weekday', 'hour', 'minute', 'second', 'millisecond', 'microsecond', 'nanosecond')
@@ -97,24 +98,27 @@ function Test-DbaDbDataMaskingConfig {
 
                 # Test the column properties
                 $columnProperties = $column | Get-Member | Where-Object MemberType -eq NoteProperty | Select-Object Name -ExpandProperty Name
-                $compareResult = Compare-Object -ReferenceObject $requiredColumnProperties -DifferenceObject $columnProperties
+                $compareResultRequired = Compare-Object -ReferenceObject $requiredColumnProperties -DifferenceObject $columnProperties
+                $compareResultAllowed = Compare-Object -ReferenceObject $allowedColumnProperties -DifferenceObject $columnProperties
 
-                if ($null -ne $compareResult) {
-                    if ($compareResult.SideIndicator -contains "<=") {
+                if ($null -ne $compareResultRequired) {
+                    if ($compareResultRequired.SideIndicator -contains "<=") {
                         [PSCustomObject]@{
                             Table  = $table.Name
                             Column = $column.Name
-                            Value  = ($compareResult | Where-Object SideIndicator -eq "<=").InputObject -join ","
+                            Value  = ($compareResultRequired | Where-Object SideIndicator -eq "<=").InputObject -join ","
                             Error  = "The column does not contain all the required properties. Please check the column "
                         }
                     }
+                }
 
-                    if ($compareResult.SideIndicator -contains "=>") {
+                if ($null -ne $compareResultAllowed) {
+                    if ($compareResultAllowed.SideIndicator -contains "=>") {
                         [PSCustomObject]@{
                             Table  = $table.Name
                             Column = $column.Name
-                            Value  = ($compareResult | Where-Object SideIndicator -eq "=>").InputObject -join ","
-                            Error  = "The column contains a property that is not in the required properties. Please check the column"
+                            Value  = ($compareResultAllowed | Where-Object SideIndicator -eq "=>").InputObject -join ","
+                            Error  = "The column contains a property that is not in the allowed properties. Please check the column"
                         }
                     }
                 }
@@ -276,15 +280,6 @@ function Test-DbaDbDataMaskingConfig {
                                 Error  = "The category is not valid with data type $($column.ColumnType)"
                             }
                         }
-
-                        <# if (-not $null -eq $column.Action.SubCategory -and $column.Action.SubCategory -notin $allo) {
-                            [PSCustomObject]@{
-                                Table  = $table.Name
-                                Column = $column.Name
-                                Value  = $column.Action.Category
-                                Error  = "The action subcategory '$($column.Action.SubCategory)' is not allowed"
-                            }
-                        } #>
                     }
 
                     # Number checks
@@ -300,15 +295,6 @@ function Test-DbaDbDataMaskingConfig {
                                     Error  = "The action does not contain all the required properties. Please check the action "
                                 }
                             }
-
-                            <# if ($compareResult.SideIndicator -contains "=>") {
-                                [PSCustomObject]@{
-                                    Table  = $table.Name
-                                    Column = $column.Name
-                                    Value  = ($compareResult | Where-Object SideIndicator -eq "=>").InputObject -join ","
-                                    Error  = "The action contains a property that is not in the required properties. Please check the column"
-                                }
-                            } #>
                         }
 
                         if ($column.ColumnType -notin $allowedNumberTypes) {
@@ -320,7 +306,7 @@ function Test-DbaDbDataMaskingConfig {
                             }
                         }
                     }
-                }# End column action
+                } # End column action
             } # End for each column
         } # End for each table
     }
