@@ -67,11 +67,20 @@ Write-Progress $msg -Completed
 # Sign Files
 $msg = "Signing files"
 Write-Progress $msg
-$cert = Get-ChildItem Cert:\CurrentUser\My | Where-Object { $_.EnhancedKeyUsageList.FriendlyName -Contains 'Code Signing' -and $_.Subject -match 'sdops@indwes.edu' }
+$certName = 'IWU Code Signing'
+$cert = Get-ChildItem Cert:\CurrentUser\My | Where-Object { $_.FriendlyName -eq $certName }
 $i = 0
+if (-not ($cert -is [System.Security.Cryptography.X509Certificates.X509Certificate2])) {
+    Write-Error "Cannot find a certificate with friendly name '$certName' to use for signing."
+    return
+}
 foreach ($file in $FilesToSign) {
     Write-Progress $msg "Signing $file" -PercentComplete (100 * $i++ / $FilesToSign.Count)
-    Set-AuthenticodeSignature $ModulePath\$file $cert -TimestampServer http://timestamp.digicert.com | Out-Null
+    Set-AuthenticodeSignature $ModulePath\$file $cert -TimestampServer http://timestamp.digicert.com | % {
+        if ($_.Status -ne 'Valid') {
+            Write-Warning "Failed to sign $($_.Path)"
+        }
+    }
 }
 Write-Progress $msg -Completed
 
