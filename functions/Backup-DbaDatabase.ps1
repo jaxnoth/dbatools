@@ -166,12 +166,12 @@ function Backup-DbaDatabase {
     .EXAMPLE
         PS C:\> Backup-DbaDatabase -SqlInstance sql2016 -AzureBaseUrl https://dbatoolsaz.blob.core.windows.net/azbackups/ -AzureCredential dbatoolscred -Type Full -CreateFolder
 
-        Performs a full backup of all databases on the sql2016 instance to their own containers under the https://dbatoolsaz.blob.core.windows.net/azbackups/ container on Azure blog storage using the sql credential "dbatoolscred" registered on the sql2016 instance.
+        Performs a full backup of all databases on the sql2016 instance to their own containers under the https://dbatoolsaz.blob.core.windows.net/azbackups/ container on Azure blob storage using the sql credential "dbatoolscred" registered on the sql2016 instance.
 
     .EXAMPLE
         PS C:\> Backup-DbaDatabase -SqlInstance sql2016 -AzureBaseUrl https://dbatoolsaz.blob.core.windows.net/azbackups/  -Type Full
 
-        Performs a full backup of all databases on the sql2016 instance to the https://dbatoolsaz.blob.core.windows.net/azbackups/ container on Azure blog storage using the Shared Access Signature sql credential "https://dbatoolsaz.blob.core.windows.net/azbackups" registered on the sql2016 instance.
+        Performs a full backup of all databases on the sql2016 instance to the https://dbatoolsaz.blob.core.windows.net/azbackups/ container on Azure blob storage using the Shared Access Signature sql credential "https://dbatoolsaz.blob.core.windows.net/azbackups" registered on the sql2016 instance.
 
     .EXAMPLE
         PS C:\> Backup-DbaDatabase -SqlInstance Server1\Prod -Database db1 -Path \\filestore\backups\servername\instancename\dbname\backuptype -Type Full -ReplaceInName
@@ -453,8 +453,17 @@ function Backup-DbaDatabase {
 
             if ($CompressBackup) {
                 if ($db.EncryptionEnabled) {
-                    Write-Message -Level Warning -Message "$dbName is enabled for encryption, will not compress"
-                    $backup.CompressionOption = 2
+                    $minVerForTDECompression = [version]'13.0.4446.0' #SQL Server 2016 CU 4
+                    $flagTDESQLVersion = $minVerForTDECompression -le $Server.version
+                    $flagTestBoundMaxTransferSize = Test-Bound 'MaxTransferSize'
+                    $flagCorrectMaxTransferSize = $flagTestBoundMaxTransferSize -and ($MaxTransferSize -gt 64kb)
+                    if ($flagTDESQLVersion -and $flagTestBoundMaxTransferSize -and $flagCorrectMaxTransferSize) {
+                        Write-Message -Level Verbose -Message "$dbName is enabled for encryption but will compress"
+                        $backup.CompressionOption = 1
+                    } else {
+                        Write-Message -Level Warning -Message "$dbName is enabled for encryption, will not compress"
+                        $backup.CompressionOption = 2
+                    }
                 } elseif ($server.Edition -like 'Express*' -or ($server.VersionMajor -eq 10 -and $server.VersionMinor -eq 0 -and $server.Edition -notlike '*enterprise*') -or $server.VersionMajor -lt 10) {
                     Write-Message -Level Warning -Message "Compression is not supported with this version/edition of Sql Server"
                 } else {

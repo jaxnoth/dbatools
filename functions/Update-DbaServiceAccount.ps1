@@ -62,7 +62,7 @@ function Update-DbaServiceAccount {
 
     .EXAMPLE
         PS C:\> $SecurePassword = ConvertTo-SecureString 'Qwerty1234' -AsPlainText -Force
-        Update-DbaServiceAccount -ComputerName sql1 -ServiceName 'MSSQL$MYINSTANCE' -SecurePassword $SecurePassword
+        PS C:\> Update-DbaServiceAccount -ComputerName sql1 -ServiceName 'MSSQL$MYINSTANCE' -SecurePassword $SecurePassword
 
         Changes the current service account's password of the service MSSQL$MYINSTANCE to 'Qwerty1234'
 
@@ -217,7 +217,7 @@ function Update-DbaServiceAccount {
                     } catch {
                         $outStatus = 'Failed'
                         $outMessage = $_.Exception.Message
-                        Write-Message -Level Warning -Message $_.Exception.Message -EnableException $EnableException.ToBool()
+                        Stop-Function -Message $outMessage -Continue
                     }
                 } else {
                     $outStatus = 'Successful'

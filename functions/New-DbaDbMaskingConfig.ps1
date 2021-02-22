@@ -240,7 +240,7 @@ function New-DbaDbMaskingConfig {
 
             # Loop through the tables
             foreach ($tableobject in $tablecollection) {
-                Write-Message -Message "Processing table $($tableobject.Name)" -Level Verbose
+                Write-Message -Message "Processing table [$($tableobject.Schema)].[$($tableobject.Name)]" -Level Verbose
 
                 $hasUniqueIndex = $false
 
@@ -408,7 +408,7 @@ function New-DbaDbMaskingConfig {
                             }
                         } else {
                             if ($knownNames.Count -ge 1) {
-                                # Go through the first check to see if any column is found with a known type
+                                # Go through the first check to see if any column is found with a known name
                                 foreach ($knownName in $knownNames) {
                                     foreach ($pattern in $knownName.Pattern) {
                                         if ($null -eq $result -and $columnobject.Name -match $pattern ) {
@@ -503,6 +503,7 @@ function New-DbaDbMaskingConfig {
                             KeepNull        = $true
                             Composite       = $null
                             Action          = $null
+                            StaticValue     = $null
                         }
                     } else {
                         $type = "Random"
@@ -569,6 +570,7 @@ function New-DbaDbMaskingConfig {
                             KeepNull        = $true
                             Composite       = $null
                             Action          = $null
+                            StaticValue     = $null
                         }
                     }
                 }
@@ -580,6 +582,7 @@ function New-DbaDbMaskingConfig {
                         Schema         = $tableobject.Schema
                         Columns        = $columns
                         HasUniqueIndex = $hasUniqueIndex
+                        FilterQuery    = $null
                     }
                 } else {
                     Write-Message -Message "No columns match for masking in table $($tableobject.Name)" -Level Verbose
@@ -603,7 +606,6 @@ function New-DbaDbMaskingConfig {
                 try {
                     $filenamepart = $server.Name.Replace('\', '$').Replace('TCP:', '').Replace(',', '.')
                     $temppath = Join-Path -Path $Path -ChildPath "$($filenamepart).$($db.Name).DataMaskingConfig.json"
-                    #$temppath = "$Path\$($filenamepart).$($db.Name).DataMaskingConfig.json"
 
                     if (-not $script:isWindows) {
                         $temppath = $temppath.Replace("\", "/")

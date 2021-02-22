@@ -1,7 +1,7 @@
 
 -- SQL Server 2016 Diagnostic Information Queries
 -- Glenn Berry 
--- Last Modified: September 1, 2020
+-- Last Modified: January 12, 2021
 -- https://glennsqlperformance.com/
 -- https://sqlserverperformance.wordpress.com/
 -- YouTube: https://bit.ly/2PkoAM1 
@@ -22,7 +22,7 @@
 
 
 --******************************************************************************
---*   Copyright (C) 2020 Glenn Berry
+--*   Copyright (C) 2021 Glenn Berry
 --*   All rights reserved. 
 --*
 --*
@@ -94,6 +94,7 @@ SELECT @@SERVERNAME AS [Server Name], @@VERSION AS [SQL Server and OS Version In
 --																															13.0.5698.0		SP2 CU12			2/25/2020
 --																															13.0.5820.21	SP2 CU13            5/28/2020
 --																															13.0.5830.85    SP2 CU14			 8/6/2020
+--																															13.0.5850.14	SP2 CU15			9/28/2020
 
 -- How to determine the version, edition and update level of SQL Server and its components 
 -- https://bit.ly/2oAjKgW														
@@ -162,6 +163,7 @@ SERVERPROPERTY('IsHadrEnabled') AS [IsHadrEnabled],
 SERVERPROPERTY('HadrManagerStatus') AS [HadrManagerStatus],
 SERVERPROPERTY('InstanceDefaultDataPath') AS [InstanceDefaultDataPath],
 SERVERPROPERTY('InstanceDefaultLogPath') AS [InstanceDefaultLogPath],
+SERVERPROPERTY('ErrorLogFileName') AS [ErrorLogFileName],
 SERVERPROPERTY('BuildClrVersion') AS [Build CLR Version],
 SERVERPROPERTY('IsXTPSupported') AS [IsXTPSupported],
 SERVERPROPERTY('IsPolybaseInstalled') AS [IsPolybaseInstalled],				-- New for SQL Server 2016
@@ -688,6 +690,12 @@ ORDER BY [Overall Latency] OPTION (RECOMPILE);
 -- These latency numbers include all file activity against all SQL Server 
 -- database files on each drive since SQL Server was last started
 
+-- sys.dm_io_virtual_file_stats (Transact-SQL)
+-- https://bit.ly/3bRWUc0
+
+-- sys.dm_os_volume_stats (Transact-SQL)
+-- https://bit.ly/33thz2j
+
 
 -- Calculates average stalls per read, per write, and per total input/output for each database file  (Query 27) (IO Latency by File)
 SELECT DB_NAME(fs.database_id) AS [Database Name], CAST(fs.io_stall_read_ms/(1.0 + fs.num_of_reads) AS NUMERIC(10,1)) AS [avg_read_latency_ms],
@@ -708,6 +716,9 @@ ORDER BY avg_io_latency_ms DESC OPTION (RECOMPILE);
 -- want to move some files to a different location or perhaps improve your I/O performance
 -- These latency numbers include all file activity against each SQL Server 
 -- database file since SQL Server was last started
+
+-- sys.dm_io_virtual_file_stats (Transact-SQL)
+-- https://bit.ly/3bRWUc0
 
 
 -- Look for I/O requests taking longer than 15 seconds in the six most recent SQL Server Error Logs (Query 28) (IO Warnings)
@@ -764,24 +775,25 @@ OPTION (RECOMPILE);
 
 -- Recovery model, log reuse wait description, log file size, log usage size  (Query 30) (Database Properties)
 -- and compatibility level for all databases on instance
-SELECT db.[name] AS [Database Name], SUSER_SNAME(db.owner_sid) AS [Database Owner], db.recovery_model_desc AS [Recovery Model], 
-db.state_desc, db.containment_desc, db.log_reuse_wait_desc AS [Log Reuse Wait Description], 
+SELECT db.[name] AS [Database Name], SUSER_SNAME(db.owner_sid) AS [Database Owner],
+db.[compatibility_level] AS [DB Compatibility Level], 
+db.recovery_model_desc AS [Recovery Model], 
+db.log_reuse_wait_desc AS [Log Reuse Wait Description], 
 CONVERT(DECIMAL(18,2), ls.cntr_value/1024.0) AS [Log Size (MB)], CONVERT(DECIMAL(18,2), lu.cntr_value/1024.0) AS [Log Used (MB)],
 CAST(CAST(lu.cntr_value AS FLOAT) / CAST(ls.cntr_value AS FLOAT)AS DECIMAL(18,2)) * 100 AS [Log Used %], 
-db.[compatibility_level] AS [DB Compatibility Level], 
-db.is_mixed_page_allocation_on, db.page_verify_option_desc AS [Page Verify Option], 
+db.page_verify_option_desc AS [Page Verify Option], db.user_access_desc, db.state_desc, db.containment_desc,
+db.is_mixed_page_allocation_on,  
 db.is_auto_create_stats_on, db.is_auto_update_stats_on, db.is_auto_update_stats_async_on, db.is_parameterization_forced, 
 db.snapshot_isolation_state_desc, db.is_read_committed_snapshot_on, db.is_auto_close_on, db.is_auto_shrink_on, 
-db.target_recovery_time_in_seconds, db.is_cdc_enabled, db.is_published, db.is_distributor,
-db.group_database_id, db.replica_id,db.is_memory_optimized_elevate_to_snapshot_on, 
-db.delayed_durability_desc, db.is_auto_create_stats_incremental_on,
-db.is_query_store_on, db.is_sync_with_backup, 
-db.is_supplemental_logging_enabled, db.is_remote_data_archive_enabled,
-db.is_encrypted, de.encryption_state, de.percent_complete, de.key_algorithm, de.key_length      
+db.target_recovery_time_in_seconds, db.is_cdc_enabled, db.is_published, db.is_distributor, db.is_sync_with_backup, 
+db.group_database_id, db.replica_id, db.is_memory_optimized_elevate_to_snapshot_on, 
+db.delayed_durability_desc, db.is_query_store_on, db.is_remote_data_archive_enabled, 
+db.is_master_key_encrypted_by_server, db.is_encrypted, 
+de.encryption_state, de.percent_complete, de.key_algorithm, de.key_length
 FROM sys.databases AS db WITH (NOLOCK)
-INNER JOIN sys.dm_os_performance_counters AS lu WITH (NOLOCK)
+LEFT OUTER JOIN sys.dm_os_performance_counters AS lu WITH (NOLOCK)
 ON db.name = lu.instance_name
-INNER JOIN sys.dm_os_performance_counters AS ls WITH (NOLOCK)
+LEFT OUTER JOIN sys.dm_os_performance_counters AS ls WITH (NOLOCK)
 ON db.name = ls.instance_name
 LEFT OUTER JOIN sys.dm_database_encryption_keys AS de WITH (NOLOCK)
 ON db.database_id = de.database_id
@@ -790,6 +802,15 @@ AND ls.counter_name LIKE N'Log File(s) Size (KB)%'
 AND ls.cntr_value > 0 
 ORDER BY db.[name] OPTION (RECOMPILE);
 ------
+
+-- sys.databases (Transact-SQL)
+-- https://bit.ly/2G5wqaX
+
+-- sys.dm_os_performance_counters (Transact-SQL)
+-- https://bit.ly/3kEO2JR
+
+-- sys.dm_database_encryption_keys (Transact-SQL)
+-- https://bit.ly/3mE7kkx
 
 -- Things to look at:
 -- How many databases are on the instance?
@@ -1798,7 +1819,8 @@ ORDER BY ps.avg_fragmentation_in_percent DESC OPTION (RECOMPILE);
 
 
 --- Index Read/Write stats (all tables in current DB) ordered by Reads  (Query 71) (Overall Index Usage - Reads)
-SELECT OBJECT_NAME(i.[object_id]) AS [ObjectName], i.[name] AS [IndexName], i.index_id, 
+SELECT SCHEMA_NAME(t.[schema_id]) AS [SchemaName], OBJECT_NAME(i.[object_id]) AS [ObjectName], 
+       i.[name] AS [IndexName], i.index_id, 
        s.user_seeks, s.user_scans, s.user_lookups,
 	   s.user_seeks + s.user_scans + s.user_lookups AS [Total Reads], 
 	   s.user_updates AS [Writes],  
@@ -1809,6 +1831,8 @@ LEFT OUTER JOIN sys.dm_db_index_usage_stats AS s WITH (NOLOCK)
 ON i.[object_id] = s.[object_id]
 AND i.index_id = s.index_id
 AND s.database_id = DB_ID()
+LEFT OUTER JOIN sys.tables AS t WITH (NOLOCK)
+ON t.[object_id] = i.[object_id]
 WHERE OBJECTPROPERTY(i.[object_id],'IsUserTable') = 1
 ORDER BY s.user_seeks + s.user_scans + s.user_lookups DESC OPTION (RECOMPILE); -- Order by reads
 ------
@@ -1817,7 +1841,8 @@ ORDER BY s.user_seeks + s.user_scans + s.user_lookups DESC OPTION (RECOMPILE); -
 
 
 --- Index Read/Write stats (all tables in current DB) ordered by Writes  (Query 72) (Overall Index Usage - Writes)
-SELECT OBJECT_NAME(i.[object_id]) AS [ObjectName], i.[name] AS [IndexName], i.index_id,
+SELECT SCHEMA_NAME(t.[schema_id]) AS [SchemaName],OBJECT_NAME(i.[object_id]) AS [ObjectName], 
+	   i.[name] AS [IndexName], i.index_id,
 	   s.user_updates AS [Writes], s.user_seeks + s.user_scans + s.user_lookups AS [Total Reads], 
 	   i.[type_desc] AS [Index Type], i.fill_factor AS [Fill Factor], i.has_filter, i.filter_definition,
 	   s.last_system_update, s.last_user_update
@@ -1826,6 +1851,8 @@ LEFT OUTER JOIN sys.dm_db_index_usage_stats AS s WITH (NOLOCK)
 ON i.[object_id] = s.[object_id]
 AND i.index_id = s.index_id
 AND s.database_id = DB_ID()
+LEFT OUTER JOIN sys.tables AS t WITH (NOLOCK)
+ON t.[object_id] = i.[object_id]
 WHERE OBJECTPROPERTY(i.[object_id],'IsUserTable') = 1
 ORDER BY s.user_updates DESC OPTION (RECOMPILE);						 -- Order by writes
 ------
@@ -1975,30 +2002,9 @@ ORDER BY bs.backup_finish_date DESC OPTION (RECOMPILE);
 -- Are you doing encrypted backups?
 -- Have you done any backup tuning with striped backups, or changing the parameters of the backup command?
 
--- In SQL Server 2016, native SQL Server backup compression actually works much better with databases that are using TDE than in previous versions
+-- In SQL Server 2016, native SQL Server backup compression actually works 
+-- much better with databases that are using TDE than in previous versions
 -- https://bit.ly/28Rpb2x
-
-
--- These six Pluralsight Courses go into more detail about how to run these queries and interpret the results
-
--- Azure SQL Database: Diagnosing Performance Issues with DMVs
--- https://bit.ly/2meDRCN
-
--- SQL Server 2017: Diagnosing Performance Issues with DMVs
--- https://bit.ly/2FqCeti
-
--- SQL Server 2017: Diagnosing Configuration Issues with DMVs
--- https://bit.ly/2MSUDUL
-
--- SQL Server 2014 DMV Diagnostic Queries – Part 1 
--- https://bit.ly/2plxCer
-
--- SQL Server 2014 DMV Diagnostic Queries – Part 2
--- https://bit.ly/2IuJpzI
-
--- SQL Server 2014 DMV Diagnostic Queries – Part 3
--- https://bit.ly/2FIlCPb
-
 
 
 -- Microsoft Visual Studio Dev Essentials
@@ -2007,7 +2013,6 @@ ORDER BY bs.backup_finish_date DESC OPTION (RECOMPILE);
 -- Microsoft Azure Learn
 -- https://bit.ly/2O0Hacc
 
--- August 2017 blog series about upgrading and migrating to SQL Server 2016/2017
--- https://bit.ly/2ftKVrX
+
 
 
