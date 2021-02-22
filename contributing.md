@@ -90,7 +90,7 @@ AppVeyor is set up to recognize what "scenario" is required by your test, simply
 
 If you don't want to wait for the entire test suite to run (i.e. you need to run only `Get-DbaFoo` on AppVeyor), you can use a **_magic command_** within the commit message, namely `(do Get-DbaFoo)` . This will run only test files within the test folder matching this mask `tests\*Get-DbaFoo*.Tests.ps1`.
 
-###TODO: how to run your own AppVeyor before pushing a PR
+### TODO: how to run your own AppVeyor before pushing a PR
 
 ### Code Coverage, AKA improving tests
 
@@ -109,13 +109,20 @@ There are a few checks which need a core developer to manually sign off the "che
 ## Managing Jaxnoth fork
 
 ### Miscellaneous commands
+
   - `git branch -vv` list local branches with tracking and worktrees
   - `git branch -D <branch names>` branch cleanup
   - `git reset origin/development` moves branch pointer
   - `git remote -v` lists remote names and urls
+
 ### Incorporating upstream changes
-Must have clean development first
-May need to Resolve conflicts after pull or merge
+
+  >**Must have clean development first**
+
+  >**May need to Resolve conflicts after pull or merge**
+   In such cases `git mergetool` may expedite the process if kdiff3
+   or some other 3-way diff tool has been properly setup.
+
   1. `git co development`  Retrieves development branch
   1. `git fetch --all` Pulls all new code from all remotes
   1. `git pull` Makes sure local development is up to date with origin
@@ -128,8 +135,11 @@ May need to Resolve conflicts after pull or merge
       1. `.\publish.ps1 ` Updating allcommands.ps1
       1. `git merge --continue` Completes merge process
   1. `.\publish.ps1 -Repository sdt` Publishes to internal repository
+
 ### Creating feature branches
+
 #### Local features
+
   1. `git co origin/master -b <branch-name>` Creates new branch that tracks origin/master
   1. Update module version with `-feature.#` at end
   1. `git commit`
@@ -146,11 +156,13 @@ May need to Resolve conflicts after pull or merge
   1. `.\publish.ps1 -Repository sdt` Publishes to internal repository
   1. `git push origin :<branch-name>` github cleanup
   1. `git branch -D <branch names>` branch cleanup
+
 #### Shared features
+
   1. `git co upstream/master -b <branch-name>` Creates new branch that tracks origin/master
   1. `git push -u origin <branch-name>` publishes to Jaxnoth fork and adds tracking to that branch
   1. Make code changes and commit
-  1. `git co -B <branch-name>-local` creates/checksout a branch that can be rebased
+  1. `git co -B <branch-name>-local` creates/checks-out a branch that can be rebased
   1. `git rebase origin/master` rebase branch to include local customizations
   1. `.\publish.ps1` Updates allcommands.ps1
   1. `install-module iwu.dbatools -repository test`
